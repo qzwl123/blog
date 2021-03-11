@@ -775,7 +775,25 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
+        
+        <div class='hoverbox'>
+          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAAG4CAAAAAASoa1vAAAGyUlEQVR42u3aQZLbOBAEQP3/0967HQqiqwsTazNx00gkgU7ModD8/DL+yvFRAnAGOAMcOAOcAe71cJ9w/H790/2+ff840Yffffv+9PnbdT1d9zSvcb3BgQMHDhw4cODAgQMH7rCATws6vW664OnvTr+/BXg6j7je4MCBAwcOHDhw4MCBAxcG6Gnhtr9PgbeBOG54hvN83DjgwIEDBw4cOHDgwIEDt73RsrHaum4KNAVoHRiAAwcOHDhw4MCBAwcO3P8lgE+vn/6u3dhsN4SnGwgcOHDgwIEDBw4cOHDgWnDbBuHp963GZVqoKWBrA2zrDQ4cOHDgwIEDBw4cOHCfcLQK89bPcb3BgfMZHDhw4MCB8xnc6+G247QBOg3k7QA+bdhuC50eKDyuFxw4cODAgQMHDhw4cK+HO13I6cRahWoH2hR221hO/358cgIOHDhw4MCBAwcOHLjXwqUFnUKlhWo1eLd/n9ZjelDw+Bxw4MCBAwcOHDhw4MC9Hq4VxE8nOv17KwCnsKfPaW/kr88DBw4cOHDgwIEDBw4cuMOCTD+3GqHtRmTa+J1unKfnxEEfHDhw4MCBAwcOHDhwr4drNRinwXNagHRjtAL2FiYN7uDAgQMHDhw4cODAgQP3DW474VZQTwN7GqxTmFbjeHpfcODAgQMHDhw4cODAgZsu8HShrUZkq/F6a97TjTY9EAAHDhw4cODAgQMHDhy43+GmhVoHyGXDdHq/W0F63AAN6wAOHDhw4MCBAwcOHDhwaSO1FWTTQJ8G9dY6p/NuN4zBgQMHDhw4cODAgQMHbgpyuvDTwNu6XyvoTzdkejCQ/gOAAwcOHDhw4MCBAwcOXNpYbDUQ2wG2Xch0nmnj+Xi+4MCBAwcOHDhw4MCBez3cdgGt4N4KsO3G7Lah3G7UggMHDhw4cODAgQMHDlwrOG4LmS60fX2rkbqdz9ffgQMHDhw4cODAgQMH7vVw7YJPg21rYa3GaRq0Ww1YcODAgQMHDhw4cODAgZvCfcLx043V6byn65s2OLe/P64fOHDgwIEDBw4cOHDgwA0flAb3aSA+Lci2QNuNl9YvDfLgwIEDBw4cOHDgwIED1yrYrWA9hd8C324wrw8wwIEDBw4cOHDgwIED93q4diMwLXQa1LfzazVcbzVevwZwcODAgQMHDhw4cODAvRYubRxuG6TbQhwv9FKgb9fv+AADHDhw4MCBAwcOHDhw4MKFpxObFiTdGNNCbeexrR84cODAgQMHDhw4cODAbeHSsQ3mP7UhTgubjm39vt4XHDhw4MCBAwcOHDhw4JYBcdqwnDY2tw3abaGnG+dW0AcHDhw4cODAgQMHDhy4dKHbwk/vmxY+3RC37jfdKODAgQMHDhw4cODAgQM3DeDb4HwakLcvxrY2SBro03WmkODAgQMHDhw4cODAgQOXBtzWi57bhd9ucG6Devr9YwAHBw4cOHDgwIEDBw7ca+FuN0a30K1gPm2IpvdPN9oxODhw4MCBAwcOHDhw4MAtJ5ZCT4HixmPYCN1uhG2Qjzvg4MCBAwcOHDhw4MCB++fh0gDaLkgKdKuA7QOJ7QEGOHDgwIEDBw4cOHDgwD0VJl1A+qLnNJhPC53OI11HK+CDAwcOHDhw4MCBAwcO3LcAPn4xcxiI0w0SNxyH89oeSGxBjusODhw4cODAgQMHDhw4cJeCcPribOs524Zt+wBg+3xw4MCBAwcOHDhw4MCBGwe/sJDbIJ+CtF7IbR1I1AI8OHDgwIEDBw4cOHDgwIUw2wJsG5VpI7LVGL21wR/vAw4cOHDgwIEDBw4cOHClCU0D6DSYpgF3++JrGuzTdYIDBw4cOHDgwIEDBw7cE9y24NPGZvu+0wODdjBvBfhxAAcHDhw4cODAgQMHDtxr4VpBdRo8twVtBeTtda2G83GdwIEDBw4cOHDgwIEDB640wWkQbS9sGuzbwfnWvMCBAwcOHDhw4MCBAwfuFO52Q7DdgG03VqfPSa87PXgABw4cOHDgwIEDBw4cuDQoThe4DaqtBu0WMj1A2M7nj/uCAwcOHDhw4MCBAwcOXDkgtxfw0wVMDxDS68d1AwcOHDhw4MCBAwcOHLgwME8LeGuhn/Jowd+aFzhw4MCBAwcOHDhw4MBt4VoL2m6E0/mn90sbn+15gwMHDhw4cODAgQMHDtwtuGmDc9vYTMHajeR0fsfzBQcOHDhw4MCBAwcOHLjlxFsLaDVwp43Y6bq2z1/XGRw4cODAgQMHDhw4cOC2L2gu/z4N6tvftQL+tjEabzBw4MCBAwcOHDhw4MC9Hs74uwY4cAY4Axw4A5wB7rXjP+pFexaWaljgAAAAAElFTkSuQmCC">
+          </div>
+        </div>
+      
     
+      
+        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
+          
+            target="_blank" href="https://t.me/share/url?url=http://example.com/2021/03/06/%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%81%E8%B5%9B_B%E7%BB%84_%E5%8D%81%E4%B8%80%E5%B1%8A_%E7%AC%AC%E4%BA%8C%E5%9C%BA/&text=蓝桥杯省赛 B组 十一届 第二场 - 秃头王"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
       
     
   </div>
@@ -984,8 +1002,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Mar 10 2021 18:33:34 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-03-10 日</div>
+            <div id="last-update" style="display: none;">Thu Mar 11 2021 16:28:49 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2021-03-11 日</div>
           
         </div>
         
@@ -1035,7 +1053,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-10 日';
+            document.getElementById('last-update-show').innerHTML = '2021-03-11 日';
           }
         </script>
         
@@ -1089,7 +1107,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <meting-js
       theme='#1BCDFC'
-      <!-- autoplay='false' -->
+      autoplay='false'
       volume='0.7'
       loop='all'
       order='list'
@@ -1743,7 +1761,7 @@ var loadCSS = function( href, before, media, attributes ){
 
 
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
     var clipboard = new ClipboardJS('.btn-copy', {
         target: function (trigger) {
@@ -1801,7 +1819,9 @@ var loadCSS = function( href, before, media, attributes ){
         pjax_initCopyCode()
     });
 </script>
- -->
+
+
+<!-- 
 
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
@@ -1822,7 +1842,13 @@ var loadCSS = function( href, before, media, attributes ){
         copyHtml += '</button>';
         $(".highlight .code pre").before(copyHtml);
         $(".article pre code").before(copyHtml);
+        
         clipboard.off('success').on('success', function (e) {
+            $.message({
+            title: '复制成功',
+            message: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+            });
             let $btn = $(e.trigger);
             $btn.addClass('copied');
             let $icon = $($btn.find('i'));
@@ -1836,12 +1862,7 @@ var loadCSS = function( href, before, media, attributes ){
                 $span[0].innerText = 'COPY'
             }, 2000)
         });
-        // clipboard.off('success').on('success', function (e) {
-        //     $.message({
-        //     title: '复制成功',
-        //     message: "代码已复制，请遵守相关授权协议。",
-        //     type: 'success'
-        // });
+
         clipboard.off('error').on('error', function (e) {
             e.clearSelection();
             let $btn = $(e.trigger);
@@ -1863,7 +1884,10 @@ var loadCSS = function( href, before, media, attributes ){
         pjax_initCopyCode()
     });
 	volantis.pjax.push(pjax_initCopyCode)
+    
 </script>
+
+ -->
 
 
 
@@ -2463,5 +2487,7 @@ document.addEventListener("pjax:success", listennSidebarTOC);
  
 	  
     </div>
+    <!--单击显示文字-->
+    <script type="text/javascript" src="/js/click_show_text.js"></script>
   </body>
 </html>

@@ -918,8 +918,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Mar 10 2021 18:33:34 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-03-10 日</div>
+            <div id="last-update" style="display: none;">Thu Mar 11 2021 16:28:49 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2021-03-11 日</div>
           
         </div>
         
@@ -969,7 +969,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-10 日';
+            document.getElementById('last-update-show').innerHTML = '2021-03-11 日';
           }
         </script>
         
@@ -1022,7 +1022,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <meting-js
       theme='#1BCDFC'
-      <!-- autoplay='false' -->
+      autoplay='false'
       volume='0.7'
       loop='all'
       order='list'
@@ -1676,7 +1676,7 @@ var loadCSS = function( href, before, media, attributes ){
 
 
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
     var clipboard = new ClipboardJS('.btn-copy', {
         target: function (trigger) {
@@ -1734,7 +1734,9 @@ var loadCSS = function( href, before, media, attributes ){
         pjax_initCopyCode()
     });
 </script>
- -->
+
+
+<!-- 
 
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
@@ -1755,7 +1757,13 @@ var loadCSS = function( href, before, media, attributes ){
         copyHtml += '</button>';
         $(".highlight .code pre").before(copyHtml);
         $(".article pre code").before(copyHtml);
+        
         clipboard.off('success').on('success', function (e) {
+            $.message({
+            title: '复制成功',
+            message: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+            });
             let $btn = $(e.trigger);
             $btn.addClass('copied');
             let $icon = $($btn.find('i'));
@@ -1769,12 +1777,7 @@ var loadCSS = function( href, before, media, attributes ){
                 $span[0].innerText = 'COPY'
             }, 2000)
         });
-        // clipboard.off('success').on('success', function (e) {
-        //     $.message({
-        //     title: '复制成功',
-        //     message: "代码已复制，请遵守相关授权协议。",
-        //     type: 'success'
-        // });
+
         clipboard.off('error').on('error', function (e) {
             e.clearSelection();
             let $btn = $(e.trigger);
@@ -1796,7 +1799,10 @@ var loadCSS = function( href, before, media, attributes ){
         pjax_initCopyCode()
     });
 	volantis.pjax.push(pjax_initCopyCode)
+    
 </script>
+
+ -->
 
 
 
@@ -2396,5 +2402,7 @@ document.addEventListener("pjax:success", listennSidebarTOC);
  
 	  
     </div>
+    <!--单击显示文字-->
+    <script type="text/javascript" src="/js/click_show_text.js"></script>
   </body>
 </html>
