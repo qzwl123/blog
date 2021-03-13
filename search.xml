@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>ACwin104_货仓选址</title>
+      <link href="2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/"/>
+      <url>2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p><a href="https://www.acwing.com/problem/content/106/">原题链接</a></p></blockquote><h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>在一条数轴上有 N 家商店，它们的坐标分别为 A1∼AN。</p><p>现在需要在数轴上建立一家货仓，每天清晨，从货仓到每家商店都要运送一车商品。</p><p>为了提高效率，求把货仓建在何处，可以使得货仓到每家商店的距离之和最小。</p><h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入整数 N。</p><p>第二行 N 个整数 A1∼ AN</p><h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示距离之和的最小值。</p><h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$1≤N≤1000001≤N≤100000$<br>$0 ≤ Ai ≤ 400000 ≤ Ai ≤ 40000$</p><h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">6</span> <span class="number">2</span> <span class="number">9</span> <span class="number">1</span></span><br></pre></td></tr></table></figure><h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路:"></a>解题思路:</h1><p>那面如何选择中位数仓库x如果当n等于奇数那么中间的数就是中位数，如果n是偶数那么现在中间两个其实一都可以。</p><p>首先考虑在坐标轴上建立仓库$x$如图 假设货仓在中间可得$|a - x| + |b - x| &gt;= |a - b|$，$|a - x|$就是a 到 x的距离 同理 $|b - x|、 |a - b|$</p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313183410812" style="zoom: 150%;" /><p>如果货仓在最左侧或者最右侧情况，那么可以看出$|x - a|$的距离就走了两遍所有放在中间才是最优解。</p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313184406768" style="zoom:120%;" /><h1 id="第一种做法："><a href="#第一种做法：" class="headerlink" title="第一种做法："></a>第一种做法：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, f + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::sort(f, f + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        res += <span class="built_in">abs</span>(f[i] - f[n &gt;&gt; <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACwin题解 </category>
+          
+          <category> 中位数 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 中位数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>背包九讲</title>
       <link href="2021/03/07/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/"/>
       <url>2021/03/07/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/</url>

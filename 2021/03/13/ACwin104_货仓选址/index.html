@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>所有标签 - 秃头王</title>
+  <title>ACwin104_货仓选址 - 秃头王</title>
+  
+    <meta name="keywords" content="中位数">
   
 
   
@@ -493,7 +495,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper tag dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -561,23 +563,314 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      <div class='post-wrapper'>
-        <article id="tag" class="post article white-box reveal shadow">
-          <h2>所有标签</h2>
-          <div class="all-tags">
-            
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" rel="tag">中位数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" rel="tag">基础算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" rel="tag">背包九讲</a><span class="tag-list-count">1</span></li></ul>
-          </div>
-          <br>
+    
+    
+      <h1 class="title">
+        ACwin104_货仓选址
+      </h1>
+      <div class='new-meta-box'>
+        
           
-        </article>
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>秃头王</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/ACwin%E9%A2%98%E8%A7%A3/">ACwin题解</a><span class="sep"></span><a class="category-link" href="/categories/ACwin%E9%A2%98%E8%A7%A3/%E4%B8%AD%E4%BD%8D%E6%95%B0/">中位数</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年3月13日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="ACwin104_货仓选址" data-path="/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
       </div>
     
+  </div>
+
+
   
+  
+  <blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/106/">原题链接</a></p>
+</blockquote>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>在一条数轴上有 N 家商店，它们的坐标分别为 A1∼AN。</p>
+<p>现在需要在数轴上建立一家货仓，每天清晨，从货仓到每家商店都要运送一车商品。</p>
+<p>为了提高效率，求把货仓建在何处，可以使得货仓到每家商店的距离之和最小。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入整数 N。</p>
+<p>第二行 N 个整数 A1∼ AN</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示距离之和的最小值。</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$1≤N≤1000001≤N≤100000$<br>$0 ≤ Ai ≤ 400000 ≤ Ai ≤ 40000$</p>
+<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">6</span> <span class="number">2</span> <span class="number">9</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路:"></a>解题思路:</h1><p>那面如何选择中位数仓库x如果当n等于奇数那么中间的数就是中位数，如果n是偶数那么现在中间两个其实一都可以。</p>
+<p>首先考虑在坐标轴上建立仓库$x$如图 假设货仓在中间可得$|a - x| + |b - x| &gt;= |a - b|$，$|a - x|$就是a 到 x的距离 同理 $|b - x|、 |a - b|$</p>
+<img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313183410812" style="zoom: 150%;" />
+
+<p>如果货仓在最左侧或者最右侧情况，那么可以看出$|x - a|$的距离就走了两遍所有放在中间才是最优解。</p>
+<img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313184406768" style="zoom:120%;" />
+
+<h1 id="第一种做法："><a href="#第一种做法：" class="headerlink" title="第一种做法："></a>第一种做法：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, f + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::sort(f, f + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        res += <span class="built_in">abs</span>(f[i] - f[n &gt;&gt; <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/>https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-13T21:12:12+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年3月13日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>中位数</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVgAAAFYCAAAAAAzB7ucAAAEe0lEQVR42u3aQZIiMQwEwPn/p3cfsEHgKqnNMpG+NTRgZ3OQFPXzx3pk/SAAC9YCCxasBfYK7E+5Xn3+nx968/rp77w8SLi/0/3WHmDBggULFixYsGCvwh4XwMv3n75/Cv4Ktr1OzwcWLFiwYMGCBQv2M7CnBffWwdMDThuYtKGJPcCCBQsWLFiwYMF+BWwKsdVwTAfYacMAFixYsGDBggUL9nfDtoV3e/80WAIWLFiwYMGCBQv2d8DGAYUwcNEOvJ9qALYDKWDBggULFixYsGDvwqYrLbC/7br2AAsWLFiwYMGCBXsFdnudFvCnhXjbEKS/s3Z+sGDBggULFixYsFdgnxpct3C3YNqB9zgJAxYsWLBgwYIFC3YFNgVrQU4Hxe/2M32/DVYfvw8WLFiwYMGCBQv2I7CnA+ppAxAX3sMgRQpeN0ZgwYIFCxYsWLBgr8CmB5qCTR/EVhD6FDI+L1iwYMGCBQsWLNgrsNsF+FbwY2vw/lRABCxYsGDBggULFuz/Bft0YGJaiKcHnw6u4z8GWLBgwYIFCxYs2Cuw06DDVsE/DYykA/rtBRYsWLBgwYIFC/YzsNOgRTs4P/1cG/ho91cHTMCCBQsWLFiwYMFegT0OIoSFfjuwnhb+2+eK9wEWLFiwYMGCBQv2KmzbEDwVsNgOeqRQ9QMGCxYsWLBgwYIFewV2+oVbQY+nDt6eow6KgAULFixYsGDBgr0COw1ktA3GtJHYbgzWgipgwYIFCxYsWLBgr8C2QYXTAr8NRKSF/ClkOrheG3SDBQsWLFiwYMGCXYV9e2MJvl34p8GOdPC+NpAHCxYsWLBgwYIFewW2DSi0gYq2sG8DGNuNzTgJAxYsWLBgwYIFC3YVNi3Etwr1d7BtIOPpAfxxYAMsWLBgwYIFCxbso7DTwXXbYLSBi08N2MdJGLBgwYIFCxYsWLCrsG2D0BbebYCi/d50X2DBggULFixYsGC/A3YaaEg39lRjsdV41AEOsGDBggULFixYsFdhp4V+OyieDrjTB9A2Dsd/PLBgwYIFCxYsWLBXYNuNTg+QDpC3Ah/pdTwABwsWLFiwYMGCBXsVNg4mLBX4f8LVBkfaIEo8QAcLFixYsGDBggV7BfZWwX160HiwXH7vVqNwnIQBCxYsWLBgwYIFuwpbF8LDjUwbj7YBaAMnx8EUsGDBggULFixYsFdgtwfDaWGePthpYd8GUtY7L7BgwYIFCxYsWLAj2Ok6BUgL+KeDGNMH/fJ1sGDBggULFixYsFdgf8qV/vB0TRuFNqgRX4MFCxYsWLBgwYK9CrsVaEgL8dNBdbrPdr9pg/A2sAEWLFiwYMGCBQv2Cmw6MJ4OsNsHcNqIpPePGyawYMGCBQsWLFiwXwWbAo8L8aV9Ts8BFixYsGDBggUL9jthU7itAXM7cJ82JnVgAyxYsGDBggULFuyjsG0Aoi6oyweXNiBtoxB/H1iwYMGCBQsWLNirsHVAYbnwTwv37fenA3OwYMGCBQsWLFiwd2Ct3QUWLFgLLFiwFthH119zqVJ21FmBkgAAAABJRU5ErkJggg==">
+          </div>
+        </div>
+      
+    
+      
+        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
+          
+            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&text=ACwin104_货仓选址 - 秃头王"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/03/07/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/'>
+          <p class='title'>背包九讲<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>动态规划
+动态规划（Dynamic programming，简称 DP）是一种在数学、管理科学、计算机科学、经济学和生物信息 学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -655,6 +948,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
 
 
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="toc-number">3.</span> <span class="toc-text">数据范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">输出样例：</span></a></li></ol>
+    </div>
+  </section>
 
 
   
@@ -791,14 +1098,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </aside>
 
 
+
 		  
 		  <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="ACwin104_货仓选址";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

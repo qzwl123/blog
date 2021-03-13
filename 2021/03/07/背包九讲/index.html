@@ -850,10 +850,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-10T10:57:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-13T17:22:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年3月10日</p>
+    <p>更新于：2021年3月13日</p>
   </a>
 </div>
 
@@ -947,6 +947,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>ACwin104_货仓选址</p>
+          <p class='content'>
+原题链接
+
+题目：在一条数轴上有 N 家商店，它们的坐标分别为 A1∼AN。
+现在需要在数轴上建立一家货仓，每天清晨，从货仓到每家商店都要运送一车商品。
+为了提高效率，求把货仓建在何处，可以使...</p>
+        </a>
+      
       
         <a class='next' href='/2021/03/06/%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%81%E8%B5%9B_B%E7%BB%84_%E5%8D%81%E4%B8%80%E5%B1%8A_%E7%AC%AC%E4%BA%8C%E5%9C%BA/'>
           <p class='title'>蓝桥杯省赛 B组 十一届 第二场<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
@@ -975,6 +985,59 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
@@ -1091,7 +1154,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>2 篇</div>
+          <div>3 篇</div>
         </div>
       
 
@@ -1113,7 +1176,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>6.7k 字</div>
+          <div>7.1k 字</div>
         </div>
       
 
@@ -1139,8 +1202,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Mar 12 2021 13:04:13 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-03-12 日</div>
+            <div id="last-update" style="display: none;">Sat Mar 13 2021 21:14:04 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2021-03-13 日</div>
           
         </div>
         
@@ -1190,7 +1253,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-12 日';
+            document.getElementById('last-update-show').innerHTML = '2021-03-13 日';
           }
         </script>
         
