@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>分类：中位数 - 秃头王</title>
+  <title>分类：算法基础 - 秃头王</title>
   
 
   
@@ -587,24 +587,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/">
-        ACwin104_货仓选址
+      <a href="/2021/03/14/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/">
+        排序合集
       </a>
     </h2>
   
   <div class='md'>
     
       
-        
-原题链接
+        怎么区分稳定还是不稳定如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。
+快速排序（不稳定）随机快速排序过程
 
-题目：在一条数轴上有 N 家商店，它们的坐标分别为 A1∼AN。
-现在需要在数轴上建立一家货仓，每天清晨，从货仓到每家商店都要运送一车商品。
-为了提高效率，求把货仓建在何处，可以使得货仓到每家商店的距离之和最小。
-输入格式第一行输入整数 N。
-第二行 N 个整数 A1∼ AN
-输出格式输出一个整数，表示距离之和的最小值。
-数据范围$1≤N≤1000001≤N≤100000$$0...
+
+
+确定分界点（也叫选择基准数）：$q[L], q[(L + R) / 2], q[R]$ 
+
+调整区间：
+
+
+ 
+
+
+递归：处理左右两端排序，如果左右两侧都排序好了在合并一起那么就是一个有序的序列了
+
+
+（暴...
       
     
   </div>
@@ -612,15 +619,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2021-03-13</time>
+        <time>2021-03-14</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/ACwin%E9%A2%98%E8%A7%A3/">ACwin题解</a><span class="sep"></span><a class="category-link" href="/categories/ACwin%E9%A2%98%E8%A7%A3/%E4%B8%AD%E4%BD%8D%E6%95%B0/">中位数</a>
+          <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">算法基础</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2021/03/13/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/'>
+          <a class='readmore' href='/2021/03/14/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/'>
             阅读全文
           </a>
         </div>
