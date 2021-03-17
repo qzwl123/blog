@@ -632,8 +632,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="怎么区分稳定还是不稳定"><a href="#怎么区分稳定还是不稳定" class="headerlink" title="怎么区分稳定还是不稳定"></a>怎么区分稳定还是不稳定</h1><p>如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。</p>
-<h1 id="快速排序（不稳定）"><a href="#快速排序（不稳定）" class="headerlink" title="快速排序（不稳定）"></a>快速排序（不稳定）</h1><p>随机快速排序过程</p>
+  <h2 id="怎么区分稳定还是不稳定"><a href="#怎么区分稳定还是不稳定" class="headerlink" title="怎么区分稳定还是不稳定"></a>怎么区分稳定还是不稳定</h2><p>如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。</p>
+<h2 id="快速排序（不稳定）"><a href="#快速排序（不稳定）" class="headerlink" title="快速排序（不稳定）"></a>快速排序（不稳定）</h2><p>随机快速排序过程</p>
 <p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img7789414-007520d3d4a7610c.gif" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img7789414-007520d3d4a7610c.gif" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="img"></p>
 <blockquote>
 <ol>
@@ -648,7 +648,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>递归：处理左右两端排序，如果左右两侧都排序好了在合并一起那么就是一个有序的序列了</li>
 </ol>
 </blockquote>
-<h2 id="（暴力）版"><a href="#（暴力）版" class="headerlink" title="（暴力）版"></a>（暴力）版</h2><ol>
+<h3 id="（暴力）版"><a href="#（暴力）版" class="headerlink" title="（暴力）版"></a>（暴力）版</h3><ol>
 <li><p>可以先开辟两个空的数组 a[] 和 b[]</p>
 </li>
 <li><p>在 L 到 R 区间内扫描一遍 把  &gt;= x 和 &lt;= x  的数拆分出来放到 a, b 数组 $q[L - R] $</p>
@@ -660,13 +660,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><p>$a[] -&gt; q[], b[]-&gt;q[]$ //在把 a，b 数组数据在合并到 q 数组里面</p>
 </li>
 </ol>
-<h2 id="（基础）版"><a href="#（基础）版" class="headerlink" title="（基础）版"></a>（基础）版</h2><p>我们可以定义两个指针从线段两侧往中间走只要（i &lt; j) <code>红色i</code> <code>蓝色j</code>，如果红色指针要小于基准数那么i++, 如果红色指针要大于基准数了，那么判断j指针数是否大于基准值如果大于那么j++, 如果小于那么 交换i, j 指针。</p>
+<h3 id="（基础）版"><a href="#（基础）版" class="headerlink" title="（基础）版"></a>（基础）版</h3><p>我们可以定义两个指针从线段两侧往中间走只要（i &lt; j) <code>红色i</code> <code>蓝色j</code>，如果红色指针要小于基准数那么i++, 如果红色指针要大于基准数了，那么判断j指针数是否大于基准值如果大于那么j++, 如果小于那么 交换i, j 指针。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210316202958043.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210316202958043.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: Demo15.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2021年03月16日 星期二 20时37分05秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 100000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> swap(a, b) &#123;\</span></span><br><span class="line">    a ^= b, b ^= a, a ^= b;\</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> q[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="comment">// 如果下面递归左右 选的是j的话 基准指数一定不能选 q[r] 要不然回发生边界问题</span></span><br><span class="line">    <span class="keyword">int</span> x = q[l], i = l - <span class="number">1</span>, j = r + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="keyword">do</span> i++; <span class="keyword">while</span> (q[i] &lt; x);</span><br><span class="line">        <span class="keyword">do</span> j--; <span class="keyword">while</span> (q[j] &gt; x);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; j) swap(q[i], q[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历左侧</span></span><br><span class="line">    quick_sort(l, j);</span><br><span class="line">    <span class="comment">// 遍历右侧</span></span><br><span class="line">    quick_sort(j + <span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, q + i);</span><br><span class="line">    &#125;</span><br><span class="line">    quick_sort(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, q[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="归并排序（稳定）"><a href="#归并排序（稳定）" class="headerlink" title="归并排序（稳定）"></a>归并排序（稳定）</h1><p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img849589-20171015230557043-37375010.gif" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img849589-20171015230557043-37375010.gif" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="img"></p>
+<h2 id="归并排序（稳定）"><a href="#归并排序（稳定）" class="headerlink" title="归并排序（稳定）"></a>归并排序（稳定）</h2><p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img849589-20171015230557043-37375010.gif" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img849589-20171015230557043-37375010.gif" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="img"></p>
 <blockquote>
 <p>确定分界点 mid(L + R) / 2 (这里的分界点是数组下标的位置)而快排是随机确定数组里面数。</p>
 <p>递归排序左右两面。</p>
@@ -706,7 +706,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-17T10:06:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-17T10:14:30+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2021年3月17日</p>
@@ -973,7 +973,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89%E7%89%88"><span class="toc-number">1.</span> <span class="toc-text">（暴力）版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89%E7%89%88"><span class="toc-number">2.</span> <span class="toc-text">（基础）版</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%8C%BA%E5%88%86%E7%A8%B3%E5%AE%9A%E8%BF%98%E6%98%AF%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-number">1.</span> <span class="toc-text">怎么区分稳定还是不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">快速排序（不稳定）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89%E7%89%88"><span class="toc-number">2.1.</span> <span class="toc-text">（暴力）版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89%E7%89%88"><span class="toc-number">2.2.</span> <span class="toc-text">（基础）版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">归并排序（稳定）</span></a></li></ol>
     </div>
   </section>
 
@@ -1046,7 +1046,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Mar 17 2021 10:12:05 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Wed Mar 17 2021 10:15:18 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2021-03-17 日</div>
           
         </div>
