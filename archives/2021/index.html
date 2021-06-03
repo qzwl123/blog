@@ -754,22 +754,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         怎么区分稳定还是不稳定如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。
+冒泡排序（稳定）
+考虑冒泡排序的复杂度，对于拥有N个字母的字符串，最多需要交换 N*(N - 1) / 2 次（完全逆序）
+
 快速排序（不稳定）随机快速排序过程
 
 
 
-确定分界点（也叫选择基准数）：$q[L], q[(L + R) / 2], q[R]$ 
-
-调整区间：
-
-
- 
-
-
-递归：处理左右两端排序，如果左右两侧都排序好了在合并一起那么就是一个有序的序列了
-
-
-（暴...
+确定分界点（也叫选择基准数）：$q[L], q[(L + R) / 2], q[...
       
     
   </div>
@@ -1207,7 +1199,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>10.5k 字</div>
+          <div>10.6k 字</div>
         </div>
       
 
@@ -1233,8 +1225,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Mar 27 2021 18:42:37 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-03-27 日</div>
+            <div id="last-update" style="display: none;">Thu Jun 03 2021 14:43:49 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2021-06-03 日</div>
           
         </div>
         
@@ -1284,7 +1276,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-27 日';
+            document.getElementById('last-update-show').innerHTML = '2021-06-03 日';
           }
         </script>
         
@@ -1652,9 +1644,51 @@ var loadCSS = function( href, before, media, attributes ){
         
       
         
-      
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/faqs/
+        
+        
+        
+        
+          id="https:volantisjsorgfaqs"
+        >
+        <i class='fa fa-question fa-fw'></i> 常见问题
+      </a>
+    </li>
+  
         
       
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/examples/
+        
+        
+        
+        
+          id="https:volantisjsorgexamples"
+        >
+        <i class='fa fa-rss fa-fw'></i> 示例博客
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/contributors/
+        
+        
+        
+        
+          id="https:volantisjsorgcontributors"
+        >
+        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
+      </a>
+    </li>
+  
         
       
         
@@ -1662,7 +1696,35 @@ var loadCSS = function( href, before, media, attributes ){
         
       
         
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://github.com/volantis-x/volantis-docs/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xvolantis-docs"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 本站源码
+      </a>
+    </li>
+  
+        
       
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://github.com/volantis-x/hexo-theme-volantis/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xhexo-theme-volantis"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 主题源码
+      </a>
+    </li>
+  
         
       
         
@@ -1692,7 +1754,7 @@ var loadCSS = function( href, before, media, attributes ){
         
           
     <li>
-      <a class='vlts-menu fix-cursor-default ' 
+      <a class='vlts-menu fix-cursor-default toggle-mode-btn' 
         
         
         

@@ -677,6 +677,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   <h2 id="怎么区分稳定还是不稳定"><a href="#怎么区分稳定还是不稳定" class="headerlink" title="怎么区分稳定还是不稳定"></a>怎么区分稳定还是不稳定</h2><p>如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。</p>
+<h2 id="冒泡排序（稳定）"><a href="#冒泡排序（稳定）" class="headerlink" title="冒泡排序（稳定）"></a>冒泡排序（稳定）</h2><blockquote>
+<p>考虑冒泡排序的复杂度，对于拥有N个字母的字符串，最多需要交换 N*(N - 1) / 2 次（完全逆序）</p>
+</blockquote>
 <h2 id="快速排序（不稳定）"><a href="#快速排序（不稳定）" class="headerlink" title="快速排序（不稳定）"></a>快速排序（不稳定）</h2><p>随机快速排序过程</p>
 <p><img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img7789414-007520d3d4a7610c.gif" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img7789414-007520d3d4a7610c.gif" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="img"></p>
 <blockquote>
@@ -750,10 +753,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-17T10:14:30+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-03T15:38:30+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年3月17日</p>
+    <p>更新于：2021年4月3日</p>
   </a>
 </div>
 
@@ -1046,7 +1049,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%8C%BA%E5%88%86%E7%A8%B3%E5%AE%9A%E8%BF%98%E6%98%AF%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-number">1.</span> <span class="toc-text">怎么区分稳定还是不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">快速排序（不稳定）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89%E7%89%88"><span class="toc-number">2.1.</span> <span class="toc-text">（暴力）版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89%E7%89%88"><span class="toc-number">2.2.</span> <span class="toc-text">（基础）版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">归并排序（稳定）</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%8C%BA%E5%88%86%E7%A8%B3%E5%AE%9A%E8%BF%98%E6%98%AF%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="toc-number">1.</span> <span class="toc-text">怎么区分稳定还是不稳定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%88%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">冒泡排序（稳定）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8D%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">快速排序（不稳定）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E6%9A%B4%E5%8A%9B%EF%BC%89%E7%89%88"><span class="toc-number">3.1.</span> <span class="toc-text">（暴力）版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89%E7%89%88"><span class="toc-number">3.2.</span> <span class="toc-text">（基础）版</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%EF%BC%88%E7%A8%B3%E5%AE%9A%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">归并排序（稳定）</span></a></li></ol>
     </div>
   </section>
 
@@ -1093,7 +1096,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>10.5k 字</div>
+          <div>10.6k 字</div>
         </div>
       
 
@@ -1119,8 +1122,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Mar 27 2021 18:42:36 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-03-27 日</div>
+            <div id="last-update" style="display: none;">Thu Jun 03 2021 14:43:49 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2021-06-03 日</div>
           
         </div>
         
@@ -1170,7 +1173,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-27 日';
+            document.getElementById('last-update-show').innerHTML = '2021-06-03 日';
           }
         </script>
         
@@ -1539,9 +1542,51 @@ var loadCSS = function( href, before, media, attributes ){
         
       
         
-      
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/faqs/
+        
+        
+        
+        
+          id="https:volantisjsorgfaqs"
+        >
+        <i class='fa fa-question fa-fw'></i> 常见问题
+      </a>
+    </li>
+  
         
       
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/examples/
+        
+        
+        
+        
+          id="https:volantisjsorgexamples"
+        >
+        <i class='fa fa-rss fa-fw'></i> 示例博客
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://volantis.js.org/contributors/
+        
+        
+        
+        
+          id="https:volantisjsorgcontributors"
+        >
+        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
+      </a>
+    </li>
+  
         
       
         
@@ -1549,7 +1594,35 @@ var loadCSS = function( href, before, media, attributes ){
         
       
         
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://github.com/volantis-x/volantis-docs/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xvolantis-docs"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 本站源码
+      </a>
+    </li>
+  
+        
       
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' href=https://github.com/volantis-x/hexo-theme-volantis/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xhexo-theme-volantis"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 主题源码
+      </a>
+    </li>
+  
         
       
         
@@ -1579,7 +1652,7 @@ var loadCSS = function( href, before, media, attributes ){
         
           
     <li>
-      <a class='vlts-menu fix-cursor-default ' 
+      <a class='vlts-menu fix-cursor-default toggle-mode-btn' 
         
         
         
