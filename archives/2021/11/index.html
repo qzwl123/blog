@@ -620,6 +620,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
       
     
     
@@ -633,23 +635,91 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2021/11/14/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
-        静态链接库
+      <a href="/2021/11/19/%E7%BB%A7%E6%89%BF/">
+        继承
       </a>
     </h2>
   
   <div class='md'>
     
       
-        静态链接库把所有.c文件 进行编译、汇编 不进行链接
-1gcc -c  test1.c test1.c test2.c test3.c
+        继承123456789// 派生类 B 基类 Aclass B&#123;public :    &#125;;// class A : public B &#123;    &#125;;
 
-r 插入 c 创建 s建立索引
-lib库的名称.a
-1ar rcs libcalc.a add.o sub.o mult.o
 
-gcc main.c -o app -I ./头文件
 
+
+
+继承权限影响的什么 类外对于访问子类对继承父类的方法和属性的访问权限
+继承的好处：
+
+代码的复用性
+逻辑上的递进关系
+
+123456789101112131415161718192021222...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-11-19</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/11/19/%E7%BB%A7%E6%89%BF/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/11/14/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+        静态链接库-静态链接库
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        命名规则Linux
+
+
+Linux :  libxxxx.so
+
+
+lib : 前缀（固定）
+
+xxxx : 库的名字，自己起
+
+.so ： 后缀（固定）
+
+在Linux下是一个可执行文件        
+
+
+
+Windwos
+
+Windows ： libxxxx.dll
+
+静态链接库把所有.c文件 进行编译、汇编 不进行链接
+1gcc -c  test1.c test1.c test2.c...
       
     
   </div>
@@ -910,6 +980,11 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
             ><div class='name'>动态规划</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
+            id="categoriesE59FBAE7A180E695B0E68DAEE7BB93E69E84"
+            ><div class='name'>基础数据结构</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"
             id="categoriesE59FBAE7A180E7AE97E6B395"
             ><div class='name'>基础算法</div><div class='badge'>(1)</div></a></li>
@@ -951,7 +1026,7 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
 
 
     <div class='content'>
-      <a href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" style="font-size: 14px; color: #999">中位数</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 14px; color: #999">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">基础算法</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 14px; color: #999">并查集</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 14px; color: #999">教程</a> <a href="/tags/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" style="font-size: 14px; color: #999">背包九讲</a>
+      <a href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" style="font-size: 14px; color: #999">中位数</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 14px; color: #999">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">基础数据结构</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">基础算法</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 14px; color: #999">并查集</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 14px; color: #999">教程</a> <a href="/tags/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" style="font-size: 14px; color: #999">背包九讲</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14px; color: #999">链表</a>
     </div>
   </section>
 
@@ -1002,7 +1077,7 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>9 篇</div>
+          <div>15 篇</div>
         </div>
       
 
@@ -1024,7 +1099,7 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>13.7k 字</div>
+          <div>17.5k 字</div>
         </div>
       
 
@@ -1050,8 +1125,8 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Nov 17 2021 08:52:04 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2021-11-17 日</div>
+            <div id="last-update" style="display: none;">Sun Jan 16 2022 09:54:13 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-01-16 日</div>
           
         </div>
         
@@ -1101,7 +1176,7 @@ Windows10下Linux子系统1、启用开发者模式设置-更新和安全-针对
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-11-17 日';
+            document.getElementById('last-update-show').innerHTML = '2022-01-16 日';
           }
         </script>
         
