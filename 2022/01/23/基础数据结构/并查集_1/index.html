@@ -683,8 +683,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>这种方法叫做并查集的:【Quick-Find算法】</li>
 </ol>
 <p><code>Quick-Find 近似</code>$ O(1) $<code>查询</code></p>
-<h3 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick-Union"></a>Quick-Union</h3><p>在图片演示种其实是包含了(路径压缩)所以每个节点指向的是一个要是看不董看不懂看可以看一下<a href="https://tutouwang.vercel.app/2022/01/23/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86_2/">并查集 - 2</a></p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123164159689.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123164159689.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123164159689"></p>
+<h3 id="Quick-Find"><a href="#Quick-Find" class="headerlink" title="Quick-Find"></a>Quick-Find</h3><p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123164159689.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123164159689.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123164159689"></p>
 <p>默认的做法吧<code>前</code>一个数字的颜色改成<code>后</code>一个颜色(大白话：就是让4接到3后面，让3作为根节点)</p>
 <p><code>这里要说明一下 ： 无论以 4 还是以 3 作为根节点都是可以的这个不重要 - 节点的链接其实是两个集合的链接</code></p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183439879.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183439879.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123183439879"></p>
@@ -692,11 +691,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>相当于 4 和 3已经属于一个集合那么你要改4当然3也要改变所以3和4的下标都要改成8</p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183500081.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183500081.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123183500081"></p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183511187.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123183511187.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123183511187"></p>
-<h3 id="Quick-Find-Quick-Union-时间复杂度分析"><a href="#Quick-Find-Quick-Union-时间复杂度分析" class="headerlink" title="Quick-Find - Quick-Union 时间复杂度分析"></a>Quick-Find - Quick-Union 时间复杂度分析</h3><blockquote>
+<h3 id="Quick-Find-时间复杂度分析"><a href="#Quick-Find-时间复杂度分析" class="headerlink" title="Quick-Find 时间复杂度分析"></a>Quick-Find 时间复杂度分析</h3><blockquote>
 <p>联通判断：近似$O(1)$</p>
 <p>合并操作：$O(n)$</p>
 </blockquote>
-<h3 id="问题思考：-需要自己手动模拟一下"><a href="#问题思考：-需要自己手动模拟一下" class="headerlink" title="问题思考：(需要自己手动模拟一下)"></a>问题思考：<code>(需要自己手动模拟一下)</code></h3><p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="路径压缩"></p>
+<h3 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick-Union"></a>Quick-Union</h3><p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123212230290.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123212230290.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123212230290"></p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123212319849.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123212319849.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123212319849"></p>
+<p>Quick-Unionu算法是选先找根节点判断是否处在同一根节点猜能在合并</p>
+<h3 id="Quick-Union-总结"><a href="#Quick-Union-总结" class="headerlink" title="Quick-Union 总结"></a>Quick-Union 总结</h3><h3 id="问题思考：-需要自己手动模拟一下"><a href="#问题思考：-需要自己手动模拟一下" class="headerlink" title="问题思考：(需要自己手动模拟一下)"></a>问题思考：<code>(需要自己手动模拟一下)</code></h3><p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="路径压缩"></p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123195549030.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123195549030.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123195549030"></p>
 <ol>
 <li>如果不看上述 Quick-Union 正常合并情况在极端情况下会退化成一条链 - 这就是一个$O(n)$操作</li>
@@ -711,6 +713,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <h3 id="平均查找次数"><a href="#平均查找次数" class="headerlink" title="平均查找次数"></a>平均查找次数</h3><p>每个节点深度相加之和除总节点数量</p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123201344971.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123201344971.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123201344971"></p>
+<p><code>按秩合并</code>下图 但是要把0接到3下面就<code>路径压缩</code> + <code>按秩合并</code>了就开头所看到的样子</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123210333670.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123210333670.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123210333670"></p>
+<p>并查集四种算法</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123213033914.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220123213033914.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220123213033914"></p>
+<p>代码见 <a href="%5Bhttps://tutouwang.vercel.app/2022/01/23/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86_2/%5D(https://tutouwang.vercel.app/2022/01/23/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86_2/)">并查集2</a></p>
 
   
   
@@ -745,7 +752,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-23T20:23:34+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-23T21:31:52+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年1月23日</p>
@@ -838,6 +845,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
     <div class="prev-next">
+      
+        <a class='prev' href='/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>二维矩阵映射成一维</p>
+          <p class='content'>二维数组映射成一维n * m 的矩阵
+(x, y) -&gt; x * n + y
+(x, y) 都从0开始
+</p>
+        </a>
       
       
         <a class='next' href='/2022/01/23/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86_2/'>
@@ -1032,7 +1047,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">连通性问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Union"><span class="toc-number">1.2.</span> <span class="toc-text">Quick-Union</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Find-Quick-Union-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">Quick-Find - Quick-Union 时间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83%EF%BC%9A-%E9%9C%80%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%8B%E5%8A%A8%E6%A8%A1%E6%8B%9F%E4%B8%80%E4%B8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">问题思考：(需要自己手动模拟一下)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E6%AC%A1%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">平均查找次数</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">并查集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">连通性问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Find"><span class="toc-number">1.2.</span> <span class="toc-text">Quick-Find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Find-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">Quick-Find 时间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Union"><span class="toc-number">1.4.</span> <span class="toc-text">Quick-Union</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Union-%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">Quick-Union 总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83%EF%BC%9A-%E9%9C%80%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%8B%E5%8A%A8%E6%A8%A1%E6%8B%9F%E4%B8%80%E4%B8%8B"><span class="toc-number">1.6.</span> <span class="toc-text">问题思考：(需要自己手动模拟一下)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E6%AC%A1%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text">平均查找次数</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1057,7 +1072,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>25 篇</div>
+          <div>27 篇</div>
         </div>
       
 
@@ -1079,7 +1094,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>30.7k 字</div>
+          <div>30.8k 字</div>
         </div>
       
 
@@ -1105,8 +1120,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sun Jan 23 2022 20:24:33 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-01-23 日</div>
+            <div id="last-update" style="display: none;">Sun Feb 20 2022 22:04:15 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-02-20 日</div>
           
         </div>
         
@@ -1156,7 +1171,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-01-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-02-20 日';
           }
         </script>
         
