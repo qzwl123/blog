@@ -22,7 +22,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>二维矩阵映射成一维 - 秃头王</title>
+  <title>Vim复制代码错位问题 - 秃头王</title>
   
 
   
@@ -537,7 +537,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper post dock' style="display: none;">
+        <div id="full" class='cover-wrapper vim dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -606,7 +606,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  <article class="article post white-box reveal md shadow article-type-vim" id="vim" itemscope itemprop="blogPost">
   
 
 
@@ -616,7 +616,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        二维矩阵映射成一维
+        Vim复制代码错位问题
       </h1>
       <div class='new-meta-box'>
         
@@ -647,7 +647,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2022年2月16日</p>
+    <p>发布于：2022年3月9日</p>
   </a>
 </div>
 
@@ -658,7 +658,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="二维矩阵映射成一维" data-path="/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/">
+      <div id="lc-pv" data-title="Vim复制代码错位问题" data-path="/2022/03/09/%E5%A4%8D%E5%88%B6%E4%BB%A3%E7%A0%81%E9%94%99%E4%BD%8D%E9%97%AE%E9%A2%98/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -676,150 +676,41 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="二维数组映射成一维"><a href="#二维数组映射成一维" class="headerlink" title="二维数组映射成一维"></a>二维数组映射成一维</h2><p>n * m 的矩阵</p>
-<p>(x, y) -&gt; x * n + y</p>
-<p>(x, y) 都从0开始</p>
+  <h2 id="Vim中复制粘贴缩进错乱问题的解决方"><a href="#Vim中复制粘贴缩进错乱问题的解决方" class="headerlink" title="Vim中复制粘贴缩进错乱问题的解决方"></a>Vim中复制粘贴缩进错乱问题的解决方</h2><p>Vim中复制粘贴缩进错乱问题的解决方案</p>
+<p>当你把这段缩进优美的代码直接ctrl+c(ctrl+shift + c)，ctrl+v到Vim的时候，就会出现如下恶心的情况</p>
+<p>可以看到，这种直接粘贴的方式会导致代码丢失和缩进错乱等情况。</p>
+<p>解决方案<br>vim进入paste模式，命令如下：</p>
+<p>:set paste</p>
+<p>进入paste模式之后，再按i进入插入模式，进行复制、粘贴就很正常了。<br>命令模式下，输入</p>
+<p>:set nopaste</p>
+<p>解除paste模式。</p>
+<p>paste模式主要帮我们做了如下事情：</p>
+<p>textwidth设置为0<br>wrapmargin设置为0<br>set noai<br>set nosi<br>softtabstop设置为0<br>revins重置<br>ruler重置<br>showmatch重置<br>formatoptions使用空值</p>
 
   
   
-    
-    <div class='footer'>
-      
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/>https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/</a></p>
-              
-            
-          </blockquote>
-        </div>
-      
-      
-    </div>
-  
-  
-    
-
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-02-16T15:01:53+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年2月16日</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/&title=二维矩阵映射成一维 - 秃头王&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/&title=二维矩阵映射成一维 - 秃头王&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/&title=二维矩阵映射成一维 - 秃头王&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        
-        <div class='hoverbox'>
-          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
-          <div class='target'>
-            <img src="data:image/png;base64,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">
-          </div>
-        </div>
-      
-    
-      
-        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
-          
-            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2022/02/16/%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4/&text=二维矩阵映射成一维 - 秃头王"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
   
   
 
   
     <div class="prev-next">
       
-        <a class='prev' href='/2022/02/20/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/gcc-g-%E5%8C%BA%E5%88%AB%E4%B8%8E%E6%B5%81%E7%A8%8B/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>gcc/g++区别与流程</p>
-          <p class='content'>gcc/G++gcc工作流程源代码(.h, .c, .cpp) - &gt; 预处理器 - &gt; 预处理后源代码 (.i) - &gt; 编译器 - &gt; 汇编代码（.s) - &gt;...</p>
+        <a class='prev' href='/2022/03/10/%E6%A0%87%E5%87%86c%E5%BA%93IO%E5%87%BD%E6%95%B0%E5%92%8CLinux%E7%B3%BB%E7%BB%9FIO%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>标准c库IO函数和Linux系统IO函数对比</p>
+          <p class='content'>标准C库IO函数
+自带帮助文档 第三章 
+
+
+虚拟地址空间
+Linux系统IO函数帮助文档 ~Linux : man 2 open12345678910111213141516171819202...</p>
         </a>
       
       
-        <a class='next' href='/2022/01/23/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86_1/'>
-          <p class='title'>并查集 — 1<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>并查集连通性问题：
-基于染色的思想，一开始所有点的颜色不同
-连接两个点的操作，可以看成将一种颜色的点染成另一种颜色
-如果两个点颜色一样，证明联通，否则不联通
-这种方法叫做并查集的:【Quick-...</p>
+        <a class='next' href='/2022/03/08/GDB%E8%B0%83%E8%AF%95/'>
+          <p class='title'>GDB调试<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>什么是 GDB
+GDB是由 GNU软件系统社区提供的调试工具，同GCC 配套组成了一套完整的开发环境，GDB是 Linux和许多类Unix系统中的标准开发环境。
+一般来说，GDB主要帮助你完成下...</p>
         </a>
       
     </div>
@@ -840,59 +731,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 
 
@@ -1007,7 +845,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4"><span class="toc-number">1.</span> <span class="toc-text">二维数组映射成一维</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vim%E4%B8%AD%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E7%BC%A9%E8%BF%9B%E9%94%99%E4%B9%B1%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9"><span class="toc-number">1.</span> <span class="toc-text">Vim中复制粘贴缩进错乱问题的解决方</span></a></li></ol>
     </div>
   </section>
 
@@ -1032,7 +870,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>28 篇</div>
+          <div>32 篇</div>
         </div>
       
 
@@ -1054,7 +892,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>30.8k 字</div>
+          <div>35.4k 字</div>
         </div>
       
 
@@ -1080,8 +918,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue Mar 01 2022 15:10:47 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-03-01 日</div>
+            <div id="last-update" style="display: none;">Sat Mar 26 2022 14:17:23 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-03-26 日</div>
           
         </div>
         
@@ -1131,7 +969,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-03-01 日';
+            document.getElementById('last-update-show').innerHTML = '2022-03-26 日';
           }
         </script>
         
@@ -1153,8 +991,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="二维矩阵映射成一维";
+  pdata.ispage=false;
+  pdata.postTitle="";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
