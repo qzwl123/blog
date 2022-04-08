@@ -22,9 +22,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>ACwin104_货仓选址 - 秃头王</title>
-  
-    <meta name="keywords" content="中位数">
+  <title>STL-Sort解析 - 秃头王</title>
   
 
   
@@ -618,7 +616,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        ACwin104_货仓选址
+        STL-Sort解析
       </h1>
       <div class='new-meta-box'>
         
@@ -635,13 +633,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
             
-  <div class='new-meta-item category'>
-    <a class='notlink'>
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/categories/ACwin%E9%A2%98%E8%A7%A3/">ACwin题解</a>
-    </a>
-  </div>
-
 
           
         
@@ -649,7 +640,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年3月13日</p>
+    <p>发布于：2022年4月8日</p>
   </a>
 </div>
 
@@ -660,7 +651,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="ACwin104_货仓选址" data-path="/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/">
+      <div id="lc-pv" data-title="STL-Sort解析" data-path="/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -678,31 +669,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/106/">原题链接</a></p>
-</blockquote>
-<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>在一条数轴上有 N 家商店，它们的坐标分别为 A1∼AN。</p>
-<p>现在需要在数轴上建立一家货仓，每天清晨，从货仓到每家商店都要运送一车商品。</p>
-<p>为了提高效率，求把货仓建在何处，可以使得货仓到每家商店的距离之和最小。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行输入整数 N。</p>
-<p>第二行 N 个整数 A1∼ AN</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一个整数，表示距离之和的最小值。</p>
-<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$1≤N≤1000001≤N≤100000$<br>$0 ≤ Ai ≤ 400000 ≤ Ai ≤ 40000$</p>
-<h2 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">6</span> <span class="number">2</span> <span class="number">9</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路:"></a>解题思路:</h1><p>那面如何选择中位数仓库x如果当n等于奇数那么中间的数就是中位数，如果n是偶数那么现在中间两个其实一都可以。</p>
-<p>首先考虑在坐标轴上建立仓库$x$如图 假设货仓在中间可得$|a - x| + |b - x| &gt;= |a - b|$，$|a - x|$就是a 到 x的距离 同理 $|b - x|、 |a - b|$</p>
-<img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313183410812.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313183410812" style="zoom: 150%;" />
-
-<p>如果货仓在最左侧或者最右侧情况，那么可以看出$|x - a|$的距离就走了两遍所有放在中间才是最优解。</p>
-<img src="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgimage-20210313184406768.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20210313184406768" style="zoom:120%;" />
-
-<h1 id="第一种做法："><a href="#第一种做法：" class="headerlink" title="第一种做法："></a>第一种做法：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_N 100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, f + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::sort(f, f + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        res += <span class="built_in">abs</span>(f[i] - f[n &gt;&gt; <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+  <p>2123132</p>
 
   
   
@@ -720,7 +687,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/>https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/</a></p>
+                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/>https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/</a></p>
               
             
           </blockquote>
@@ -737,10 +704,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-19T10:51:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-08T17:31:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年1月19日</p>
+    <p>更新于：2022年4月8日</p>
   </a>
 </div>
 
@@ -748,9 +715,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>中位数</p></a></div>
-
 
         
       
@@ -762,7 +726,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/&title=STL-Sort解析 - 秃头王&summary="
           
           >
           
@@ -774,7 +738,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/&title=STL-Sort解析 - 秃头王&summary="
           
           >
           
@@ -786,7 +750,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&title=ACwin104_货仓选址 - 秃头王&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/&title=STL-Sort解析 - 秃头王&summary="
           
           >
           
@@ -800,7 +764,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class='hoverbox'>
           <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
           <div class='target'>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXgAAAF4CAAAAAB79r16AAAFJ0lEQVR42u3bQXIbMRADQP3/084DUs5yMKCsJM2bK9Iu2dQFhcnry/qR9UIAHrwFHrwFHrxVgH+F6+n76b+ffu+3A4XveYQ63NexF3jw4MGDBw8ePHjwRfh0I+3nPIFu33v6/FvnBA8ePHjw4MGDBw/+BvxpEJkGjlqRsAxI0wCXBirw4MGDBw8ePHjw4D8ZvlUUPB10up/pe9JgBR48ePDgwYMHDx78vwzfOtB2cKk1gAUePHjw4MGDBw8e/CfBjwd0hn/fKjbSwmV7/h+bJAMPHjx48ODBgwcPflFY/K9/x17gwYMHDx48ePDgwRfgt+upcJgODrUD2ClYGpDGXuDBgwcPHjx48ODBF+BPD7aFag0K3R5o2u6n1kCBBw8ePHjw4MGDB/8H+HRwqRVM0qCT7rt1UXHgAw8ePHjw4MGDBw++AH+6kXSgqV1EnD6/dZFpoPt2n+DBgwcPHjx48ODBF+FTiCnQdhAqLSBu7WP8PvDgwYMHDx48ePDgC/DTg20LiluwaeGxDVbjIAkePHjw4MGDBw8e/AX4bcFxK7CkRcvpubbPPQ5e4MGDBw8ePHjw4MFfgJ8ONN0uMsYDQ0v4aRAbD2SBBw8ePHjw4MGDB/8D8NtCIn3P9HtpobPdV62BAg8ePHjw4MGDBw8+mKtJg9X2QFugaeGRFjNpcQMePHjw4MGDBw8e/A341iDQ9nut4mQLPw1mj+cBDx48ePDgwYMHD74A3wpEaZGwvcDpRacXDx48ePDgwYMHDx78J8G3g0sKNn3etECZFj7XfhjgwYMHDx48ePDgwV+AbwWlbeBpBbppsZF6HP9AwIMHDx48ePDgwYMvwKcFRjsQtQuS1g9ier7Hz4MHDx48ePDgwYMHX4Rv/b0NQmnhkRYZ7y5cwIMHDx48ePDgwYNvwqcPTDeYBqTpv09Xe3/gwYMHDx48ePDgwd+AP31xKwCdHjzdT7sgqQ9QgQcPHjx48ODBgwdfgD994RRsG1xagWr7Azktfo6fBx48ePDgwYMHDx58AX5aVLQGik6fPy0qWoCnzxsPSoEHDx48ePDgwYMHX4C/NXiUAqYBqvUDOIWOgyZ48ODBgwcPHjx48EX46YunBUZaaLT3k35++x7w4MGDBw8ePHjw4G/Cp4FlWnCkA1PpagWwdWADDx48ePDgwYMHD74APw0Yt2Fb4NNgll7UOFiBBw8ePHjw4MGDB/8D8Ntg9TVc04tOL3I7iDUuQsCDBw8ePHjw4MGDfwN8WgBML7I1oDS92Lf9IMCDBw8ePHjw4MGDL8CfBob2QbZBbVuotIPfcWEEHjx48ODBgwcPHnwBPgVKX5wWC2lgmg5AbQej4iIEPHjw4MGDBw8ePPgAPoVLg8w4eAwHkVK41iAUePDgwYMHDx48ePA34afFQetAKfQUIA1S2318e27w4MGDBw8ePHjw4Avw2zW9mNaBpoNR22KnVuSABw8ePHjw4MGDB1+Af4VrGqjSC02DWCsYTt//eC7w4MGDBw8ePHjw4IvwaWC6tcHtxbZhW/sDDx48ePDgwYMHD/4G/DQwpQNO22IkvchpYbINluDBgwcPHjx48ODBfyL8tGhIN358sHD/t4MUePDgwYMHDx48ePB/E3x68LRAaQ1AbS/s28+DBw8ePHjw4MGDB38B/tZAU/q5FGh7Aek+4wAFHjx48ODBgwcPHvwH/gfjadCYDh6lhcXpgFRahDwONIEHDx48ePDgwYMHH8Bb713gwYO3wIO3wIO3FusXA9Glt5pRHOIAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAE4CAAAAADqFLC2AAADo0lEQVR42u3aQXICMQwEQP7/afICaq2RFgRp36DC2mpfJtI+nla0HgjAgQMHzgIHbgncI1wvH3zx968+V/ernmuqXnDgwIEDBw4cuG1wxwHwEK4KWS38FKJ6/sv9wIEDBw4cOHDglsKlAbYaPNOgml7gWL3gwIEDBw4cOHA/BnfcCDz8fqpwcODAgQMHDhw4cLUAnAbU0326UODAgQMHDhw4cL8Glw6Eqw3JdN9piI9N8sGBAwcOHDhw4IbgqqsaMLd9jusFBw4cOHDgwIFbAtddaeDsDqyrQXmsXnDgwIEDBw4cuCVw3RcFqwPndIBdfU71BcbjiwEHDhw4cODAgVsCd7phOpiuHrDbaEyD+mmABgcOHDhw4MCB2wZ3VwHd79MGZve88UAaHDhw4MCBAwfuTXDVIHvaeKw2ENMB9lQj87gOcODAgQMHDhy4JXBThbcbhCFs+nfpecGBAwcOHDhw4LbApQervhiYDpCnnlMN8O3/HMCBAwcOHDhw4N4Ml254V2OyWujpeaoNT3DgwIEDBw4cuG+FmxoUVwvv7lOFuXQBBw4cOHDgwIH7UrjuOm2gpoF2enANDhw4cODAgQO3HS4NhNUGYTp4vmv/6kWCAwcOHDhw4MBtg0sbfHFDMARJ4abqAgcOHDhw4MCB2wJ3V+BMg203yHYbsZeg4MCBAwcOHDhwS+C6YN2BchWsCp1e1Ms6wIEDBw4cOHDglsF1C5hqhHYLrDZaT+sBBw4cOHDgwIHbCjfdgEwbnt0LmbqIy4E0OHDgwIEDBw7ccrir4FgNmqeBtdvoTGEuzwEOHDhw4MCBA7cE7l0vDlZ/l75AeFdDExw4cODAgQMHbhvc9MD2Uy8UTgdtcODAgQMHDhy4b4E73Sg9aFpIekHdAHw8kAYHDhw4cODAgVsGVx1ITw2Uq9DVxmh7X3DgwIEDBw4cuOVw1cHy6QHT76uBtbqO4cGBAwcOHDhw4JbAddfUC4OnF1EN5t2B+cuBNDhw4MCBAwcO3IfhpgJj96BTv7v9Mzhw4MCBAwcO3DK4dOBcDcBTg+QUsnuR4MCBAwcOHDhwW+HuHjynjdC0sdodrIMDBw4cOHDgwP0XuG5ATQN1FTK9eHDgwIEDBw4cuF+DexbXaeBNG5PTARocOHDgwIEDB247XLfgNHBWn59Cty8CHDhw4MCBAwduGdz0ALfbaDz9fXW/9kWBAwcOHDhw4MAtgbOKDVgE4MCBA2eBA/fZ9QcWDQII07iTkgAAAABJRU5ErkJggg==">
           </div>
         </div>
       
@@ -808,7 +772,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
           
-            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2021/03/13/ACwin%E9%A2%98%E8%A7%A3/ACwin104_%E8%B4%A7%E4%BB%93%E9%80%89%E5%9D%80/&text=ACwin104_货仓选址 - 秃头王"
+            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2022/04/08/c++OOP/STL-Sort%E8%A7%A3%E6%9E%90/&text=STL-Sort解析 - 秃头王"
           
           >
           
@@ -834,18 +798,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2021/03/14/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>排序合集</p>
-          <p class='content'>怎么区分稳定还是不稳定如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。
-冒泡排序（稳定）
-考虑冒泡排序的复杂度，对于拥有...</p>
-        </a>
       
-      
-        <a class='next' href='/2021/03/07/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/'>
-          <p class='title'>背包九讲<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>动态规划
-动态规划（Dynamic programming，简称 DP）是一种在数学、管理科学、计算机科学、经济学和生物信息 学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方...</p>
+        <a class='next' href='/2022/04/08/c++OOP/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0Sort/'>
+          <p class='title'>手动实现Sort<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>STL_sort 模板解析123456789101112131415161718192021222324252627282930313233343536373839404142434445464...</p>
         </a>
       
     </div>
@@ -1023,20 +979,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-    <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="toc-number">3.</span> <span class="toc-text">数据范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">输出样例：</span></a></li></ol>
-    </div>
-  </section>
-
 
   
 
@@ -1106,7 +1048,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Apr 08 2022 17:32:05 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Fri Apr 08 2022 17:32:03 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2022-04-08 日</div>
           
         </div>
@@ -1180,7 +1122,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="ACwin104_货仓选址";
+  pdata.postTitle="STL-Sort解析";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
