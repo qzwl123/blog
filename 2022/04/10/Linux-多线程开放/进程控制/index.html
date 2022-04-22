@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>分类：算法基础 - 秃头王</title>
+  <title>进程控制 - 秃头王</title>
+  
+    <meta name="keywords" content="Linux">
   
 
   
@@ -539,7 +539,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -607,84 +607,321 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        进程控制
+      </h1>
+      <div class='new-meta-box'>
         
           
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>秃头王</p>
+  </a>
+</div>
+
+          
         
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/03/14/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/">
-        排序合集
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        怎么区分稳定还是不稳定如果在原序列里面两个数是相同的，那么排完序位置没有发生变化那么 这个排序就是稳定的，如果发生变化那么这个排序就是不稳定的。
-冒泡排序（稳定）
-考虑冒泡排序的复杂度，对于拥有N个字母的字符串，最多需要交换 N*(N - 1) / 2 次（完全逆序）
-
-快速排序（不稳定）随机快速排序过程
-
-
-
-确定分界点（也叫选择基准数）：$q[L], q[(L + R) / 2], q[...
-      
-    
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/">Linux-多线程开放</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2021-03-14</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年4月10日</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">算法基础</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="进程控制" data-path="/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h2 id="进程退出"><a href="#进程退出" class="headerlink" title="进程退出"></a>进程退出</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">void</span> _exit(<span class="keyword">int</span> status);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410190008070.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410190008070.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410190008070"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: exit.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 19时08分41秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        #include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">        void exit(int status);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        #include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment">        void _exit(int status);</span></span><br><span class="line"><span class="comment">        父进程回收子进程时候会用到!</span></span><br><span class="line"><span class="comment">        status参数: 是进程退时的一个状态信息。父进程回收子进程资源时候可以h 获取到。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;world&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//exit(0); // 输出 hello world --- \n 会刷新缓冲区 吧缓冲区 world 输出到控制台</span></span><br><span class="line">    _exit(<span class="number">0</span>); <span class="comment">// 输出 hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><p>父进程运行结束，但子进程还在运行(未运行结束)，这样的子进程就称为孤儿进程(Orphan Process).</p>
+<p>每当出现一个孤儿进程时候,内核就把孤儿进程的父进程设置为init，而init进程会循环地wait()(进程资源释放)它的已经退出的子进程。这样，当一个孤儿进程凄凉地结束了其生命周期的时候，init进程就会代表党和政府出面处理它的一切善后工作</p>
+<p>因此孤儿进程并不会有什么危害。</p>
+<h3 id="对比代码"><a href="#对比代码" class="headerlink" title="对比代码"></a>对比代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: fork_exit.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 21时12分28秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是父进程</span></span><br><span class="line">    <span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am parent process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am child process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i : %d, pid : %d\n&quot;</span>, i, getpid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>注意 pid、ppid 变化</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: fork_exit.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 21时12分28秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是父进程</span></span><br><span class="line">    <span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am parent process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am child process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i : %d, pid : %d\n&quot;</span>, i, getpid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>每个进程结束之后，都会释放自己地址空间中的用户区数据，内核区的 PCB没有办法自己释放掉，需要父进程去释放。</p>
+<p>进程终止时，父进程尚未回收，子进程残留资源（PCB）存放于内核中，变成僵尸( zombie)进程。</p>
+<p>僵尸进程不能被kill -9杀死。</p>
+<p>这样就会导致一个问题，如果父进程不调用wait()或waitpid()的话，那么保留的那段信息就不会释放，其进程号就会一直被占用，但是系统所能使用的进程号是有限的， 如果大量的产生僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程，此即为僵尸进程的危害，应当避免。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: zombie.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 21时12分28秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是父进程</span></span><br><span class="line">    <span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am parent process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line">            sleep(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am child process, pid : %d, ppid : %d\n&quot;</span>, getpid(), getppid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i : %d, pid : %d\n&quot;</span>, i, getpid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>新打开一个窗口 ps aux 查看进程 可以试着用 kill -9 进程id (测试杀死僵尸进程)</code></p>
+<p><code>如果父进程结束了 子进程就会被进程为 1 的接替</code> </p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410225325329.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410225325329.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410225325329"></p>
+<h2 id="进程回收"><a href="#进程回收" class="headerlink" title="进程回收"></a>进程回收</h2><p>在每个进程退出的时候，内核释放该进程所有的资源、包括打开的文件、占用的内存等。但是仍然为其保留一定的信息，这些信息主要主要指进程控制块PCB的信息(包括进程号、退出状态、运行时间等)。</p>
+<p>父进程可以通过调用wait或waitpid得到它的退出状态同时彻底清除掉这个进程。</p>
+<p>wait()和waitpid()函数的功能一样，区别在于, wait()函数会阻塞，waitpid ()可以设置不阻塞, waitpid()还可以指定等待哪个子进程结束。</p>
+<p><code>注意:一次wait或waitpid调用只能清理一个子进程，清理多个子进程应使用循环。</code></p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2021/03/14/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/'>
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/>https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-13T22:08:11+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年4月13日</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Linux</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/&title=进程控制 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/&title=进程控制 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/&title=进程控制 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
+          <div class='target'>
+            <img src="data:image/png;base64,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">
+          </div>
+        </div>
+      
+    
+      
+        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
+          
+            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2022/04/10/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/&text=进程控制 - 秃头王"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2022/04/11/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/wait%E5%87%BD%E6%95%B0/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>wait-waitpid 函数</p>
+          <p class='content'>wait函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950...</p>
+        </a>
+      
+      
+        <a class='next' href='/2022/04/08/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/exec%E5%87%BD%E6%95%B0%E6%97%8F/'>
+          <p class='title'>exec函数族<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>函数族族 ： 一族就是一系列函数 相同或者相似的 如oop 函数重载 
+名字不同 但是实现的功能相似的
+exec函数族介绍exec函数族的作用是根据指定的文件名找到可执行文件，并用它来取代调用进...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -783,127 +1020,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     
-  
 
-  <section class="widget category shadow desktop mobile">
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/ACwin%E9%A2%98%E8%A7%A3/" href="/categories/ACwin%E9%A2%98%E8%A7%A3/"
-            id="categoriesACwinE9A298E8A7A3"
-            ><div class='name'>ACwin题解</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/C-OOP/" href="/categories/C-OOP/"
-            id="categoriesC-OOP"
-            ><div class='name'>C++\OOP</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/"
-            id="categoriesLInux-E7B3BBE7BB9FE7BC96E7A88BE585A5E997A8"
-            ><div class='name'>LInux-系统编程入门</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/" href="/categories/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/"
-            id="categoriesLinux-E5A49AE7BABFE7A88BE5BC80E694BE"
-            ><div class='name'>Linux-多线程开放</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/c-OOP/" href="/categories/c-OOP/"
-            id="categoriesc-OOP"
-            ><div class='name'>c++OOP</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
-            id="categoriesE59FBAE7A180E695B0E68DAEE7BB93E69E84"
-            ><div class='name'>基础数据结构</div><div class='badge'>(11)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"
-            id="categoriesE59FBAE7A180E7AE97E6B395"
-            ><div class='name'>基础算法</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%99%E7%A8%8B/" href="/categories/%E6%95%99%E7%A8%8B/"
-            id="categoriesE69599E7A88B"
-            ><div class='name'>教程</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/" href="/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/"
-            id="categoriesE69C89E8B6A3E79A84E79FA5E8AF86"
-            ><div class='name'>有趣的知识</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/"
-            id="categoriesE7AE97E6B395E59FBAE7A180"
-            ><div class='name'>算法基础</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8E%86%E5%B1%8A%E7%9C%9F%E9%A2%98/" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8E%86%E5%B1%8A%E7%9C%9F%E9%A2%98/"
-            id="categoriesE8939DE6A1A5E69DAFE58E86E5B18AE79C9FE9A298"
-            ><div class='name'>蓝桥杯历届真题</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%80%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">进程退出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">孤儿进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E4%BB%A3%E7%A0%81"><span class="toc-number">2.1.</span> <span class="toc-text">对比代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">僵尸进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%9B%9E%E6%94%B6"><span class="toc-number">4.</span> <span class="toc-text">进程回收</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/LInux/" style="font-size: 24px; color: #555">LInux</a> <a href="/tags/Linux/" style="font-size: 20.67px; color: #6c6c6c">Linux</a> <a href="/tags/object-Object/" style="font-size: 14px; color: #999">[object Object]</a> <a href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/" style="font-size: 14px; color: #999">中位数</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 14px; color: #999">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" style="font-size: 17.33px; color: #828282">基础算法</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 14px; color: #999">并查集</a> <a href="/tags/%E5%B9%BF%E4%B9%89%E8%A1%A8%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px; color: #999">广义表转二叉树</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 14px; color: #999">教程</a> <a href="/tags/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" style="font-size: 14px; color: #999">栈与队列</a> <a href="/tags/%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 14px; color: #999">树与二叉树</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 17.33px; color: #828282">蓝桥杯</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14px; color: #999">链表</a> <a href="/tags/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" style="font-size: 14px; color: #999">顺序表</a>
-    </div>
-  </section>
-
-
-  
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode shadow desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
-      <img src='https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgmmqrcode1615980321334.png'
-      
-        height='64px'
-      />
-    
-      <img src='https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img20210317192601.png'
-      
-        height='64px'
-      />
-    
-  </div>
-</section>
 
   
 
@@ -973,7 +1106,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Apr 22 2022 09:32:13 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Fri Apr 22 2022 09:32:09 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2022-04-22 日</div>
           
         </div>
@@ -1039,14 +1172,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </aside>
 
 
+
 		  
 		  <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="进程控制";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
