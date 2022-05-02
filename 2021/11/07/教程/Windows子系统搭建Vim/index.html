@@ -692,29 +692,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20211011192816517.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20211011192816517.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211011192816517"></p>
 <p>我这里选择的是ubuntu20.04，点击获取后等待安装完成</p>
 <h3 id="4、启动"><a href="#4、启动" class="headerlink" title="4、启动"></a>4、启动</h3><p>在开始菜单中找到安装的ubuntu点击启动，第一次启动需要设置用户和密码按照提示设置即可。</p>
-<h2 id="安装系统后的环境准备"><a href="#安装系统后的环境准备" class="headerlink" title="安装系统后的环境准备"></a>安装系统后的环境准备</h2><h3 id="添加普通用户（如已添加普通用户，跳转到下一步配置sshd）"><a href="#添加普通用户（如已添加普通用户，跳转到下一步配置sshd）" class="headerlink" title="添加普通用户（如已添加普通用户，跳转到下一步配置sshd）"></a>添加普通用户（如已添加普通用户，跳转到下一步配置sshd）</h3><blockquote>
-<p>在Linux使用过程中，应尽量避免使用root用户直接使用系统，请使用下面的步骤创建一个新用户</p>
-</blockquote>
-<ol>
-<li>添加新用户</li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adduser new_user <span class="comment">#根据自己的真实需求修改new_user</span></span><br><span class="line"><span class="comment">#这里是创建一个新的用户，用户名不要用new_user</span></span><br></pre></td></tr></table></figure>
+<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>Ubuntu系统自带的源都是国外的网址，国内用户在使用的时候网速比较慢，这样我们在下载或更新软件时就会十分痛苦。所以对于一个新手来说，给Ubuntu换源，就显得十分必要了。</p>
+<h3 id="一：备份原来的源"><a href="#一：备份原来的源" class="headerlink" title="一：备份原来的源"></a>一：备份原来的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp &#x2F;etc&#x2F;apt&#x2F;sources.list &#x2F;etc&#x2F;apt&#x2F;sources_init.list</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li><p>将新用户添加到<code>sudo</code>组中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -G sudo new_user</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ol start="3">
-<li><p>使用<code>su</code>命令切换到新用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - new_user</span><br></pre></td></tr></table></figure></li>
-</ol>
-<blockquote>
-<p>添加新用户之后，请在<code>xshell</code>中重新添加一个新用户的连接，以后直接使用新用户登录系统</p>
-</blockquote>
-<p><code>↓↓↓</code></p>
-<p>==请注意，从这里开始，所有的操作都是用普通用户做的==</p>
-<p><code>↑↑↑</code></p>
-<h3 id="配置sshd"><a href="#配置sshd" class="headerlink" title="配置sshd"></a>配置sshd</h3><blockquote>
+<p>注意，我们操作Ubuntu一般都是要在管理员权限下进行操作的，尤其是要对系统文件进行更改。sudo就是告诉系统使用管理员权限运行后面的命令。敲入回车后输入我们之前设置的密码即可运行。</p>
+<h3 id="二：查看版本号"><a href="#二：查看版本号" class="headerlink" title="二：查看版本号"></a>二：查看版本号</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423091242937.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423091242937.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423091242937"></p>
+<h3 id="三：更换阿里源"><a href="#三：更换阿里源" class="headerlink" title="三：更换阿里源"></a>三：更换阿里源</h3><p>进入更换阿里数据源  打开网站  找到对应版本数据源 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;阿里源地址</span><br><span class="line">https:&#x2F;&#x2F;developer.aliyun.com&#x2F;mirror&#x2F;ubuntu?spm&#x3D;a2c6h.13651102.0.0.3e221b11dHF7v5</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;清华源地址</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;help&#x2F;ubuntu&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>将文件里的内容全部删除（可在vim的命令模式下，使用gg将光标移到文件首行，使用dG命令清空文件），敲入i进入编辑模式，将下面内容粘贴(ctrl + shift + v)进文件 保持原有格式粘贴（esc 后 输入： set paste 在按下i键 ctrl + shift + v）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//阿里源20.04LTS</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<p>按ESC（或Ctrl + [）退出编辑模式进入命令模式，然后先按“:”，再输入wq，敲入回车，文件即写入成功。</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423091640996.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423091640996.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423091640996"></p>
+<h3 id="三：更新系统"><a href="#三：更新系统" class="headerlink" title="三：更新系统"></a>三：更新系统</h3><p>输入下列命令，等待更新完毕~</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装系统后的环境准备"><a href="#安装系统后的环境准备" class="headerlink" title="安装系统后的环境准备"></a>安装系统后的环境准备</h2><h3 id="配置sshd"><a href="#配置sshd" class="headerlink" title="配置sshd"></a>配置sshd</h3><blockquote>
 <p>Vim的简单使用，请百度</p>
 </blockquote>
 <ol>
@@ -744,7 +746,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><p>保存并退出</p>
 </li>
 </ol>
-<p>###配置Vim（使用新添加的用户操作）</p>
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><p>###配置Vim（使用新添加的用户操作）</p>
 <blockquote>
 <p>在后续的学习过程中，会使用<code>vim</code>写程序</p>
 </blockquote>
@@ -758,9 +760,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget 47.93.11.51:88/install_vim.sh</span><br><span class="line">bash install_vim.sh</span><br></pre></td></tr></table></figure></li>
 </ol>
 <blockquote>
-<p>sudo apt-get remove vim-common </p>
 <p>vim的配置因为需要安装较多插件，所以需要等较多时间，大家耐心等待</p>
+<p>如果出现括号不能自动匹配情况重新安装第二条命令即可</p>
 </blockquote>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423093604441.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423093604441.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423093604441"></p>
 <h3 id="zsh的安装及配置"><a href="#zsh的安装及配置" class="headerlink" title="zsh的安装及配置"></a>zsh的安装及配置</h3><ol>
 <li>安装zsh // 主题</li>
 </ol>
@@ -814,6 +817,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> tags+=~/.vim/systags</span><br></pre></td></tr></table></figure>
 
+<h3 id="安装-gcc-g"><a href="#安装-gcc-g" class="headerlink" title="安装 gcc/g++"></a>安装 gcc/g++</h3><p>gcc 安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gcc</span><br></pre></td></tr></table></figure>
+
+<p>g++ 安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install g++</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423092150581.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423092150581.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423092150581"></p>
+<h3 id="运行各种程序的run脚本"><a href="#运行各种程序的run脚本" class="headerlink" title="运行各种程序的run脚本"></a>运行各种程序的run脚本</h3><p>查看<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&spm=1001.2101.3001.7020">环境变量</a><code>echo $PATH</code>，在任意一个目录下创建一个run文件<img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103538481.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103538481.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423103538481"></p>
+<p>或者在环境变量里面新建一个文件</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103701773.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103701773.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423103701773"></p>
+<ol>
+<li>run文件内容</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#0 c</span></span><br><span class="line"><span class="comment">#1 c++</span></span><br><span class="line"><span class="comment">#2 bash</span></span><br><span class="line"><span class="comment">#3 py</span></span><br><span class="line"></span><br><span class="line">CC=<span class="string">&quot;gcc -lm -Wall&quot;</span></span><br><span class="line">GPP=<span class="string">&quot;g++ -std=c++11 -Wall&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">CheckType</span></span>() &#123;</span><br><span class="line">    <span class="built_in">type</span>=`<span class="built_in">echo</span> <span class="variable">$1</span> | tr <span class="string">&quot;.&quot;</span> <span class="string">&quot;\n&quot;</span> | tail -1`</span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$&#123;type&#125;</span> == <span class="string">&quot;c&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 0</span><br><span class="line">    <span class="keyword">elif</span> [[ <span class="variable">$&#123;type&#125;</span> == <span class="string">&quot;cpp&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">elif</span> [[ <span class="variable">$&#123;type&#125;</span> == <span class="string">&quot;sh&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 2</span><br><span class="line">    <span class="keyword">elif</span> [[ <span class="variable">$&#123;type&#125;</span> == <span class="string">&quot;py&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">return</span> 3</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">exit</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">File=<span class="variable">$1</span></span><br><span class="line">Args=(<span class="variable">$@</span>)</span><br><span class="line"><span class="built_in">unset</span> Args[0]</span><br><span class="line"></span><br><span class="line">OutFile=`<span class="built_in">echo</span> <span class="variable">$&#123;File&#125;</span> | tr <span class="string">&quot;.&quot;</span> <span class="string">&quot;\n&quot;</span> | head -1 | tr <span class="string">&quot;\n&quot;</span> <span class="string">&quot;.&quot;</span>`</span><br><span class="line"></span><br><span class="line">CheckType <span class="variable">$&#123;File&#125;</span></span><br><span class="line">re=$?</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;re&#125;</span> -eq 0 ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="variable">$&#123;CC&#125;</span> <span class="variable">$&#123;File&#125;</span> -o <span class="variable">$&#123;OutFile&#125;</span>exe &amp;&amp; time ./<span class="variable">$&#123;OutFile&#125;</span>exe <span class="variable">$&#123;Args[*]&#125;</span> &amp;&amp; rm -f <span class="variable">$&#123;OutFile&#125;</span>exe</span><br><span class="line"><span class="keyword">elif</span> [[ <span class="variable">$&#123;re&#125;</span> -eq 1 ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="variable">$&#123;GPP&#125;</span> <span class="variable">$&#123;File&#125;</span> -o <span class="variable">$&#123;OutFile&#125;</span>exe &amp;&amp; time ./<span class="variable">$&#123;OutFile&#125;</span>exe <span class="variable">$&#123;Args[*]&#125;</span>&amp;&amp; rm -f <span class="variable">$&#123;OutFile&#125;</span>exe</span><br><span class="line"><span class="keyword">elif</span> [[ <span class="variable">$&#123;re&#125;</span> -eq 2 ]]; <span class="keyword">then</span></span><br><span class="line">    time bash <span class="variable">$&#123;File&#125;</span> <span class="variable">$&#123;Args[*]&#125;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    time python3 <span class="variable">$&#123;File&#125;</span> <span class="variable">$&#123;Args[*]&#125;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>保存后给run文件加上x权限<code>chmod +x run</code></li>
+<li>以后执行.c .cpp .sh .py文件时就直接run + 源文件名就可以了</li>
+</ol>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103823589.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220423103823589.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220423103823589"></p>
 <h3 id="安装glibc-doc"><a href="#安装glibc-doc" class="headerlink" title="安装glibc-doc"></a>安装glibc-doc</h3><ol>
 <li>使用以下命令安装</li>
 </ol>
@@ -833,6 +856,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>保存，退出，再次打开Ubuntu，就可以自由的设置喜欢的字体了，连VIM也一并搞定。</p>
 <p>自己设置的是 Cascadia Code 字体还挺好用的~</p>
 <p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20211110195635767.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20211110195635767.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20211110195635767"></p>
+<h2 id="中文设置-在20-04中好像时效了"><a href="#中文设置-在20-04中好像时效了" class="headerlink" title="中文设置 - 在20.04中好像时效了"></a>中文设置 - 在20.04中好像时效了</h2><h3 id="因为是刚刚安装的需要更新下软件源和软件包："><a href="#因为是刚刚安装的需要更新下软件源和软件包：" class="headerlink" title="因为是刚刚安装的需要更新下软件源和软件包："></a>因为是刚刚安装的需要更新下软件源和软件包：</h3><p>时间可能会久点</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装中文语言包"><a href="#安装中文语言包" class="headerlink" title="安装中文语言包"></a>安装中文语言包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y language-pack-zh-hans language-pack-zh-hans-base</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置中文环境变量"><a href="#设置中文环境变量" class="headerlink" title="设置中文环境变量"></a>设置中文环境变量</h3><p>vi ~/.profile</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在末尾新增一行:LANG=zh_CN.UTF-8</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422201412222.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422201412222.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422201412222"></p>
+<p>设置完毕重新打开ubuntu即可，部分软件及命令不支持汉化以ls命令为例：</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203426047.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203426047.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203426047"></p>
+<h2 id="中文设置"><a href="#中文设置" class="headerlink" title="中文设置"></a>中文设置</h2><p>先查找一下是否有apt-cache search language-pack-zh-hans中文包，如果没有则需要更新一下软件源。</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203308973.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203308973.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203308973"></p>
+<p>之后执行</p>
+<p>sudo apt install -y language-pack-zh-hans</p>
+<p>安装中文包，需要管理员密码。</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203458820.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203458820.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203458820"></p>
+<p>之后会提示是否安装，输入y。</p>
+<p>安装完成会看到语言的名字。</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203607919.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203607919.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203607919"></p>
+<p> sudo update-locale LANG=zh_CN.UTF-8</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203630171.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203630171.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203630171"></p>
+<p>之后看一下帮助信息，已有中文显示了。</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203426047.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422203426047.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422203426047"></p>
+<h2 id="vim设置代码文件作者信息等"><a href="#vim设置代码文件作者信息等" class="headerlink" title="vim设置代码文件作者信息等"></a>vim设置代码文件作者信息等</h2><p>vim .vimrc</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204132818.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204132818.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422204132818">创建文件 vim test.c</p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204205168.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204205168.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422204205168"></p>
+<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204403267.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220422204403267.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220422204403267"></p>
 
   
   
@@ -867,10 +918,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-11-17T08:52:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-23T10:38:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年11月17日</p>
+    <p>更新于：2022年4月23日</p>
   </a>
 </div>
 
@@ -1173,7 +1224,7 @@ xxxx : 库的名字，自己起
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows10%E4%B8%8BLinux%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">Windows10下Linux子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E7%94%A8%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">1、启用开发者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE-%E7%A8%8B%E5%BA%8F%E5%92%8C%E5%8A%9F%E8%83%BD-%E5%90%AF%E7%94%A8%E6%88%96%E5%85%B3%E9%97%ADwindows%E5%8A%9F%E8%83%BD-%E9%80%82%E7%94%A8%E4%BA%8ELinux%E7%9A%84Windows%E5%AD%90%E7%B3%BB%E7%BB%9F-%E7%A1%AE%E5%AE%9A-%E7%AD%89%E5%BE%85%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%B9%B6%E9%87%8D%E5%90%AFPC"><span class="toc-number">1.2.</span> <span class="toc-text">2、设置-程序和功能-启用或关闭windows功能-适用于Linux的Windows子系统-确定-等待安装完成并重启PC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85Linux"><span class="toc-number">1.3.</span> <span class="toc-text">3、安装Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text">4、启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">安装系统后的环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%EF%BC%88%E5%A6%82%E5%B7%B2%E6%B7%BB%E5%8A%A0%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%EF%BC%8C%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%B8%8B%E4%B8%80%E6%AD%A5%E9%85%8D%E7%BD%AEsshd%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">添加普通用户（如已添加普通用户，跳转到下一步配置sshd）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEsshd"><span class="toc-number">2.2.</span> <span class="toc-text">配置sshd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub%E8%AE%BF%E9%97%AE%E4%BC%98%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">GitHub访问优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="toc-number">2.4.</span> <span class="toc-text">zsh的安装及配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ctags%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text">ctags安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85glibc-doc"><span class="toc-number">2.6.</span> <span class="toc-text">安装glibc-doc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vim%E4%B8%8B%E5%AD%97%E4%BD%93%E4%BF%AE%E6%94%B9"><span class="toc-number">3.</span> <span class="toc-text">Vim下字体修改</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows10%E4%B8%8BLinux%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">Windows10下Linux子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E7%94%A8%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">1、启用开发者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE-%E7%A8%8B%E5%BA%8F%E5%92%8C%E5%8A%9F%E8%83%BD-%E5%90%AF%E7%94%A8%E6%88%96%E5%85%B3%E9%97%ADwindows%E5%8A%9F%E8%83%BD-%E9%80%82%E7%94%A8%E4%BA%8ELinux%E7%9A%84Windows%E5%AD%90%E7%B3%BB%E7%BB%9F-%E7%A1%AE%E5%AE%9A-%E7%AD%89%E5%BE%85%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%B9%B6%E9%87%8D%E5%90%AFPC"><span class="toc-number">1.2.</span> <span class="toc-text">2、设置-程序和功能-启用或关闭windows功能-适用于Linux的Windows子系统-确定-等待安装完成并重启PC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85Linux"><span class="toc-number">1.3.</span> <span class="toc-text">3、安装Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text">4、启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">换源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%EF%BC%9A%E5%A4%87%E4%BB%BD%E5%8E%9F%E6%9D%A5%E7%9A%84%E6%BA%90"><span class="toc-number">2.1.</span> <span class="toc-text">一：备份原来的源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9A%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-number">2.2.</span> <span class="toc-text">二：查看版本号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%EF%BC%9A%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90"><span class="toc-number">2.3.</span> <span class="toc-text">三：更换阿里源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%EF%BC%9A%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.4.</span> <span class="toc-text">三：更新系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%E7%9A%84%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">安装系统后的环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEsshd"><span class="toc-number">3.1.</span> <span class="toc-text">配置sshd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub%E8%AE%BF%E9%97%AE%E4%BC%98%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">GitHub访问优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim"><span class="toc-number">3.3.</span> <span class="toc-text">vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="toc-number">3.4.</span> <span class="toc-text">zsh的安装及配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ctags%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.5.</span> <span class="toc-text">ctags安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-gcc-g"><span class="toc-number">3.6.</span> <span class="toc-text">安装 gcc&#x2F;g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%90%84%E7%A7%8D%E7%A8%8B%E5%BA%8F%E7%9A%84run%E8%84%9A%E6%9C%AC"><span class="toc-number">3.7.</span> <span class="toc-text">运行各种程序的run脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85glibc-doc"><span class="toc-number">3.8.</span> <span class="toc-text">安装glibc-doc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vim%E4%B8%8B%E5%AD%97%E4%BD%93%E4%BF%AE%E6%94%B9"><span class="toc-number">4.</span> <span class="toc-text">Vim下字体修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E8%AE%BE%E7%BD%AE-%E5%9C%A820-04%E4%B8%AD%E5%A5%BD%E5%83%8F%E6%97%B6%E6%95%88%E4%BA%86"><span class="toc-number">5.</span> <span class="toc-text">中文设置 - 在20.04中好像时效了</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%A0%E4%B8%BA%E6%98%AF%E5%88%9A%E5%88%9A%E5%AE%89%E8%A3%85%E7%9A%84%E9%9C%80%E8%A6%81%E6%9B%B4%E6%96%B0%E4%B8%8B%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%92%8C%E8%BD%AF%E4%BB%B6%E5%8C%85%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">因为是刚刚安装的需要更新下软件源和软件包：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%AF%AD%E8%A8%80%E5%8C%85"><span class="toc-number">5.2.</span> <span class="toc-text">安装中文语言包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">5.3.</span> <span class="toc-text">设置中文环境变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%87%E8%AE%BE%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">中文设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E4%BD%9C%E8%80%85%E4%BF%A1%E6%81%AF%E7%AD%89"><span class="toc-number">7.</span> <span class="toc-text">vim设置代码文件作者信息等</span></a></li></ol>
     </div>
   </section>
 
@@ -1198,7 +1249,7 @@ xxxx : 库的名字，自己起
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>39 篇</div>
+          <div>40 篇</div>
         </div>
       
 
@@ -1220,7 +1271,7 @@ xxxx : 库的名字，自己起
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>47.2k 字</div>
+          <div>51.4k 字</div>
         </div>
       
 
@@ -1246,8 +1297,8 @@ xxxx : 库的名字，自己起
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Apr 22 2022 09:32:11 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-04-22 日</div>
+            <div id="last-update" style="display: none;">Mon May 02 2022 19:37:58 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-05-02 日</div>
           
         </div>
         
@@ -1297,7 +1348,7 @@ xxxx : 库的名字，自己起
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-04-22 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-02 日';
           }
         </script>
         
