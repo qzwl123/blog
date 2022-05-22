@@ -680,7 +680,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <h2 id="进程退出"><a href="#进程退出" class="headerlink" title="进程退出"></a>进程退出</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">void</span> _exit(<span class="keyword">int</span> status);</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410190008070.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410190008070.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410190008070"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220410190008070.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220410190008070.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410190008070"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: exit.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 19时08分41秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        #include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">        void exit(int status);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        #include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment">        void _exit(int status);</span></span><br><span class="line"><span class="comment">        父进程回收子进程时候会用到!</span></span><br><span class="line"><span class="comment">        status参数: 是进程退时的一个状态信息。父进程回收子进程资源时候可以h 获取到。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;world&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//exit(0); // 输出 hello world --- \n 会刷新缓冲区 吧缓冲区 world 输出到控制台</span></span><br><span class="line">    _exit(<span class="number">0</span>); <span class="comment">// 输出 hello</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><p>父进程运行结束，但子进程还在运行(未运行结束)，这样的子进程就称为孤儿进程(Orphan Process).</p>
@@ -699,7 +699,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <p><code>新打开一个窗口 ps aux 查看进程 可以试着用 kill -9 进程id (测试杀死僵尸进程)</code></p>
 <p><code>如果父进程结束了 子进程就会被进程为 1 的接替</code> </p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410225325329.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220410225325329.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410225325329"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220410225325329.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220410225325329.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220410225325329"></p>
 <h2 id="进程回收"><a href="#进程回收" class="headerlink" title="进程回收"></a>进程回收</h2><p>在每个进程退出的时候，内核释放该进程所有的资源、包括打开的文件、占用的内存等。但是仍然为其保留一定的信息，这些信息主要主要指进程控制块PCB的信息(包括进程号、退出状态、运行时间等)。</p>
 <p>父进程可以通过调用wait或waitpid得到它的退出状态同时彻底清除掉这个进程。</p>
 <p>wait()和waitpid()函数的功能一样，区别在于, wait()函数会阻塞，waitpid ()可以设置不阻塞, waitpid()还可以指定等待哪个子进程结束。</p>
@@ -738,10 +738,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-13T22:08:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-22T23:05:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年4月13日</p>
+    <p>更新于：2022年5月22日</p>
   </a>
 </div>
 
@@ -1058,7 +1058,7 @@ exec函数族介绍exec函数族的作用是根据指定的文件名找到可执
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1080,7 +1080,7 @@ exec函数族介绍exec函数族的作用是根据指定的文件名找到可执
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>55.3k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1106,8 +1106,8 @@ exec函数族介绍exec函数族的作用是根据指定的文件名找到可执
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 17 2022 11:28:28 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-17 日</div>
+            <div id="last-update" style="display: none;">Sun May 22 2022 23:17:55 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-05-22 日</div>
           
         </div>
         
@@ -1157,7 +1157,7 @@ exec函数族介绍exec函数族的作用是根据指定的文件名找到可执
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-17 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-22 日';
           }
         </script>
         

@@ -731,11 +731,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>可以 ll 对比一下两个文件大小</p>
 <p>ssh命令 gdb 可执行程序(test1)</p>
 <p>进入到gdb模式</p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220309144955993.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220309144955993.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220309144955993"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309144955993.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309144955993.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220309144955993"></p>
 <p>GDB调试中设置参数 ：set args 10 20 </p>
 <p>GDB 获取设置参数 ： show args</p>
 <p>可以看上面 <a href="#GDB%E5%91%BD%E4%BB%A4-%E5%90%AF%E5%8A%A8%E3%80%81%E9%80%80%E5%87%BA%E3%80%81%E6%9F%A5%E7%9C%8B%E4%BB%A3%E7%A0%81">点我跳转</a></p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220309145453276.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220309145453276.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220309145453276"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309145453276.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309145453276.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220309145453276"></p>
 <h3 id="调试多个文件"><a href="#调试多个文件" class="headerlink" title="调试多个文件"></a>调试多个文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c a.c b.c -o main -g</span><br><span class="line">gdb main</span><br><span class="line">&#x2F;&#x2F; 查看其中一个文件</span><br><span class="line">&#x2F;&#x2F; 注意不能是一个文件例如 list mian.c</span><br><span class="line">l  a.c:1 &#x2F;&#x2F; 就会进入 a.c 的第一行 以行号为中心显示</span><br><span class="line">or</span><br><span class="line">l  a.c:函数名 &#x2F;&#x2F; 就会进入 a.c 的第函数为中心显示</span><br></pre></td></tr></table></figure>
 
 <h2 id="GDB命令-断电操作"><a href="#GDB命令-断电操作" class="headerlink" title="GDB命令-断电操作"></a>GDB命令-断电操作</h2><ul>
@@ -761,11 +761,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>b/break 10 if i == 5</p>
 </li>
 </ul>
-<h3 id="断点设置"><a href="#断点设置" class="headerlink" title="断点设置"></a>断点设置</h3><p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220310095912836.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220310095912836.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310095912836"></p>
+<h3 id="断点设置"><a href="#断点设置" class="headerlink" title="断点设置"></a>断点设置</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310095912836"></p>
 <p><code>断电编号</code>：Num 下面数字(断电编号)</p>
 <p><code>设置断点无效</code> End = n 正常是 y 想要断点再次生效 </p>
 <p><code>设置断点生效</code> (命令)end/enable 断电编号</p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220310101526835.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220310101526835.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310101526835"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310101526835"></p>
 <h2 id="GDB命令-调试命令"><a href="#GDB命令-调试命令" class="headerlink" title="GDB命令-调试命令"></a>GDB命令-调试命令</h2><ul>
 <li><p>运行GDB程序</p>
 <p>start (程序停在第一行)</p>
@@ -829,10 +829,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-01T21:31:32+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-22T23:05:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年4月1日</p>
+    <p>更新于：2022年5月22日</p>
   </a>
 </div>
 
@@ -1149,7 +1149,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1171,7 +1171,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>55.3k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1197,8 +1197,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 17 2022 11:28:28 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-17 日</div>
+            <div id="last-update" style="display: none;">Sun May 22 2022 23:17:56 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-05-22 日</div>
           
         </div>
         
@@ -1248,7 +1248,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-17 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-22 日';
           }
         </script>
         

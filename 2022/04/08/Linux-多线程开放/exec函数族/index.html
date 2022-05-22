@@ -683,9 +683,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h2 id="exec函数族介绍"><a href="#exec函数族介绍" class="headerlink" title="exec函数族介绍"></a>exec函数族介绍</h2><p>exec函数族的作用是根据指定的文件名找到可执行文件，并用它来取代调用进程的内容，换句话说，就是在调用进程内部执行一个可执行文件。</p>
 <p>exec函数族的函数执行成功后不会返回，因为调用进程的实体，包括代码段，数据段和堆栈等都已经被新的内容取代．只留下进程ID 等一些表面上的信息仍保持原样，颇有些神似”三十六计”中的”金蝉脱壳”。看上去还是旧的躯壳，却已经注入了新的灵魂。只有调用失败了，它们才会返回 -1，从原程序的调用点接着往下执行。</p>
 <h2 id="exec函数族作用图解"><a href="#exec函数族作用图解" class="headerlink" title="exec函数族作用图解"></a>exec函数族作用图解</h2><p>替换 </p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220408215949284.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220408215949284.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220408215949284"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220408215949284.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220408215949284.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220408215949284"></p>
 <p>最后一条才是Linux函数库的 其他都是标准c库的</p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220408223512584.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/image-20220408223512584.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220408223512584"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220408223512584.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220408223512584.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220408223512584"></p>
 <h2 id="execl"><a href="#execl" class="headerlink" title="execl"></a>execl</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: execl.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年04月10日 星期日 11时37分27秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*  #include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment"> *  int execl(const char *path, const char *arg, ...);</span></span><br><span class="line"><span class="comment"> *      - 参数:</span></span><br><span class="line"><span class="comment"> *          - path: 需要指定的执行的文件的路径或者名称</span></span><br><span class="line"><span class="comment"> *              a.out /test/高并发/Linux多线程/exec函数族/execl.aout</span></span><br><span class="line"><span class="comment"> *              建议写绝对路径</span></span><br><span class="line"><span class="comment"> *              ./a.out hello world</span></span><br><span class="line"><span class="comment"> *          - arg: 是执行可执行文件所需要的参数列表</span></span><br><span class="line"><span class="comment"> *              第一个参数一般没有什么作用, 为了方便, 一般可写的是执行的程序名称</span></span><br><span class="line"><span class="comment"> *              从二个参数开始往后, 就是程序执行的所需要的参数列表</span></span><br><span class="line"><span class="comment"> *              参数最后要以NULL结束(哨兵)</span></span><br><span class="line"><span class="comment"> *          - 返回值:</span></span><br><span class="line"><span class="comment"> *              只有调用失败, 才会返回值, 返回-1, 并设置errno</span></span><br><span class="line"><span class="comment"> *              如果调用成功没有返回值！</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个子进程, 在子进程中执行exec函数族中的函数</span></span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 父进程</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am paren peocess, pid : %d\n&quot;</span>, getpid());</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 子进程</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自己的可执行程序 --- 参数 可执行文件</span></span><br><span class="line">        <span class="comment">// execl(&quot;test&quot;, &quot;test&quot;, NULL);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// which ps --- /usr/bin/ps</span></span><br><span class="line">        <span class="comment">// or</span></span><br><span class="line">        <span class="comment">// execl(&quot;/usr/bin/ps&quot;, &quot;ps&quot;, &quot;a&quot;,&quot;u&quot;,&quot;x&quot;, NULL);</span></span><br><span class="line">        execl(<span class="string">&quot;/usr/bin/ps&quot;</span>, <span class="string">&quot;ps&quot;</span>, <span class="string">&quot;aux&quot;</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i am child proess pid = %d\n&quot;</span>, getpid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot; i = %d, pid = %d\n&quot;</span>, i, getpid());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="execlp"><a href="#execlp" class="headerlink" title="execlp"></a>execlp</h2><p><code>env // 环境变量</code></p>
@@ -729,10 +729,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-04-10T18:45:15+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-22T23:05:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年4月10日</p>
+    <p>更新于：2022年5月22日</p>
   </a>
 </div>
 
@@ -1047,7 +1047,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1069,7 +1069,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>55.3k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1095,8 +1095,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 17 2022 11:28:28 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-17 日</div>
+            <div id="last-update" style="display: none;">Sun May 22 2022 23:17:55 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-05-22 日</div>
           
         </div>
         
@@ -1146,7 +1146,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-17 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-22 日';
           }
         </script>
         

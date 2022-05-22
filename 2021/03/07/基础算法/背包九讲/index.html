@@ -689,7 +689,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </blockquote>
 <hr>
 <p>在大家看完什么是动态规划后就是说我们在之前也做题中可能也遇到过动态规划的题比如<code>斐波那契数列</code> 如 1，1， 2， 3… 就是这个 2 怎么来的就是 1 + 1 = 2 之后 3 的下一项是什么？就是 2 + 3 = 5 也就是说 3 的下一项就是 5 之后下几项就是 8，13，21…就会得到这组序列 我们如果相求第<code>n</code>斐波那契数列可以得到转移公式 $Fib(n) = Fib(n - 1) + Fib(n - 2);$ (Fib(1) = 1 和 Fib(2) = 1是由题目给出的，n &gt; 2 ) 完整的斐波那契数列 加上出口就是 n = 1 or n = 2 返回 1 ,  就是说我们这里为什么提出这个斐波那契数列呢就是我们在递归时候，我们呢会发现他的递归式中会出现重叠的子问题，为什么会这么说我来计算一下斐波那契数列 第 5 项  Fib(5) 可得出如下</p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/FIB.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/FIB.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/FIB.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/FIB.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 <p>假如说我们用数组去求解Fib(6) 是不就可以直接用之前求Fib(5) + Fib(4) 的 直接得到 Fib(6) 这样我是不是就可以省去求重叠子问题的时间，这样我们的时间复杂度就从o(2^n^) 变成 o(n)(当然这个时间复杂度也是能弄<code>记忆化搜索</code>优化的)。</p>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><blockquote>
 <p>01 背包    只又 2 种选择一种<code>选</code>一种<code>不选</code>。    <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1048">洛谷 P1048 采药</a></p>
@@ -763,7 +763,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <p>上面朴素算法时间复杂度与空间复杂度皆为 O(t*n)  其中时间复杂度不能再优化, 而空间复杂度可以 优化为O(t), 下面我们来讲解如何优化到一维数组</p>
 <p><strong>细节问题</strong></p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/01_%E5%AE%8C%E5%85%A8.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/01_%E5%AE%8C%E5%85%A8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="01_完全"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/01_%E5%AE%8C%E5%85%A8.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/01_%E5%AE%8C%E5%85%A8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="01_完全"></p>
 <p>1 我们看到的求最优解的背包问题题目中，事实上有两种不太相同的问法。有的题目要求“恰好装满背包”时的最优解，有的题目则并没有要求必须把背包装满。一种区别这两种问法的实现方法是在初始化的时候有所不同。<br>如果是第一种问法，要求恰好装满背包，那么在初始化时除了f[0]为0其它f[1..V]均设为-∞，这样就可以保证最终得到的f[N]是一种恰好装满背包的最优解。</p>
 <p>2 如果并没有要求必须把背包装满，而是只希望价格尽量大，初始化时应该将f[0..V]全部设为0。为什么呢？</p>
 <p>3 可以这样理解：初始化的f数组事实上就是在没有任何物品可以放入背包时的合法状态。如果要求背包恰好装满，那么此时只有容量为0的背包可能被价值为0的（相当于没装东西），其它容量的背包均没有合法的解，属于未定义的状态，它们的值就都应该是-∞了。如果背包并非必须被装满，那么任何容量的背包都有一个合法解“什么都不装”，这个解的价值为0，所以初始时状态的值也就全部为0了。<br>这个小技巧完全可以推广到其它类型的背包问题，后面也就不再对进行状态转移之前的初始化进行讲解。</p>
@@ -772,7 +772,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>转移方程：$dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i])$</p>
 <p>与 01背包的区别–第二个循环</p>
 <p>01背包 在更新时候倒序因为是需要用之前元素</p>
-<p><img src="https://gitee.com/qzwl123/typora_images/raw/master/img/01_%E5%AE%8C%E5%85%A8.png" class="lazyload" data-srcset="https://gitee.com/qzwl123/typora_images/raw/master/img/01_%E5%AE%8C%E5%85%A8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="01_完全"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/01_%E5%AE%8C%E5%85%A8.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/01_%E5%AE%8C%E5%85%A8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="01_完全"></p>
 <h4 id="代码实现：-1"><a href="#代码实现：-1" class="headerlink" title="代码实现："></a>代码实现：</h4><h5 id="无优化-代码-1"><a href="#无优化-代码-1" class="headerlink" title="无优化-代码"></a>无优化-代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N = <span class="number">1e4</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[MAX_N + <span class="number">10</span>][MAX_N +<span class="number">10</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> t[MAX_N + <span class="number">10</span>], v[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backpack</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= s; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &lt; t[i]) dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                dp[i][j] = max(dp[i - <span class="number">1</span>][j], dp[i][j - t[i]] + v[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T, n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t[i] &gt;&gt; v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    backpack(n, T);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; dp[n][T] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="优化-代码-1"><a href="#优化-代码-1" class="headerlink" title="优化-代码"></a>优化-代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N = <span class="number">1e7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> B[MAX_N + <span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> t[MAX_N + <span class="number">10</span>], v[MAX_N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backpack</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = t[i]; j &lt;= s; j++) &#123;</span><br><span class="line">            B[j] = max(B[j], B[j - t[i]] + v[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T, n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t[i] &gt;&gt; v[i];</span><br><span class="line">    &#125;</span><br><span class="line">    backpack(n, T);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; B[T] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -901,10 +901,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-01-19T10:53:48+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-22T23:05:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年1月19日</p>
+    <p>更新于：2022年5月22日</p>
   </a>
 </div>
 
@@ -1228,7 +1228,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1250,7 +1250,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>55.3k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1276,8 +1276,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 17 2022 11:28:30 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-17 日</div>
+            <div id="last-update" style="display: none;">Sun May 22 2022 23:18:00 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update-show">2022-05-22 日</div>
           
         </div>
         
@@ -1327,7 +1327,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-17 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-22 日';
           }
         </script>
         
