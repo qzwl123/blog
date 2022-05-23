@@ -676,9 +676,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="二维数组映射成一维"><a href="#二维数组映射成一维" class="headerlink" title="二维数组映射成一维"></a>二维数组映射成一维</h2><p>n * m 的矩阵</p>
-<p>(x, y) -&gt; x * n + y</p>
-<p>(x, y) 都从0开始</p>
+  <h2 id="二维数组映射成一维-0，0-开始"><a href="#二维数组映射成一维-0，0-开始" class="headerlink" title="二维数组映射成一维 - (0，0)开始"></a>二维数组映射成一维 - (0，0)开始</h2><p> 设<code>一维数组</code>下标为index,二维长度为$n*m$则</p>
+<p>一维数组转为<code>二维数组</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">row = index / m <span class="comment">// 行</span></span><br><span class="line">col = index % m <span class="comment">// 列  </span></span><br></pre></td></tr></table></figure>
+
+<p>二维数组转换为一维数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index = row * m + col </span><br></pre></td></tr></table></figure>
+
+
+
 
   
   
@@ -713,10 +719,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-02-16T15:01:53+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-23T22:24:24+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年2月16日</p>
+    <p>更新于：2022年5月23日</p>
   </a>
 </div>
 
@@ -1007,7 +1013,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4"><span class="toc-number">1.</span> <span class="toc-text">二维数组映射成一维</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E7%BB%B4-0%EF%BC%8C0-%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">二维数组映射成一维 - (0，0)开始</span></a></li></ol>
     </div>
   </section>
 
@@ -1054,7 +1060,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.7k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1080,7 +1086,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 14:48:48 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:54 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2022-05-23 日</div>
           
         </div>

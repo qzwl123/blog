@@ -1089,9 +1089,15 @@ gcc/g++的区别
   <div class='md'>
     
       
-        二维数组映射成一维n * m 的矩阵
-(x, y) -&gt; x * n + y
-(x, y) 都从0开始
+        二维数组映射成一维 - (0，0)开始 设一维数组下标为index,二维长度为$n*m$则
+一维数组转为二维数组
+12row = index / m // 行col = index % m // 列  
+
+二维数组转换为一维数组
+1index = row * m + col 
+
+
+
 
       
     
@@ -1412,7 +1418,7 @@ gcc/g++的区别
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.7k 字</div>
+          <div>58.8k 字</div>
         </div>
       
 
@@ -1438,7 +1444,7 @@ gcc/g++的区别
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 14:48:51 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:56 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2022-05-23 日</div>
           
         </div>
