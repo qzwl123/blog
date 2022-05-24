@@ -676,7 +676,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h2 id="1-简介-博弈"><a href="#1-简介-博弈" class="headerlink" title="1.简介 博弈"></a>1.简介 博弈</h2><p>博弈/博弈论，又称为对策论（Game Theory）、赛局理论等，既是现代数学的一个新分支，也是运筹学的一个重要学科。博弈论主要研究公式化了的激励结构间的相互作用，是研究具有斗争或竞争性质现象的数学理论和方法，博弈论考虑游戏中的个体的预测行为和实际行为，并研究它们的优化策略。</p>
+  <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h2 id="1-简介-博弈"><a href="#1-简介-博弈" class="headerlink" title="1.简介 博弈"></a>1.简介 博弈</h2><p>博弈&#x2F;博弈论，又称为对策论（Game Theory）、赛局理论等，既是现代数学的一个新分支，也是运筹学的一个重要学科。博弈论主要研究公式化了的激励结构间的相互作用，是研究具有斗争或竞争性质现象的数学理论和方法，博弈论考虑游戏中的个体的预测行为和实际行为，并研究它们的优化策略。</p>
 <p>总而言之，博弈，就是两方（或者多方）在为了某一种目标进行的竞争。</p>
 <p>在生活中，博弈无处不在，国与国之间的交锋就是一种博弈，在游戏中你与对手的有来有回也是一种博弈，面对老板提出加工资的需求又也是一种博弈，在博弈中，选择去做什么非常重要，这也是十分有研究价值的，一个有趣的题外话：从1994年诺贝尔经济学奖授予3位博弈论专家开始，共有7届的诺贝尔经济学奖与博弈论的研究有关。</p>
 <h2 id="2-基础概念"><a href="#2-基础概念" class="headerlink" title="2. 基础概念"></a>2. 基础概念</h2><p>　　必胜态：通过某一步可以转移到必败态的局面。 也就是说，对于一个处于必胜态的玩家，他总能找到一种合法操作，将当前局面变成一个必败态然后交给对方，如果中途不出现意外的话，最终自己就会得到胜利。但是处于必胜态并不意味着任意的操作都能将当前局面变成必败态。</p>
@@ -689,12 +689,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h2 id="4-学习方法"><a href="#4-学习方法" class="headerlink" title="4.学习方法"></a>4.学习方法</h2><p>关于博弈论，最理想的学习方式还当属熟悉模型，几种常用的博弈论模型有：巴什博弈，威佐夫博弈，斐波那契博弈，尼姆博弈，通过理解模型以及他们模型可能产生的变种，面对各种题目也只是“换汤不换药”的思维。</p>
 <p>在基本了解各类模型之后，我们可以开始学习“博弈树”和“决策树”这类算法，以及其他一些启发式算法，这与人工智能的思维很接近，此时算法难度已经直线上升，在经过这个瓶颈之后，等待你的是一片星辰大海。</p>
 <h1 id="巴什博弈"><a href="#巴什博弈" class="headerlink" title="巴什博弈"></a>巴什博弈</h1><p> <strong>巴什博弈的主要内容：</strong>只有一堆n个物品，两个人轮流从这堆物品中取物，规定每次至少取一个，最多取m个。最后取光者得胜。<strong>其中它强调的是只有一堆物品：</strong>取光者胜</p>
-<p>如果 n % (m + 1) == 0 先手必败</p>
-<p>​         n % (m + 1) != 0 先后必败</p>
+<p>如果 n % (m + 1) &#x3D;&#x3D; 0 先手必败</p>
+<p>​		 n % (m + 1) !&#x3D; 0 先后必败</p>
 <p><strong>相信大家看见这个一定有很多疑惑就是为什么这个公式就能看到结局！</strong></p>
-<p>1.如果它能被（m+1）整除，那么假设你先手 取p个，那么对手总能取m+1-p 个（因为1&lt;=p&lt;=m，那么 1&lt;=(m+1-p)&lt;=m 也满足对手所取数量的条件限制），这样不断循环下去，最后拿到石头的一定是对手。</p>
+<p>1.如果它能被（m+1）整除，那么假设你先手 取p个，那么对手总能取m+1-p 个（因为1&lt;&#x3D;p&lt;&#x3D;m，那么 1&lt;&#x3D;(m+1-p)&lt;&#x3D;m 也满足对手所取数量的条件限制），这样不断循环下去，最后拿到石头的一定是对手。</p>
 <p><img src="C:\Users\16583\Desktop\博弈\images\1.png" class="lazyload" data-srcset="C:\Users\16583\Desktop\博弈\images\1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="1"></p>
-<p>2.如果它不能被（m+1）整除，那么你一定可以拿走那个余数k（k=n%(m+1)） 这样对手就相当于面对了 n%（m+1）的局面，也就是1的情况。</p>
+<p>2.如果它不能被（m+1）整除，那么你一定可以拿走那个余数k（k&#x3D;n%(m+1)） 这样对手就相当于面对了 n%（m+1）的局面，也就是1的情况。</p>
 <h1 id="巴什博弈-例题"><a href="#巴什博弈-例题" class="headerlink" title="巴什博弈(例题)"></a><strong>巴什博弈</strong>(例题)</h1><h4 id="巴什博弈-普通"><a href="#巴什博弈-普通" class="headerlink" title="巴什博弈-普通"></a><strong>巴什博弈</strong>-普通</h4><p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1846">http://acm.hdu.edu.cn/showproblem.php?pid=1846</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  最先取光石子的一方为胜</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Bash</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n % (m + <span class="number">1</span>) != <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>; <span class="comment">// 核心代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, n, m; <span class="comment">// n = 组数    n = 石子个数    m = 每回取最多个数</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (Bash(n, m) ? <span class="string">&quot;first&quot;</span> : <span class="string">&quot;second&quot;</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -739,24 +739,24 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>就是大家可以算一下7的二进制数是什么  1 1 1 对吧！ </p>
 <p>从此问题看出他们异或的结果就等于他们两个数相加 对吧 ！！!</p>
 <p>就是异或也叫半加运算</p>
-<p> 这里能大家可以比如再去实验一个数比如说 1 ^ 2 = 什么对吧！！！</p>
+<p> 这里能大家可以比如再去实验一个数比如说 1 ^ 2 &#x3D; 什么对吧！！！</p>
 <p>现在说了这么多都是什么对吧！！！ 就是为了我们之后要讲的尼姆博弈做的 铺垫！</p>
 <p>什么是尼姆博弈</p>
 <p>有n堆石子，两人从某一堆取任意多个，规定至少取走1个之多可以取走这堆的全部最后<strong>取光者胜</strong>。</p>
 <p>在这里大家就可能发现了这和刚刚的巴什博弈不差什么对吧！</p>
 <p>情况 ① 当有 1 堆石子的时候先手可以全部取走，对吧 ， 之后先手胜利</p>
-<p>情况 ② 当有 2 堆石子时候 我们令一堆石子为 n 另一堆 m 假设 n &gt; m —–  n = 4  —- m = 3 之后先手先取 因为两个人都是顶尖聪明的人都会去去吧自己利益最大化     就是我们先取 n - m 个剩下的无论后手怎么去取我们都和后手去取相同 个数的石子这样我们一定是必胜局，</p>
+<p>情况 ② 当有 2 堆石子时候 我们令一堆石子为 n 另一堆 m 假设 n &gt; m —–  n &#x3D; 4  —- m &#x3D; 3 之后先手先取 因为两个人都是顶尖聪明的人都会去去吧自己利益最大化     就是我们先取 n - m 个剩下的无论后手怎么去取我们都和后手去取相同 个数的石子这样我们一定是必胜局，</p>
 <table>
 <thead>
 <tr>
-<th align="center">n = 4 - &gt; 二进制</th>
+<th align="center">n &#x3D; 4 - &gt; 二进制</th>
 <th align="center">1</th>
 <th align="center">0</th>
 <th align="center">0</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><strong>m = 3</strong>  <strong>- &gt; 二进制</strong></td>
+<td align="center"><strong>m &#x3D; 3</strong>  <strong>- &gt; 二进制</strong></td>
 <td align="center"><strong>0</strong></td>
 <td align="center"><strong>1</strong></td>
 <td align="center"><strong>1</strong></td>
@@ -791,21 +791,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </tr>
 </tbody></table>
 <p>我们让异或为0也就是说我们让两个石子数量相对 之后不就像我们之前说的不管后手取多少我们先手都是必胜</p>
-<p>情况 ③ 当有 2 堆石子时候 我们令一堆石子为 n 另一堆 m 假设 n = m —–  n = 4  —- m = 4  从刚才上图看出一但出现 n == m 时候无论先手怎么取 后手就可以取和先手相同的个数 这样先手必败 （就是说因为两个都足够聪明所有说先手一定是什么比败局）</p>
+<p>情况 ③ 当有 2 堆石子时候 我们令一堆石子为 n 另一堆 m 假设 n &#x3D; m —–  n &#x3D; 4  —- m &#x3D; 4  从刚才上图看出一但出现 n &#x3D;&#x3D; m 时候无论先手怎么取 后手就可以取和先手相同的个数 这样先手必败 （就是说因为两个都足够聪明所有说先手一定是什么比败局）</p>
 <p>之后咱们不可能说是只有2堆是吧 可能还有 3 堆 ， 4 堆 ， 5 堆，6 堆…..等等 </p>
 <p>比如说（1， 2 ，3）这种我们能看出    先手必败</p>
 <p>1 二进制 0 0 1</p>
 <p>2 二进制 0 1 0</p>
 <p>3 二进制 0 1 1 +（xor）</p>
 <hr>
-<p>​               0 0 0</p>
+<p>​			   0 0 0</p>
 <p>随机举例</p>
 <p>堆数</p>
-<p> n = 5</p>
+<p> n &#x3D; 5</p>
 <p>石子个数</p>
-<p>182    63    59    22    10</p>
+<p>182	63	59	22	10</p>
 <p><strong>取光者胜</strong></p>
-<p>甲 先    乙 后</p>
+<p>甲 先	乙 后</p>
 <table>
 <thead>
 <tr>
@@ -1267,8 +1267,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <a class='prev' href='/2022/05/06/STL%E5%89%96%E6%9E%90/STL-%E4%BA%8C%E5%88%86/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>STL_二分</p>
           <p class='content'>数组是升序的情况例：1 3 5 7 7 10 11
-lower_bound(begin, ned, key) — 得到第一个 &gt;= key 的下标
-upper_bound(begin, n...</p>
+lower_bound(begin, ned, key) — 得到第一个 &gt;&#x3D; key 的下标
+upper_bound(beg...</p>
         </a>
       
       
@@ -1510,7 +1510,7 @@ upper_bound(begin, n...</p>
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.8k 字</div>
+          <div>60.4k 字</div>
         </div>
       
 
@@ -1536,8 +1536,8 @@ upper_bound(begin, n...</p>
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:53 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-23 日</div>
+            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:41 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-24 日</div>
           
         </div>
         
@@ -1587,7 +1587,7 @@ upper_bound(begin, n...</p>
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
           }
         </script>
         

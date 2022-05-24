@@ -680,19 +680,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>取出 第一位</p>
 <p>1</p>
 <blockquote>
-<p>1 * 2 + 0 = 2</p>
+<p>1 * 2 + 0 &#x3D; 2</p>
 </blockquote>
 <blockquote>
-<p>10 * 2 + 1 == 2 * 2 + 1</p>
+<p>10 * 2 + 1 &#x3D;&#x3D; 2 * 2 + 1</p>
 </blockquote>
-<p>10 = 5</p>
+<p>10 &#x3D; 5</p>
 <blockquote>
-<p>5 * 2 + 0 = 10</p>
+<p>5 * 2 + 0 &#x3D; 10</p>
 </blockquote>
 <p>有二进制<code>1010</code></p>
 <p>二进制转换成十进制:基数乘以权,然后相加</p>
 <p>$$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$$</p>
-<p>$$ = ((1 * 2 + 0) * 2 + 1 ) * 2 + 0$$</p>
+<p>$$ &#x3D; ((1 * 2 + 0) * 2 + 1 ) * 2 + 0$$</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="built_in">string</span> s, b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> c : s)</span><br><span class="line">        res = res * b + c- <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -1068,7 +1068,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.8k 字</div>
+          <div>60.4k 字</div>
         </div>
       
 
@@ -1094,8 +1094,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:55 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-23 日</div>
+            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:43 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-24 日</div>
           
         </div>
         
@@ -1145,7 +1145,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
           }
         </script>
         

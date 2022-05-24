@@ -680,15 +680,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：</p>
 <ol>
 <li>n≤30n≤30, 指数级别, dfs+剪枝，状态压缩dp</li>
-<li>n≤100n≤100 =&gt; O(n3)O(n3)，floyd，dp，高斯消元</li>
-<li>n≤1000n≤1000 =&gt; O(n2)O(n2)，O(n2logn)O(n2logn)，dp，二分，朴素版Dijkstra、朴素版Prim、Bellman-Ford</li>
-<li>n≤10000n≤10000 =&gt; O(n∗n√)O(n∗n)，块状链表、分块、莫队</li>
-<li>n≤100000n≤100000 =&gt; O(nlogn)O(nlogn) =&gt; 各种sort，线段树、树状数组、set/map、heap、拓扑排序、dijkstra+heap、prim+heap、Kruskal、spfa、求凸包、求半平面交、二分、CDQ分治、整体二分、后缀数组、树链剖分、动态树</li>
-<li>n≤1000000n≤1000000 =&gt; O(n)O(n), 以及常数较小的 O(nlogn)O(nlogn) 算法 =&gt; 单调队列、 hash、双指针扫描、并查集，kmp、AC自动机，常数比较小的 O(nlogn)O(nlogn) 的做法：sort、树状数组、heap、dijkstra、spfa</li>
-<li>n≤10000000n≤10000000 =&gt; O(n)O(n)，双指针扫描、kmp、AC自动机、线性筛素数<br>n≤109n≤109 =&gt; O(n√)O(n)，判断质数</li>
-<li>n≤1018n≤1018 =&gt; O(logn)O(logn)，最大公约数，快速幂，数位DP</li>
-<li>n≤101000n≤101000 =&gt; O((logn)2)O((logn)2)，高精度加减乘除</li>
-<li>n≤10100000n≤10100000 =&gt; O(logk×loglogk)，k表示位数O(logk×loglogk)，k表示位数，高精度加减、FFT/NTT</li>
+<li>n≤100n≤100 &#x3D;&gt; O(n3)O(n3)，floyd，dp，高斯消元</li>
+<li>n≤1000n≤1000 &#x3D;&gt; O(n2)O(n2)，O(n2logn)O(n2logn)，dp，二分，朴素版Dijkstra、朴素版Prim、Bellman-Ford</li>
+<li>n≤10000n≤10000 &#x3D;&gt; O(n∗n√)O(n∗n)，块状链表、分块、莫队</li>
+<li>n≤100000n≤100000 &#x3D;&gt; O(nlogn)O(nlogn) &#x3D;&gt; 各种sort，线段树、树状数组、set&#x2F;map、heap、拓扑排序、dijkstra+heap、prim+heap、Kruskal、spfa、求凸包、求半平面交、二分、CDQ分治、整体二分、后缀数组、树链剖分、动态树</li>
+<li>n≤1000000n≤1000000 &#x3D;&gt; O(n)O(n), 以及常数较小的 O(nlogn)O(nlogn) 算法 &#x3D;&gt; 单调队列、 hash、双指针扫描、并查集，kmp、AC自动机，常数比较小的 O(nlogn)O(nlogn) 的做法：sort、树状数组、heap、dijkstra、spfa</li>
+<li>n≤10000000n≤10000000 &#x3D;&gt; O(n)O(n)，双指针扫描、kmp、AC自动机、线性筛素数<br>n≤109n≤109 &#x3D;&gt; O(n√)O(n)，判断质数</li>
+<li>n≤1018n≤1018 &#x3D;&gt; O(logn)O(logn)，最大公约数，快速幂，数位DP</li>
+<li>n≤101000n≤101000 &#x3D;&gt; O((logn)2)O((logn)2)，高精度加减乘除</li>
+<li>n≤10100000n≤10100000 &#x3D;&gt; O(logk×loglogk)，k表示位数O(logk×loglogk)，k表示位数，高精度加减、FFT&#x2F;NTT</li>
 </ol>
 <p>来源：AcWing</p>
 
@@ -1050,7 +1050,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.8k 字</div>
+          <div>60.4k 字</div>
         </div>
       
 
@@ -1076,8 +1076,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:55 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-23 日</div>
+            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:42 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-24 日</div>
           
         </div>
         
@@ -1127,7 +1127,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
           }
         </script>
         

@@ -700,18 +700,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>tail % leng</p>
 <p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220116103748456.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220116103748456.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220116103748456"></p>
 <h3 id="出队操作-入队操作"><a href="#出队操作-入队操作" class="headerlink" title="出队操作 - 入队操作"></a>出队操作 - 入队操作</h3><blockquote>
-<p>出队 (head += 1)</p>
-<p>入队 (tail += 1)</p>
+<p>出队 (head +&#x3D; 1)</p>
+<p>入队 (tail +&#x3D; 1)</p>
 </blockquote>
 <h3 id="假溢出"><a href="#假溢出" class="headerlink" title="假溢出"></a>假溢出</h3><h3 id="出队操作-入队操作-假溢出优化"><a href="#出队操作-入队操作-假溢出优化" class="headerlink" title="出队操作 - 入队操作 - 假溢出优化"></a>出队操作 - 入队操作 - 假溢出优化</h3><blockquote>
-<p>入队 (q-&gt;count != q-&gt;length) 当前队列数据总长度 (count)、队列总长度 (q-&gt;length)</p>
+<p>入队 (q-&gt;count !&#x3D; q-&gt;length) 当前队列数据总长度 (count)、队列总长度 (q-&gt;length)</p>
 <blockquote>
 <p>满足条件情况：</p>
 <blockquote>
 </blockquote>
 <ol>
-<li>q-&gt;data[q-&gt;tail++] = val;</li>
-<li>if(q-&gt;tail == q-&gt;leng ) q-&gt;tail = 0;</li>
+<li>q-&gt;data[q-&gt;tail++] &#x3D; val;</li>
+<li>if(q-&gt;tail &#x3D;&#x3D; q-&gt;leng ) q-&gt;tail &#x3D; 0;</li>
 <li>q-&gt;count++;</li>
 </ol>
 </blockquote>
@@ -722,7 +722,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </blockquote>
 <ol>
 <li>q-&gt;head++;</li>
-<li>if(q-&gt;head == q-&gt;leng) q-&gt;head = 0;</li>
+<li>if(q-&gt;head &#x3D;&#x3D; q-&gt;leng) q-&gt;head &#x3D; 0;</li>
 <li>q-&gt;count–;</li>
 </ol>
 </blockquote>
@@ -758,7 +758,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-<p>// 待做 <del>链栈</del>、链队列、<del>循环队列扩容</del>、还没实现</p>
+<p>&#x2F;&#x2F; 待做 <del>链栈</del>、链队列、<del>循环队列扩容</del>、还没实现</p>
 
   
   
@@ -907,13 +907,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <p class='title'>链表<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>单向链表结点组成部分
 数据域 - data
-指针域 - next / 后继 
+指针域 - next &#x2F; 后继 
 
 
 插入 - 结点
 把待插入数据创建成一个结点
 把待插入结点指向新建结点的next
-把待插入结点前一个结点的next...</p>
+把待插入结点前一个结点...</p>
         </a>
       
     </div>
@@ -1148,7 +1148,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.8k 字</div>
+          <div>60.4k 字</div>
         </div>
       
 
@@ -1174,8 +1174,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:55 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-23 日</div>
+            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:43 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-24 日</div>
           
         </div>
         
@@ -1225,7 +1225,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
           }
         </script>
         

@@ -702,7 +702,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>gdb 可执行程序</p>
 <p>quit</p>
 </li>
-<li><p>给程序设置参数/获取设置参数</p>
+<li><p>给程序设置参数&#x2F;获取设置参数</p>
 <p>set args 10 20</p>
 <p>show args</p>
 </li>
@@ -710,23 +710,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>help</p>
 </li>
 <li><p>查看当前文件代码 (回车继续执行上一行命令)</p>
-<p>list/l (从默认位置显示) </p>
-<p>list/l 行号 (从指定的行显示)</p>
-<p>list/l 函数名 (从指定的函数显示)</p>
+<p>list&#x2F;l (从默认位置显示) </p>
+<p>list&#x2F;l 行号 (从指定的行显示)</p>
+<p>list&#x2F;l 函数名 (从指定的函数显示)</p>
 </li>
 <li><p>查看非当前文件文件</p>
-<p>list/l 文件名：行号</p>
-<p>list/l 文件名：函数名</p>
+<p>list&#x2F;l 文件名：行号</p>
+<p>list&#x2F;l 文件名：函数名</p>
 </li>
 <li><p>设置显示行数</p>
-<p>show list/listsize</p>
-<p>set list/listsize 行数</p>
+<p>show list&#x2F;listsize</p>
+<p>set list&#x2F;listsize 行数</p>
 </li>
 </ul>
 <h3 id="gdb-调试代码"><a href="#gdb-调试代码" class="headerlink" title="gdb 调试代码"></a>gdb 调试代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: gdb_test1.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年03月09日 星期三 10时19分28秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a; i++) &#123;</span><br><span class="line">        sum += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ./test1 10 20 // 传递参数就会给main里面</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;argc = %d\n&quot;</span>, argc);</span><br><span class="line">    <span class="keyword">if</span>(argc &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        a = <span class="number">10</span>;</span><br><span class="line">        b = <span class="number">30</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        a = atoi(argv[<span class="number">1</span>]);</span><br><span class="line">        b = atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d, b = %d\n&quot;</span>, a, b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a + b = %d \n&quot;</span>, a + b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;i = %d\n&quot;</span>, i);</span><br><span class="line">        <span class="keyword">int</span> res = test(i);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;res value : %d \n&quot;</span>, res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;THE END !!! \n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>vim 下 set nu</p>
-<p><code> gcc test1.c -o test1 -g</code> 加上调试信息 // 源代码文件要要和可执行程序在一起否则 gdb 中命令不可使用</p>
+<p><code> gcc test1.c -o test1 -g</code> 加上调试信息 &#x2F;&#x2F; 源代码文件要要和可执行程序在一起否则 gdb 中命令不可使用</p>
 <p><code> gcc test1.c -o test2</code> 不加调试信息</p>
 <p>可以 ll 对比一下两个文件大小</p>
 <p>ssh命令 gdb 可执行程序(test1)</p>
@@ -740,31 +740,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <h2 id="GDB命令-断电操作"><a href="#GDB命令-断电操作" class="headerlink" title="GDB命令-断电操作"></a>GDB命令-断电操作</h2><ul>
 <li><p>设置断点</p>
-<p>b/break 行号</p>
-<p>b/break 函数名</p>
-<p>b/break 文件名：行号</p>
-<p>b/break 文件名: 函数</p>
+<p>b&#x2F;break 行号</p>
+<p>b&#x2F;break 函数名</p>
+<p>b&#x2F;break 文件名：行号</p>
+<p>b&#x2F;break 文件名: 函数</p>
 </li>
 <li><p>查看断点</p>
-<p>i/info b/break</p>
+<p>i&#x2F;info b&#x2F;break</p>
 </li>
 <li><p>删除断点</p>
-<p>d/del/delete 断点编号</p>
+<p>d&#x2F;del&#x2F;delete 断点编号</p>
 </li>
 <li><p>设置断点无效</p>
-<p>dis/disable 断点编号</p>
+<p>dis&#x2F;disable 断点编号</p>
 </li>
 <li><p>设置断点生效</p>
-<p>ena/enable 断电编号</p>
+<p>ena&#x2F;enable 断电编号</p>
 </li>
 <li><p>设置条件断点(一般在循环的位置)</p>
-<p>b/break 10 if i == 5</p>
+<p>b&#x2F;break 10 if i &#x3D;&#x3D; 5</p>
 </li>
 </ul>
 <h3 id="断点设置"><a href="#断点设置" class="headerlink" title="断点设置"></a>断点设置</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310095912836"></p>
 <p><code>断电编号</code>：Num 下面数字(断电编号)</p>
-<p><code>设置断点无效</code> End = n 正常是 y 想要断点再次生效 </p>
-<p><code>设置断点生效</code> (命令)end/enable 断电编号</p>
+<p><code>设置断点无效</code> End &#x3D; n 正常是 y 想要断点再次生效 </p>
+<p><code>设置断点生效</code> (命令)end&#x2F;enable 断电编号</p>
 <p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310101526835"></p>
 <h2 id="GDB命令-调试命令"><a href="#GDB命令-调试命令" class="headerlink" title="GDB命令-调试命令"></a>GDB命令-调试命令</h2><ul>
 <li><p>运行GDB程序</p>
@@ -772,26 +772,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>run (遇到断点才停)</p>
 </li>
 <li><p>继续运行，到下一个断点停</p>
-<p>c/continue </p>
+<p>c&#x2F;continue </p>
 </li>
 <li><p>向下执行一行代码 (不会进入函数体)</p>
-<p>n/next</p>
+<p>n&#x2F;next</p>
 </li>
 <li><p>变量操作</p>
-<p>p/print 变量名 (打印变量值)</p>
+<p>p&#x2F;print 变量名 (打印变量值)</p>
 <p>ptype 变量名 (打印变量类型)</p>
 </li>
 <li><p>向下单步调试 (遇到函数进入函数体)</p>
-<p>s/step</p>
+<p>s&#x2F;step</p>
 <p>finish (跳出函数体)</p>
 </li>
 <li><p>自动变量操作</p>
 <p>display num (自动打印指定变量的值)</p>
-<p>i/info display</p>
+<p>i&#x2F;info display</p>
 <p>undisplay 编号</p>
 </li>
 <li><p>其他操作</p>
-<p>set var 变量名 = 变量值</p>
+<p>set var 变量名 &#x3D; 变量值</p>
 <p>until (跳出循环)</p>
 </li>
 </ul>
@@ -1171,7 +1171,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>58.8k 字</div>
+          <div>60.4k 字</div>
         </div>
       
 
@@ -1197,8 +1197,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Mon May 23 2022 22:24:54 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2022-05-23 日</div>
+            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:42 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-24 日</div>
           
         </div>
         
@@ -1248,7 +1248,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-23 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
           }
         </script>
         
