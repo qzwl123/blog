@@ -690,11 +690,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <p><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.136.la%2F20210831%2F7c8b558d1335448d94e98fbcded9735f.jpg&refer=http%3A%2F%2Fimg.136.la&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649325714&t=24e3d9033f770182f43dc2d420351992" class="lazyload" data-srcset="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.136.la%2F20210831%2F7c8b558d1335448d94e98fbcded9735f.jpg&refer=http%3A%2F%2Fimg.136.la&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649325714&t=24e3d9033f770182f43dc2d420351992" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="GDB吉祥物"></p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li><p>通常，在为调试而编译时，我们会()关掉编译器的优化选项（’-o’) ，并打开调试选项(‘-g’)。另外， ‘-Wall’在尽量不影响程序行为的情况下选项打开所有warning(警告)，也可以发现许多问题，避免一些不必要的 BUG。</p>
+<li><p>通常，在为调试而编译时，我们会关掉编译器的优化选项（’-o’) ，并打开调试选项(‘-g’)。另外， ‘-Wall’在尽量不影响程序行为的情况下选项打开所有warning(警告)，也可以发现许多问题，避免一些不必要的 BUG。</p>
 </li>
 <li><p>gcc -g -Wall program.c -o program</p>
 </li>
 <li><p>‘g’ 选项的作用是在执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，可以在调试时必须保证 gdb 能找打源文件</p>
+</li>
+<li><p>-w 的意思是关闭编译时的警告，也就是编译后不显示任何warning，因为有时在编译之后<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%BC%96%E8%AF%91%E5%99%A8&spm=1001.2101.3001.7020">编译器</a>会显示一些例如数据转换之类的警告，这些警告是我们平时可以忽略的。</p>
+</li>
+<li><p>-Wall选项意思是编译后显示所有警告。</p>
+</li>
+<li><p>-W选项类似-Wall，会显示警告，但是只显示编译器认为会出现错误的警告。</p>
+<p>在编译一些项目的时候可以-W和-Wall选项一起使用。</p>
 </li>
 </ul>
 <h2 id="GDB命令-启动、退出、查看代码"><a href="#GDB命令-启动、退出、查看代码" class="headerlink" title="GDB命令-启动、退出、查看代码"></a>GDB命令-启动、退出、查看代码</h2><ul>
@@ -762,7 +769,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </li>
 </ul>
 <h3 id="断点设置"><a href="#断点设置" class="headerlink" title="断点设置"></a>断点设置</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310095912836.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310095912836"></p>
-<p><code>断电编号</code>：Num 下面数字(断电编号)</p>
+<p><code>断点编号</code>：Num 下面数字(断电编号)</p>
 <p><code>设置断点无效</code> End &#x3D; n 正常是 y 想要断点再次生效 </p>
 <p><code>设置断点生效</code> (命令)end&#x2F;enable 断电编号</p>
 <p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220310101526835.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220310101526835"></p>
@@ -829,10 +836,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-22T23:05:06+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-27T09:27:02+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年5月22日</p>
+    <p>更新于：2022年5月27日</p>
   </a>
 </div>
 
@@ -1149,7 +1156,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1171,7 +1178,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>60.4k 字</div>
+          <div>64.4k 字</div>
         </div>
       
 
@@ -1197,8 +1204,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:42 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-05-24 日</div>
+            <div id="last-update" style="display: none;">Fri May 27 2022 15:39:37 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-27 日</div>
           
         </div>
         
@@ -1248,7 +1255,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-27 日';
           }
         </script>
         

@@ -647,6 +647,50 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2022/05/26/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/">
+        共享内存
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        共享内存共享内存允许两个或者多个进程共享物理内存的同一块区域（通常被称为段）。由于 一个共享内存段会成为一个进程用户空间的一部分，因此这种 IPC 机制无需内核介 入。所有需要做的就是让一个进程将数据复制进共享内存中，并且这部分数据会对其 他所有共享同一个段的进程可用。
+与管道等要求发送进程将数据从用户空间的缓冲区复制进内核内存和接收进程将数据 从内核内存复制进用户空间的缓冲区的做法相比，这...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-26</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/26/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2022/05/18/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/%E4%BF%A1%E5%8F%B7/">
         信号
       </a>
@@ -943,7 +987,7 @@ API：应用程序接口
   <div class='md'>
     
       
-        wait函数123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354/*************************************************************************        &gt; File ...
+        wait - 回收子进程资源123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354/*************************************************************************        &g...
       
     
   </div>
@@ -1058,52 +1102,6 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
       
         <div>
           <a class='readmore' href='/2022/04/08/Linux-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%BC%80%E6%94%BE/exec%E5%87%BD%E6%95%B0%E6%97%8F/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/04/08/OOP/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0Sort/">
-        STL-Sort解析
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        STL_sort 模板解析1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-04-08</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/c-OOP/">c++OOP</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/04/08/OOP/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0Sort/'>
             阅读全文
           </a>
         </div>
@@ -1379,7 +1377,7 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>44 篇</div>
+          <div>45 篇</div>
         </div>
       
 
@@ -1401,7 +1399,7 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>60.4k 字</div>
+          <div>64.4k 字</div>
         </div>
       
 
@@ -1427,8 +1425,8 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue May 24 2022 16:47:44 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-05-24 日</div>
+            <div id="last-update" style="display: none;">Fri May 27 2022 15:39:39 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-05-27 日</div>
           
         </div>
         
@@ -1478,7 +1476,7 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-05-24 日';
+            document.getElementById('last-update-show').innerHTML = '2022-05-27 日';
           }
         </script>
         
