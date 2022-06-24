@@ -1,0 +1,2649 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,zh-HK,zh-TW,default">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>socket通信基础 - 秃头王</title>
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+    
+      <meta name="msapplication-TileColor" content="#ffffff">
+    
+      <meta name="msapplication-config" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/browserconfig.xml">
+    
+      <meta name="theme-color" content="#ffffff">
+    
+  
+
+  <!-- link -->
+  
+
+  <!-- import link -->
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/site.webmanifest">
+  <link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgQQ%E5%9B%BE%E7%89%8720210307112526.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                  
+                  
+                  >
+                  <i class='fas fa-link fa-fw'></i>OJ
+                </a>
+                
+                  <ul class="list-v">
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.acwing.com/problem/
+                  
+                  
+                  
+                    id="https:wwwacwingcomproblem"
+                  >
+                  Acwin
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=http://oj.haizeix.com/
+                  
+                  
+                  
+                    id="http:ojhaizeixcom"
+                  >
+                  海贼
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.luogu.com.cn/
+                  
+                  
+                  
+                    id="https:wwwluogucomcn"
+                  >
+                  洛谷
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.lanqiao.cn/contests/?category_id=3/
+                  
+                  
+                  
+                    id="https:wwwlanqiaocncontests?category_id=3"
+                  >
+                  蓝桥杯
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                  
+                  
+                  >
+                  <i class='fas fa-link fa-fw'></i>OJ
+                </a>
+                
+                  <ul class="list-v">
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.acwing.com/problem/
+                  
+                  
+                  
+                    id="https:wwwacwingcomproblem"
+                  >
+                  Acwin
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=http://oj.haizeix.com/
+                  
+                  
+                  
+                    id="http:ojhaizeixcom"
+                  >
+                  海贼
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.luogu.com.cn/
+                  
+                  
+                  
+                    id="https:wwwluogucomcn"
+                  >
+                  洛谷
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.lanqiao.cn/contests/?category_id=3/
+                  
+                  
+                  
+                    id="https:wwwlanqiaocncontests?category_id=3"
+                  >
+                  蓝桥杯
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div id='cover-backstretch'></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">秃头王</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/v4/getting-started/"
+              
+              
+              id="v4getting-started">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        socket通信基础
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>秃头王</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年6月17日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="socket通信基础" data-path="/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <h2 id="1-socket介绍"><a href="#1-socket介绍" class="headerlink" title="1.socket介绍"></a>1.socket介绍</h2><blockquote>
+<p>所谓 socket（套接字），就是对网络中不同主机上的应用进程之间进行双向通信的端点的抽象。 一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处 的地位来讲，套接字上联应用进程，下联网络协议栈，是应用程序通过网络协议进行通信的接口， 是应用程序与网络协议根进行交互的接口。 socket 可以看成是两个网络应用程序进行通信时，各自通信连接中的端点，这是一个逻辑上的概 念。它是网络环境中进程间通信的 API，也是可以被命名和寻址的通信端点，使用中的每一个套接 字都有其类型和一个与之相连进程。通信时其中一个网络应用程序将要传输的一段信息写入它所在 主机的 socket 中，该 socket 通过与网络接口卡（NIC）相连的传输介质将这段信息送到另外一台 主机的 socket 中，使对方能够接收到这段信息。socket 是由 IP 地址和端口结合的，提供向应用 层进程传送数据包的机制。 socket 本身有“插座”的意思，在 Linux 环境下，用于表示进程间网络通信的特殊文件类型。本质为 内核借助缓冲区形成的伪文件。既然是文件，那么理所当然的，我们可以使用文件描述符引用套接 字。与管道类似的，Linux 系统将其封装成文件的目的是为了统一接口，使得读写套接字和读写文 件的操作一致。区别是管道主要应用于本地进程间通信，而套接字多应用于网络进程间数据的传 递。</p>
+</blockquote>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618195502521.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618195502521.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220618195502521"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 套接字通信分两部分：</span></span><br><span class="line">- 服务器端：被动接受连接，一般不会主动发起连接</span><br><span class="line">- 客户端：主动向服务器发起连接</span><br><span class="line">socket是一套通信的接口，Linux 和 Windows 都有，但是有一些细微的差别</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-字节序"><a href="#2-字节序" class="headerlink" title="2. 字节序"></a>2. 字节序</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>现代 CPU 的累加器一次都能装载（至少）4 字节（这里考虑 32 位机），即一个整数。那么这 4 字节在内存中排列的顺序将影响它被累加器装载成的整数的值，这就是字节序问题。在各种计算机 体系结构中，对于字节、字等的存储机制有所不同，因而引发了计算机通信领域中一个很重要的问 题，即通信双方交流的信息单元（比特、字节、字、双字等等）应该以什么样的顺序进行传送。如</p>
+<p>果不达成一致的规则，通信双方将无法进行正确的编码&#x2F;译码从而导致通信失败。 <font color='red'>字节序，顾名思义字节的顺序，就是大于一个字节类型的数据在内存中的存放顺序(一个字节的数 据当然就无需谈顺序的问题了)。</font></p>
+<p>字节序分为大端字节序（Big-Endian） 和小端字节序（Little-Endian）。大端字节序是指一个整 数的最高位字节（23 ~ 31 bit）存储在内存的低地址处，低位字节（0 ~ 7 bit）存储在内存的高地 址处；小端字节序则是指整数的高位字节存储在内存的高地址处，而低位字节则存储在内存的低地 址处。</p>
+</blockquote>
+<h3 id="字节序举例"><a href="#字节序举例" class="headerlink" title="字节序举例"></a>字节序举例</h3><ul>
+<li>小端字节序</li>
+</ul>
+<p>​	0x 01 02 03 04 - ff &#x3D; 255 </p>
+<p>​	内存的方向 —–&gt; </p>
+<p>​	内存的低位 —–&gt; 内存的高位 </p>
+<p>​	04 03 02 01 </p>
+<p>​	0x 11 22 33 44 12 34 56 78</p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618201124424.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618201124424.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220618201124424"></p>
+<ul>
+<li>大端字节序</li>
+</ul>
+<p>​	0x 01 02 03 04</p>
+<p>​	内存的方向—– &gt;</p>
+<p>​	内存的低位  —–&gt;  内存的高位</p>
+<p>​	01 02 03 04</p>
+<p>​	0x 12 34 56 78 11 22 33 44</p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618201628398.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220618201628398.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220618201628398"></p>
+<h3 id="查看本机是-大端字节序-or-小端字节序"><a href="#查看本机是-大端字节序-or-小端字节序" class="headerlink" title="查看本机是 大端字节序 or 小端字节序"></a>查看本机是 大端字节序 or 小端字节序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: byteorder.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年06月18日 星期六 14时51分19秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  字节序: 字节在内存中存储的顺序</span></span><br><span class="line"><span class="comment"> *  小端字节序: 数据的高位字节存储在内存的高位地址,低位字节</span></span><br><span class="line"><span class="comment">存储在内存的底位地址。</span></span><br><span class="line"><span class="comment"> *  大端字节序: 数据的底位字节存储在内存的高位地址,高位字节</span></span><br><span class="line"><span class="comment">存储在内存的底位地址。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//通过代码检测当前主机的字节序</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">union</span>&#123;</span></span><br><span class="line">        <span class="comment">// 2 字节</span></span><br><span class="line">        <span class="keyword">short</span> value;</span><br><span class="line">        <span class="comment">// 2 字节</span></span><br><span class="line">        <span class="keyword">char</span> bytes[<span class="keyword">sizeof</span>(<span class="keyword">short</span>)];</span><br><span class="line">    &#125; test;</span><br><span class="line"></span><br><span class="line">    test.value = <span class="number">0x0102</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, test.bytes[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((test.bytes[<span class="number">0</span>] == <span class="number">1</span>) &amp;&amp; (test.bytes[<span class="number">1</span>] == <span class="number">2</span>)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端字节序\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>((test.bytes[<span class="number">0</span>] == <span class="number">2</span>) &amp;&amp; (test.bytes[<span class="number">1</span>] == <span class="number">1</span>))&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端字节序\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d --- %d \n&quot;</span>, test.bytes[<span class="number">0</span>], test.bytes[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未知\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="字节序转换函数"><a href="#字节序转换函数" class="headerlink" title="字节序转换函数"></a>字节序转换函数</h3><p>当格式化的数据在两台使用不同字节序的主机之间直接传递时，接收端必然错误的解释之。解决问题的 方法是：发送端总是把要发送的数据转换成大端字节序数据后再发送，而接收端知道对方传送过来的数 据总是采用大端字节序，所以接收端可以根据自身采用的字节序决定是否对接收到的数据进行转换（小 端机转换，大端机不转换）。</p>
+<p><strong>网络字节顺序是</strong> TCP&#x2F;IP 中规定好的一种数据表示格式，它与具体的 CPU 类型、操作系统等无关，从而 可以保证数据在不同主机之间传输时能够被正确解释，网络字节顺序采用大端排序方式。 BSD Socket提供了封装好的转换接口，方便程序员使用。包括从主机字节序到网络字节序的转换函数： htons、htonl；从网络字节序到主机字节序的转换函数：ntohs、ntohl。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h - host 主机，主机字节序</span><br><span class="line">to - 转换成什么</span><br><span class="line">n - network 网络字节序</span><br><span class="line">s - <span class="keyword">short</span> <span class="keyword">unsigned</span> <span class="keyword">short</span></span><br><span class="line">l - <span class="keyword">long</span> <span class="keyword">unsigned</span> <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// 转换端口</span></span><br><span class="line"><span class="function"><span class="keyword">uint16_t</span> <span class="title">htons</span><span class="params">(<span class="keyword">uint16_t</span> hostshort)</span></span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="function"><span class="keyword">uint16_t</span> <span class="title">ntohs</span><span class="params">(<span class="keyword">uint16_t</span> netshort)</span></span>; <span class="comment">// 网络字节序 - 主机字节序 </span></span><br><span class="line"><span class="comment">// 转IP</span></span><br><span class="line"><span class="function"><span class="keyword">uint32_t</span> <span class="title">htonl</span><span class="params">(<span class="keyword">uint32_t</span> hostlong)</span></span>; <span class="comment">// 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="function"><span class="keyword">uint32_t</span> <span class="title">ntohl</span><span class="params">(<span class="keyword">uint32_t</span> netlong)</span></span>; <span class="comment">// 网络字节序 - 主机字节序</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码实现-网络字节序-与-主机字节序-转换"><a href="#代码实现-网络字节序-与-主机字节序-转换" class="headerlink" title="代码实现 网络字节序 与 主机字节序 转换"></a>代码实现 网络字节序 与 主机字节序 转换</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: byterans.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年06月18日 星期六 22时47分04秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    网络通信时,需要将主机字节序转换成网络字节序(大端),另外一端获取到数据以后根据情况将网络字节序转换成主机字节序。</span></span><br><span class="line"><span class="comment">        #include &lt;arpa/inet.h&gt;</span></span><br><span class="line"><span class="comment">        // 转换端口</span></span><br><span class="line"><span class="comment">        uint16_t htons(uint16_t hostshort); // 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment">        uint16_t ntohs(uint16_t netshort); // 网络字节序 - 主机字节序</span></span><br><span class="line"><span class="comment">        // 转IP</span></span><br><span class="line"><span class="comment">        uint32_t htonl(uint32_t hostlong); // 主机字节序 - 网络字节序</span></span><br><span class="line"><span class="comment">        uint32_t ntohl(uint32_t netlong); // 网络字节序 - 主机字节序</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// htons 转换端口</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> a = <span class="number">0x0102</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> b = htons(a);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;0xa = %x \n0xb = %x\n&quot;</span>, a, b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n==================================\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// htol 转换ID</span></span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">4</span>] = &#123;<span class="number">192</span>, <span class="number">168</span>, <span class="number">1</span>, <span class="number">100</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> num = *(<span class="keyword">int</span> *)buf;</span><br><span class="line">    <span class="comment">// printf(&quot;%d&quot;, num);</span></span><br><span class="line">    <span class="keyword">int</span> sum = htonl(num);</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">char</span> *)&amp;sum;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, *p, *(p + <span class="number">1</span>), *(p + <span class="number">2</span>), *(p + <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n==================================\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ntohl</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> buf1[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">168</span>, <span class="number">192</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> num1 = *(<span class="keyword">int</span> *)buf1;</span><br><span class="line">    <span class="keyword">int</span> sum1 = ntohl(num1);</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *p1 = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *) &amp;sum1;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, *p1, *(p1 + <span class="number">1</span>), *(p1 + <span class="number">2</span>), *(p1 + <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n==================================\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ntohs</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> a1 = <span class="number">0x0201</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> b1 = ntohs(a1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;0xa1 = %x\n0xb1 = %x\n&quot;</span>, a1, b1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-socket-地址"><a href="#3-socket-地址" class="headerlink" title="3. socket 地址"></a>3. socket 地址</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// socket地址其实是一个结构体，封装端口号和IP等信息。后面的socket相关的api中需要使用到这个</span></span><br><span class="line">socket地址。</span><br><span class="line"><span class="comment">// 客户端 -&gt; 服务器（IP, Port）</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="通用-socket-地址"><a href="#通用-socket-地址" class="headerlink" title="通用 socket 地址"></a>通用 socket 地址</h3><p>socket 网络编程接口中表示 socket 地址的是结构体 sockaddr，其定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span> &#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sa_family;</span><br><span class="line">    <span class="keyword">char</span> sa_data[<span class="number">14</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> <span class="keyword">sa_family_t</span>;</span><br></pre></td></tr></table></figure>
+
+<p>sa_family 成员是地址族类型（sa_family_t）的变量。地址族类型通常与协议族类型对应。常见的协议 族（protocol family，也称 domain）和对应的地址族入下所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>协议族</strong></th>
+<th align="left"><strong>地址族</strong></th>
+<th align="left"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PF_UNIX</td>
+<td align="left">AF_UNIX</td>
+<td align="left">UNIX本地域协议族</td>
+</tr>
+<tr>
+<td align="left">PF_INET</td>
+<td align="left">AF_INET</td>
+<td align="left">TCP&#x2F;IPv4协议族</td>
+</tr>
+<tr>
+<td align="left">PF_INET6</td>
+<td align="left">AF_INET6</td>
+<td align="left">TCP&#x2F;IPv6协议族</td>
+</tr>
+</tbody></table>
+<p>宏 PF_* 和 AF_* 都定义在 bits&#x2F;socket.h 头文件中，且后者与前者有完全相同的值，所以二者通常混 用。</p>
+<p>sa_data 成员用于存放 socket 地址值。但是，不同的协议族的地址值具有不同的含义和长度，如下所 示：</p>
+<table>
+<thead>
+<tr>
+<th><strong>协议族</strong></th>
+<th><strong>地址值含义和长度</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PF_UNIX</td>
+<td>文件的路径名，长度可达到108字节</td>
+</tr>
+<tr>
+<td>PF_INET</td>
+<td>16bit端口号和32bitIPv4地址，共6字节</td>
+</tr>
+<tr>
+<td>PF_INET6</td>
+<td>16bit端口号，32bit流标识，128bitIPv6地址，32bit范围ID，共26字节</td>
+</tr>
+</tbody></table>
+<p>由上表可知，14 字节的 sa_data 根本无法容纳多数协议族的地址值。因此，Linux 定义了下面这个新的 通用的 socket 地址结构体，这个结构体不仅提供了足够大的空间用于存放地址值，而且是内存对齐的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/socket.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span> &#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sa_family;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> __ss_align;</span><br><span class="line">    <span class="keyword">char</span> __ss_padding[ <span class="number">128</span> - <span class="keyword">sizeof</span>(__ss_align) ];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> <span class="keyword">sa_family_t</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="专用-socket-地址"><a href="#专用-socket-地址" class="headerlink" title="专用 socket 地址"></a>专用 socket 地址</h3><p>很多网络编程函数诞生早于 IPv4 协议，那时候都使用的是 struct sockaddr 结构体，为了向前兼容，现 在sockaddr 退化成了（void *）的作用，传递一个地址给函数，至于这个函数是 sockaddr_in 还是 sockaddr_in6，由地址族确定，然后函数内部再强制类型转化为所需的地址类型。</p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220619113259517.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220619113259517.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220619113259517"></p>
+<p>UNIX 本地域协议族使用如下专用的 socket 地址结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/un.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin_family;</span><br><span class="line">    <span class="keyword">char</span> sun_path[<span class="number">108</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>TCP&#x2F;IP 协议族有 sockaddr_in 和 sockaddr_in6 两个专用的 socket 地址结构体，它们分别用于 IPv4 和 IPv6：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin_family; <span class="comment">/* __SOCKADDR_COMMON(sin_) */</span></span><br><span class="line">    <span class="keyword">in_port_t</span> sin_port; <span class="comment">/* Port number. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span> <span class="comment">/* Internet address. */</span></span><br><span class="line">    <span class="comment">/* Pad to size of `struct sockaddr&#x27;. */</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> sin_zero[<span class="keyword">sizeof</span> (struct sockaddr) - __SOCKADDR_COMMON_SIZE -</span><br><span class="line">    <span class="keyword">sizeof</span> (<span class="keyword">in_port_t</span>) - <span class="keyword">sizeof</span> (struct in_addr)];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">in_addr_t</span> s_addr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in6</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">sa_family_t</span> sin6_family;</span><br><span class="line">    <span class="keyword">in_port_t</span> sin6_port; <span class="comment">/* Transport layer port # */</span></span><br><span class="line">    <span class="keyword">uint32_t</span> sin6_flowinfo; <span class="comment">/* IPv6 flow information */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in6_addr</span> <span class="title">sin6_addr</span>;</span> <span class="comment">/* IPv6 address */</span></span><br><span class="line">    <span class="keyword">uint32_t</span> sin6_scope_id; <span class="comment">/* IPv6 scope-id */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">uint16_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">uint32_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint16_t</span> <span class="keyword">in_port_t</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint32_t</span> <span class="keyword">in_addr_t</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __SOCKADDR_COMMON_SIZE (sizeof (unsigned short int))</span></span><br></pre></td></tr></table></figure>
+
+<p>所有专用 socket 地址（以及 sockaddr_storage）类型的变量在实际使用时都需要转化为通用 socket 地 址类型 sockaddr（强制转化即可），因为所有 socket 编程接口使用的地址参数类型都是 sockaddr。</p>
+<h2 id="4-IP地址转换（字符串ip-整数-，主机、网络-字节序的转换）"><a href="#4-IP地址转换（字符串ip-整数-，主机、网络-字节序的转换）" class="headerlink" title="4. IP地址转换（字符串ip-整数 ，主机、网络 字节序的转换）"></a>4. IP地址转换（字符串ip-整数 ，主机、网络 字节序的转换）</h2><p>通常，人们习惯用可读性好的字符串来表示 IP 地址，比如用点分十进制字符串表示 IPv4 地址，以及用 十六进制字符串表示 IPv6 地址。但编程中我们需要先把它们转化为整数（二进制数）方能使用。而记录 日志时则相反，我们要把整数表示的 IP 地址转化为可读的字符串。下面 3 个函数可用于用点分十进制字 符串表示的 IPv4 地址和用网络字节序整数表示的 IPv4 地址之间的转换：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">in_addr_t</span> <span class="title">inet_addr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cp)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_aton</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *cp, struct in_addr *inp)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">inet_ntoa</span><span class="params">(struct in_addr in)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>下面这对更新的函数也能完成前面 3 个函数同样的功能，并且它们同时适用 IPv4 地址和 IPv6 地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="comment">// p:点分十进制的IP字符串， n:表示network，网络字节序的整数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_pton</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">char</span> *src, <span class="keyword">void</span> *dst)</span></span>;</span><br><span class="line">    af:地址族： AF_INET AF_INET6</span><br><span class="line">    src:需要转换的点分十进制的IP字符串</span><br><span class="line">    dst:转换后的结果保存在这个里面</span><br><span class="line"><span class="comment">// 将网络字节序的整数，转换成点分十进制的IP地址字符串</span></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">inet_ntop</span><span class="params">(<span class="keyword">int</span> af, <span class="keyword">const</span> <span class="keyword">void</span> *src, <span class="keyword">char</span> *dst, <span class="keyword">socklen_t</span> size)</span></span>;</span><br><span class="line">    af:地址族： AF_INET AF_INET6</span><br><span class="line">    src: 要转换的ip的整数的地址</span><br><span class="line">    dst: 转换成IP地址字符串保存的地方</span><br><span class="line">    size：第三个参数的大小（数组的大小）</span><br><span class="line">    返回值：返回转换后的数据的地址（字符串），和 dst 是一样的</span><br></pre></td></tr></table></figure>
+
+<h3 id="C代码-实现-IP地址转换函数"><a href="#C代码-实现-IP地址转换函数" class="headerlink" title="C代码-实现 IP地址转换函数"></a>C代码-实现 IP地址转换函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: iptrans.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年06月20日 星期一 19时45分21秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    #include &lt;arpa/inet.h&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    // p:点分十进制的IP字符串， n:表示network，网络字节序 的整数</span></span><br><span class="line"><span class="comment">    int inet_pton(int af, const char *src, void *dst);</span></span><br><span class="line"><span class="comment">        af:地址族： AF_INET AF_INET6</span></span><br><span class="line"><span class="comment">        src:需要转换的点分十进制的IP字符串</span></span><br><span class="line"><span class="comment">        dst:转换后的结果保存在这个里面</span></span><br><span class="line"><span class="comment">    // 将网络字节序的整数，转换成点分十进制的IP地址字符串</span></span><br><span class="line"><span class="comment">    const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);</span></span><br><span class="line"><span class="comment">        af:地址族： AF_INET AF_INET6</span></span><br><span class="line"><span class="comment">        src: 要转换的ip的整数的地址</span></span><br><span class="line"><span class="comment">        dst: 转换成IP地址字符串保存的地方</span></span><br><span class="line"><span class="comment">        size：第三个参数的大小（数组的大小）</span></span><br><span class="line"><span class="comment">        返回值：返回转换后的数据的地址（字符串），和 dst  是一样的</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个ip字符串,点分十进制的</span></span><br><span class="line">    <span class="keyword">char</span> buf[] = <span class="string">&quot;192.168.1.1&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 将点分十进制的IP字符串</span></span><br><span class="line">    inet_pton(AF_INET, buf, &amp;num);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)&amp;num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d \n&quot;</span>, *p, *(p + <span class="number">1</span>), *(p + <span class="number">2</span>), *(p + <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将网络字节序的IP整数</span></span><br><span class="line">    <span class="keyword">char</span> ip[<span class="number">16</span>] = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *str = inet_ntop(AF_INET, &amp;num, ip, <span class="keyword">sizeof</span>(ip));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;str : %s\n&quot;</span>, str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ip : %s\n&quot;</span>, ip);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ip == str = %d\n&quot;</span>, str == ip);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-TCP通信流程"><a href="#5-TCP通信流程" class="headerlink" title="5. TCP通信流程"></a>5. TCP通信流程</h2><h3 id="TCP-UDP-特点区别"><a href="#TCP-UDP-特点区别" class="headerlink" title="TCP - UDP 特点区别"></a>TCP - UDP 特点区别</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TCP 和 UDP -&gt; 传输层的协议</span></span><br><span class="line">UDP:用户数据报协议，面向无连接，可以单播，多播，广播， 面向数据报，不可靠</span><br><span class="line">TCP:传输控制协议，面向连接的，可靠的，基于字节流，仅支持单播传输 </span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center">UDP</th>
+<th align="center">TCP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否创建连接</td>
+<td align="center">无连接</td>
+<td align="center">面向连接</td>
+</tr>
+<tr>
+<td>是否可靠</td>
+<td align="center">不可靠</td>
+<td align="center">可靠的</td>
+</tr>
+<tr>
+<td>连接的对象个数</td>
+<td align="center">一对一、一对多、多对多、多对一</td>
+<td align="center">支持一对一</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td align="center">面向数据报</td>
+<td align="center">面向字节流</td>
+</tr>
+<tr>
+<td>首部开销</td>
+<td align="center">8个字节</td>
+<td align="center">最少20个字节</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td align="center">实时应用（视频会议，直播）</td>
+<td align="center">可靠性高的应用（文件传输）</td>
+</tr>
+</tbody></table>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220621115812206.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220621115812206.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220621115812206"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TCP 通信的流程</span></span><br><span class="line"><span class="comment">// 服务器端 （被动接受连接的角色）</span></span><br><span class="line"><span class="number">1.</span> 创建一个用于监听的套接字</span><br><span class="line">	- 监听: 监听有客户端的连接</span><br><span class="line">	- 套接字: 这个套接字其实就是一个文件描述符</span><br><span class="line"><span class="number">2.</span> 将这个监听文件描述符和本地的IP和端口绑定（IP和端口就是服务器的地址信息）</span><br><span class="line">	- 客户端连接服务器的时候使用的就是这个IP和端口</span><br><span class="line"><span class="number">3.</span> 设置监听，监听的fd开始工作</span><br><span class="line"><span class="number">4.</span> 阻塞等待，当有客户端发起连接，解除阻塞，接受客户端的连接，会得到一个和客户端通信的套接字（fd）</span><br><span class="line"><span class="number">5.</span> 通信</span><br><span class="line">	- 接收数据</span><br><span class="line">	- 发送数据</span><br><span class="line"><span class="number">6.</span> 通信结束，断开连接</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="number">1.</span>创建一个用于通信的套接字(fd)</span><br><span class="line">不需要绑定IP和端口</span><br><span class="line">	客户端IP会有的但是端口是随机的、连接到服务器刚开始会进行<span class="number">3</span>次握手、两端都记录了两端的IP和端口</span><br><span class="line"><span class="number">2.</span>连接服务器，需要指定的连接的服务器的 IP 和 端口</span><br><span class="line"><span class="number">3.</span> 连接成功，客户端可以和服务器直接铜线</span><br><span class="line">	- 接受数据</span><br><span class="line">	- 发送数据</span><br><span class="line"><span class="number">6.</span>通信结束，断开连接</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-套接字函数"><a href="#6-套接字函数" class="headerlink" title="6. 套接字函数"></a>6. 套接字函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt; // 包含了这个头文件，上面两个就可以省略</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br><span class="line">	- 功能：创建一个套接字</span><br><span class="line">	- 参数：</span><br><span class="line">		- domain: 协议族</span><br><span class="line">			AF_INET : ipv4</span><br><span class="line">			AF_INET6 : ipv6</span><br><span class="line">			AF_UNIX, AF_LOCAL : 本地套接字通信（进程间通信）</span><br><span class="line">			... ...</span><br><span class="line">		- type: 通信过程中使用的协议类型</span><br><span class="line">			SOCK_STREAM : 流式协议 - TCP</span><br><span class="line">			SOCK_DGRAM : 报式协议 - UDP</span><br><span class="line">			... ... </span><br><span class="line">		- protocol: 具体的一个协议。一般写 <span class="number">0</span> 情况下</span><br><span class="line">			- SOCK_STREAM : 流式协议默认使用 TCP</span><br><span class="line">			- SOCK_DGRAM : 报式协议默认使用 UDP</span><br><span class="line">		- 返回值: </span><br><span class="line">			- 成功：返回文件描述符，操作的就是内核缓冲区。</span><br><span class="line">			- 失败：<span class="number">-1</span></span><br><span class="line">                </span><br><span class="line"><span class="comment">// 绑定也叫 - socket命名</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br><span class="line">	- 功能: 绑定，将fd 和本地的IP + 端口进行绑定</span><br><span class="line">	- 参数:</span><br><span class="line">		- sockfd : 通过socket函数得到的文件描述符</span><br><span class="line">		- addr : 需要绑定的socket地址，这个地址封装了ip和端口号的信息</span><br><span class="line">		- addrlen : 第二个参数结构体占的内存大小</span><br><span class="line">	- 返回值:</span><br><span class="line">		- 成功: 返回 <span class="number">0</span></span><br><span class="line">		- 失败: 返回 <span class="number">-1</span> 并设置错误号</span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br><span class="line">	- 功能：监听这个socket上的连接</span><br><span class="line">	- 参数：</span><br><span class="line">		- sockfd : 通过socket()函数得到的文件描述符</span><br><span class="line">		- backlog : 未连接的和已经连接的和的最大值, 一般指定 <span class="number">5</span> 就够了,不能超过下面查看的值</span><br><span class="line">			查看最大连接  <span class="comment">// cat /proc/sys/net/core/somaxconn   </span></span><br><span class="line">	- 返回值:</span><br><span class="line">		- 成功: 返回 <span class="number">0</span></span><br><span class="line">		- 失败: 返回 <span class="number">-1</span> 并设置错误号</span><br><span class="line">            </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br><span class="line">	- 功能：接收客户端连接，默认是一个阻塞的函数，阻塞等待客户端连接</span><br><span class="line">	- 参数：</span><br><span class="line">		- sockfd : 用于监听的文件描述符</span><br><span class="line">		- addr : 传出参数，记录了连接成功后客户端的地址信息（ip，port）</span><br><span class="line">		- addrlen : 指定第二个参数的对应的内存大小</span><br><span class="line">		- 返回值：</span><br><span class="line">			- 成功: 用于通信的文件描述符</span><br><span class="line">			- 失败: <span class="number">-1</span></span><br><span class="line">                </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br><span class="line">	- 功能: 客户端连接服务器</span><br><span class="line">	- 参数:</span><br><span class="line">		- sockfd: 用于通信的文件描述符</span><br><span class="line">		- addr: 客户端要连接的服务器的地址信息</span><br><span class="line">		- addrlen: 第二个参数的内存大小</span><br><span class="line">		- 返回值:</span><br><span class="line">			- 成功: <span class="number">0</span></span><br><span class="line">			- 失败: <span class="number">-1</span></span><br><span class="line">                </span><br><span class="line"><span class="comment">// 写数据</span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 读数据</span></span><br><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="TCP-手动输入消息-回射"><a href="#TCP-手动输入消息-回射" class="headerlink" title="TCP - 手动输入消息 - 回射"></a>TCP - 手动输入消息 - 回射</h2><h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: server.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年06月22日 星期三 18时45分38秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="comment">// TCP 通信的服务器端E</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1.创建socket(用于监听套接字)</span></span><br><span class="line">    <span class="keyword">int</span> lfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(lfd == <span class="number">1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.绑定 IP 和 端口</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">saddr</span>;</span></span><br><span class="line">    saddr.sin_family = AF_INET;</span><br><span class="line">    <span class="comment">// inet_net_pton(AF_INET, &quot;192.168.3.206&quot;, saddr.sin_addr.s_addr);</span></span><br><span class="line">    saddr.sin_addr.s_addr = INADDR_ANY; <span class="comment">// = 0; // 0.0.0.0 任意地址 客户端不能这面写</span></span><br><span class="line">    saddr.sin_port = htons(<span class="number">9999</span>);</span><br><span class="line">    <span class="keyword">int</span> ret = bind(lfd, (struct sockaddr *)&amp;saddr, <span class="keyword">sizeof</span>(saddr));</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;bind&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.监听</span></span><br><span class="line">    ret = listen(lfd, <span class="number">8</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;listen&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.接受客户端的连接 - 阻塞</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientaddr</span>;</span></span><br><span class="line">    <span class="keyword">socklen_t</span> len = <span class="keyword">sizeof</span>(clientaddr);</span><br><span class="line">    <span class="keyword">int</span> cfd = accept(lfd, (struct sockaddr *)&amp;clientaddr, &amp;len);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(cfd == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;accept&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出客户端的信息</span></span><br><span class="line">    <span class="keyword">char</span> clientIP[<span class="number">16</span>];</span><br><span class="line">    inet_ntop(AF_INET, &amp;clientaddr.sin_addr.s_addr, clientIP, <span class="keyword">sizeof</span>(clientIP));</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> clientPort = ntohs(clientaddr.sin_port);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;client ip is %s, prot is %d\n&quot;</span>, clientIP, clientPort);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 5.通信</span></span><br><span class="line">        <span class="comment">// 获取客户的数据</span></span><br><span class="line">        <span class="keyword">char</span> recvBuf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> readLen = read(cfd, recvBuf, <span class="keyword">sizeof</span>(recvBuf));</span><br><span class="line">        <span class="keyword">if</span>(readLen == <span class="number">-1</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;read&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(readLen &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;recv client data : %s\n&quot;</span>, recvBuf);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(readLen == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 客户端断开连接</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;client closed ... ...\n&quot;</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="comment">// 给客户端发送数据</span></span><br><span class="line">        <span class="keyword">char</span> *data = <span class="string">&quot;hello, i am server&quot;</span>;</span><br><span class="line">        write(cfd, recvBuf, <span class="built_in">strlen</span>(data));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件描述符</span></span><br><span class="line">    close(cfd);</span><br><span class="line">    close(lfd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: client.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年06月23日 星期四 14时41分42秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="comment">// TCP 通信客户端</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1.创建套接字</span></span><br><span class="line">        <span class="keyword">int</span> fd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(fd == <span class="number">-1</span>) &#123;</span><br><span class="line">                perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.连接服务</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serveraddr</span>;</span></span><br><span class="line">        serveraddr.sin_family = AF_INET;</span><br><span class="line">        serveraddr.sin_port = htons(<span class="number">9999</span>);</span><br><span class="line">        inet_pton(AF_INET, <span class="string">&quot;192.168.222.139&quot;</span>, &amp;serveraddr.sin_addr.s_addr);</span><br><span class="line">        <span class="keyword">int</span> ret = connect(fd, (struct sockaddr *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(ret == <span class="number">-1</span>) &#123;</span><br><span class="line">                perror(<span class="string">&quot;connect&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通信</span></span><br><span class="line">        <span class="keyword">char</span> recvBuf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">char</span> data[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="built_in">memset</span>(data, <span class="number">0</span>, <span class="keyword">sizeof</span>(data));</span><br><span class="line">                <span class="comment">// 获取标准输入(stdin)的数据</span></span><br><span class="line">                fgets(data, <span class="keyword">sizeof</span>(data), <span class="built_in">stdin</span>);</span><br><span class="line">                write(fd, data, <span class="built_in">strlen</span>(data));</span><br><span class="line">                <span class="keyword">int</span> readLen = read(fd, recvBuf, <span class="keyword">sizeof</span>(recvBuf));</span><br><span class="line">        <span class="keyword">if</span>(readLen == <span class="number">-1</span>) &#123;</span><br><span class="line">                perror(<span class="string">&quot;read&quot;</span>);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(readLen &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;recv server data : %s\n&quot;</span>, recvBuf);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(readLen == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 表示服务端断开连接</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;server closed ... ...\n&quot;</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭</span></span><br><span class="line">        close(fd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-TCP-三次握手"><a href="#7-TCP-三次握手" class="headerlink" title="7. TCP 三次握手"></a>7. TCP 三次握手</h2><p>TCP 是一种面向连接的单播协议，在发送数据前，通信双方必须在彼此间建立一条连接。所谓的“连 接”，其实是客户端和服务器的内存里保存的一份关于对方的信息，如 IP 地址、端口号等。 </p>
+<p>TCP 可以看成是一种字节流，它会处理 IP 层或以下的层的丢包、重复以及错误问题。在连接的建立过程 中，双方需要交换一些连接的参数。这些参数可以放在 TCP 头部。 </p>
+<p>TCP 提供了一种可靠、面向连接、字节流、传输层的服务，采用三次握手建立一个连接。采用 四次挥手 来关闭一个连接。</p>
+<p>三次握手的目的是保证双方互相之间建立了连接</p>
+<p>三次握手发生在客户端连接的时候，当调用connect(),底层会通过TCP协议进行三次握手。</p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="TCP三次握手四次挥手.pdf_页面_1"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111003498.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111003498.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220624111003498"></p>
+<blockquote>
+<p>ACK: 用来做确认的</p>
+<p>SYN: 用来做连接的</p>
+<p>FIN: 用来做四次挥手的 断开连接的</p>
+</blockquote>
+<ul>
+<li>16 位端口号（port number）：告知主机报文段是来自哪里（源端口）以及传给哪个上层协议或 应用程序（目的端口）的。进行 TCP 通信时，客户端通常使用系统自动选择的临时端口号。 </li>
+<li>32 位序号（sequence number）：一次 TCP 通信（从 TCP 连接建立到断开）过程中某一个传输 方向上的字节流的每个字节的编号。假设主机 A 和主机 B 进行 TCP 通信，A 发送给 B 的第一个 TCP 报文段中，序号值被系统初始化为某个随机值 ISN（Initial Sequence Number，初始序号 值）。那么在该传输方向上（从 A 到 B），后续的 TCP 报文段中序号值将被系统设置成 ISN 加上 该报文段所携带数据的第一个字节在整个字节流中的偏移。例如，某个 TCP 报文段传送的数据是字 节流中的第 1025 ~ 2048 字节，那么该报文段的序号值就是 ISN + 1025。另外一个传输方向（从 B 到 A）的 TCP 报文段的序号值也具有相同的含义。 </li>
+<li>32 位确认号（acknowledgement number）：用作对另一方发送来的 TCP 报文段的响应。其值是 收到的 TCP 报文段的序号值 + 标志位长度（SYN，FIN） + 数据长度 。假设主机 A 和主机 B 进行 TCP 通信，那么 A 发送出的 TCP 报文段不仅携带自己的序号，而且包含对 B 发送来的 TCP 报文段 的确认号。反之，B 发送出的 TCP 报文段也同样携带自己的序号和对 A 发送来的报文段的确认序 号。 </li>
+<li>4 位头部长度（head length）：标识该 TCP 头部有多少个 32 bit(4 字节)。因为 4 位最大能表示 15，所以 TCP 头部最长是60 字节。 - 功能： 客户端连接服务器 - 参数： - sockfd : 用于通信的文件描述符 - addr : 客户端要连接的服务器的地址信息 - addrlen : 第二个参数的内存大小 - 返回值：成功 0， 失败 -1 ssize_t write(int fd, const void *buf, size_t count); &#x2F;&#x2F; 写数据 ssize_t read(int fd, void *buf, size_t count); &#x2F;&#x2F; 读数据 </li>
+<li>6 位标志位包含如下几项： <ul>
+<li>URG 标志，表示紧急指针（urgent pointer）是否有效。 </li>
+<li>ACK 标志，表示确认号是否有效。我们称携带 ACK 标志的 TCP 报文段为确认报文段。 </li>
+<li>PSH 标志，提示接收端应用程序应该立即从 TCP 接收缓冲区中读走数据，为接收后续数据腾 出空间（如果应用程序不将接收到的数据读走，它们就会一直停留在 TCP 接收缓冲区中）。 </li>
+<li>RST 标志，表示要求对方重新建立连接。我们称携带 RST 标志的 TCP 报文段为复位报文段。 </li>
+<li>SYN 标志，表示请求建立一个连接。我们称携带 SYN 标志的 TCP 报文段为同步报文段。 </li>
+<li>FIN 标志，表示通知对方本端要关闭连接了。我们称携带 FIN 标志的 TCP 报文段为结束报文 段。 </li>
+<li>16 位窗口大小（window size）：是 TCP 流量控制的一个手段。这里说的窗口，指的是接收 通告窗口（Receiver Window，RWND）。它告诉对方本端的 TCP 接收缓冲区还能容纳多少 字节的数据，这样对方就可以控制发送数据的速度。 </li>
+<li>16 位校验和（TCP checksum）：由发送端填充，接收端对 TCP 报文段执行 CRC 算法以校验 TCP 报文段在传输过程中是否损坏。注意，这个校验不仅包括 TCP 头部，也包括数据部分。 这也是 TCP 可靠传输的一个重要保障。 </li>
+<li>16 位紧急指针（urgent pointer）：是一个正的偏移量。它和序号字段的值相加表示最后一 个紧急数据的下一个字节的序号。因此，确切地说，这个字段是紧急指针相对当前序号的偏 移，不妨称之为紧急偏移。TCP 的紧急指针是发送端向接收端发送紧急数据的方法。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220624111928654"></p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/>https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-06-24T14:45:52+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年6月24日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/&title=socket通信基础 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/&title=socket通信基础 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/&title=socket通信基础 - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVgAAAFYCAAAAAAzB7ucAAAEZElEQVR42u3aQZLjIAwF0Nz/0jP7SU0ZfQlIuh+7TtvGPLxAv/T6Y2wZLwRgwRpgwYI1wB6BfYXj3/vfJije93Td/+Z5eo/V5495gAULFixYsGDBgj0Ku3wAHgKqblT1ParXjXmABQsWLFiwYMGCvQLbXfiug3oXYLpgAAsWLFiwYMGCBfvdsNWCIC0E0uurGwQWLFiwYMGCBQv2d8Cu3rf7AJ8G6mDBggULFixYsGB/Bmy1QWG6UJg+4FcLjo/phAELFixYsGDBggW7BFsd1QP7t/0de4AFCxYsWLBgwYI9Atsd08FzNwivBu/dQP7teWDBggULFixYsGCPwFYbGdJCofp7+rzq+4/PAxYsWLBgwYIFC/YIbHqwrgbD3fvTgqJaQLSDcrBgwYIFCxYsWLBHYNOJu40NaeC8WgCkhUY3GAcLFixYsGDBggV7BzY9eKcH+dWFThUkafC+7AAWLFiwYMGCBQv2COx0g0QaHKcNFNV504JleR6wYMGCBQsWLFiwV2C7IFMw3QKiW9C0g26wYMGCBQsWLFiwW2HTYDjdgHSeqYaNqd8fCwSwYMGCBQsWLFiwW2GnXjhtcJja0DTQTgP/uPICCxYsWLBgwYIFuxW22/jQ/X/3uun5lzcCLFiwYMGCBQsW7BHYKuSpDUkLmNVRLQyWA3SwYMGCBQsWLFiwR2GrkN2DdBo0V58z1cCxPC9YsGDBggULFizYI7DdsVoYVAuLVeA0KO8G9GDBggULFixYsGA/A3ZXYDx9YK8WINMb+Hg9WLBgwYIFCxYs2KOwUwfsOCCeapgI51uFfHQBCxYsWLBgwYIFewQ2bcitwqYNv91gvVvYlINwsGDBggULFixYsEdg04U+LSxdYBV4aiO76wELFixYsGDBggV7FrYa6FYP9LuC7G6DSbqxyw0bYMGCBQsWLFiwYLfC7mp4mAqou8/fXUiABQsWLFiwYMGCvQObvki3waFamEwH81MFBViwYMGCBQsWLNg7sN3gt9twMd3w0YVOG0zAggULFixYsGDBnoVNGymqv6cvHAfOmwqLx+vBggULFixYsGDBHoGtHpy7QXUVtApWDqbDwgcsWLBgwYIFCxbsXdhug8MU5OnndD8ksGDBggULFixYsHdhq6DVhocULi1MUpBu4QMWLFiwYMGCBQv2Dmx6ME4Lh+r/U8Dqe7fXCxYsWLBgwYIFC/YobDqmN2QqoK4+p1swgAULFixYsGDBgj0L+wpHtzEiXWj1vnTDqsE/WLBgwYIFCxYs2DuwaUFQPbinz+k2blQLnLjxBCxYsGDBggULFuwV2OqBOoWpLjydt7pB6YcBFixYsGDBggUL9rtgq4DdjUkh0w0uf2BgwYIFCxYsWLBgvxJ2KqBOwarP7Qbc24JusGDBggULFixYsFsbNqqB8VRjRhxED8+/XCCABQsWLFiwYMGC3QLbhanCT21Y9QPpFhhgwYIFCxYsWLBgPwPWmB1gwYI1wIIFa4DdOv4CNePWq1qwjTsAAAAASUVORK5CYII=">
+          </div>
+        </div>
+      
+    
+      
+        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
+          
+            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2022/06/17/socket%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/&text=socket通信基础 - 秃头王"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2022/06/15/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/'>
+          <p class='title'>网络基础<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>1.网络结构模式C&#x2F;S结构简介
+服务器 - 客户机，即 Client - Server（C&#x2F;S）结构。C&#x2F;S 结构通常采取两层结构。服务器负责数据的 管理，客户机负...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgQQ%E5%9B%BE%E7%89%8720210307112526.png'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">秃头王</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/volantis-x/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget text shadow desktop mobile">
+  
+  <header>
+    
+      <i class="iconfont icon-gonggao fa-fw" aria-hidden="true"></i><span class='name'>公告</span>
+    
+  </header>
+
+
+  <div class='content'>
+    
+      <p>本站默认替换了右键菜单，恢复原始右键菜单请按住Ctrl再点击鼠标右键。</p>
+
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-socket%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1.socket介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">2. 字节序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E4%B8%BE%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">字节序举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E6%98%AF-%E5%A4%A7%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F-or-%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">查看本机是 大端字节序 or 小端字节序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">字节序转换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-%E7%BD%91%E7%BB%9C%E5%AD%97%E8%8A%82%E5%BA%8F-%E4%B8%8E-%E4%B8%BB%E6%9C%BA%E5%AD%97%E8%8A%82%E5%BA%8F-%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.5.</span> <span class="toc-text">代码实现 网络字节序 与 主机字节序 转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">3. socket 地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.1.</span> <span class="toc-text">通用 socket 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.2.</span> <span class="toc-text">专用 socket 地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2ip-%E6%95%B4%E6%95%B0-%EF%BC%8C%E4%B8%BB%E6%9C%BA%E3%80%81%E7%BD%91%E7%BB%9C-%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. IP地址转换（字符串ip-整数 ，主机、网络 字节序的转换）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E4%BB%A3%E7%A0%81-%E5%AE%9E%E7%8E%B0-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">C代码-实现 IP地址转换函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">5. TCP通信流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-UDP-%E7%89%B9%E7%82%B9%E5%8C%BA%E5%88%AB"><span class="toc-number">5.1.</span> <span class="toc-text">TCP - UDP 特点区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">6. 套接字函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5%E6%B6%88%E6%81%AF-%E5%9B%9E%E5%B0%84"><span class="toc-number">7.</span> <span class="toc-text">TCP - 手动输入消息 - 回射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-TCP-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">8.</span> <span class="toc-text">7. TCP 三次握手</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+<section class="widget shadow desktop mobile">
+  
+  <header>
+    
+      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>文章数目：</div>
+          <div>55 篇</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>已运行时间：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2021/03/06'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+        </script>
+      
+
+
+      
+        <div class="webinfo-item">
+          <div>本站总字数：</div>
+          <div>96k 字</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站访客数：</div>
+          
+          <div><span id="lc-uv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站总访问量：</div>
+          
+          <div><span id="lc-sv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Fri Jun 24 2022 15:28:48 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-06-24 日</div>
+          
+        </div>
+        
+        <script>
+          function timeago(dateTimeStamp) {
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+              var hour = minute * 60;
+              var day = hour * 24;
+              var week = day * 7;
+              var month = day * 30;
+              var now = new Date().getTime(); //获取当前时间毫秒
+              var diffValue = now - dateTimeStamp; //时间差
+              if (diffValue < 0) {
+                  return;
+              }
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+              var hourC = diffValue / hour;
+              var dayC = diffValue / day;
+              var weekC = diffValue / week;
+              var monthC = diffValue / month;
+              if (monthC >= 1 && monthC <= 3) {
+                  result = " " + parseInt(monthC) + " 月前"
+              } else if (weekC >= 1 && weekC <= 3) {
+                  result = " " + parseInt(weekC) + " 周前"
+              } else if (dayC >= 1 && dayC <= 6) {
+                  result = " " + parseInt(dayC) + " 天前"
+              } else if (hourC >= 1 && hourC <= 23) {
+                  result = " " + parseInt(hourC) + " 小时前"
+              } else if (minC >= 1 && minC <= 59) {
+                  result = " " + parseInt(minC) + " 分钟前"
+              } else if (diffValue >= 0 && diffValue <= minute) {
+                  result = "刚刚"
+              } else {
+                  var datetime = new Date();
+                  datetime.setTime(dateTimeStamp);
+                  var Nyear = datetime.getFullYear();
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+                  result = Nyear + "-" + Nmonth + "-" + Ndate
+              }
+              return result;
+          }
+          var lastUpDate = document.getElementById('last-update').innerHTML;
+          try {
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
+          } catch (error) {
+            document.getElementById('last-update-show').innerHTML = '2022-06-24 日';
+          }
+        </script>
+        
+      
+    </div>
+  </div>
+</section>
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="socket通信基础";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2020-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  loadCSS("https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css", window.volantis.loadcss);
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+        var imgs=["https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img%E5%A5%BD%E7%9C%8B%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%85%83%20%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9%20%E8%88%B9%20%E7%81%AF%20%CB%AE%203440x1440%E5%B8%A6%E9%B1%BC%E5%B1%8F%E5%A3%81%E7%BA%B8_%E5%BD%BC%E5%B2%B8%E5%9B%BE%E7%BD%91.jpg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+	  function Pjax_backstretch(){
+        
+          $('#cover-backstretch').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        
+	  }
+	  loadScript("https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js",Pjax_backstretch)
+    </script>
+  
+
+
+
+  
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick="document.execCommand('copy')"><i class='fa fa-copy fa-fw'></i>复制文本</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>复制链接</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>在新标签页打开</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>复制图片地址</a>
+        <hr id='hr-src'>
+      </li>
+      
+        <li class='navigation'>
+          <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+        </li>
+      
+      <hr>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <hr>
+        
+      
+        
+      
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default toggle-mode-btn' 
+        
+        
+        
+        >
+        <i class='fas fa-moon fa-fw'></i> Dark mode
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          if ('true' == 'true') {
+            copyText.style.display = 'block';
+            hrText.style.display = 'block';
+          }
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+      // 有音乐播放器 see: layout/_third-party/aplayer/script.ejs
+      
+      if(volantis.APlayerLoaded){ // APlayer加载完成？
+        // 如果有aplayer，初始化一下
+        checkAPlayer();
+      }
+      
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+		if($(".highlight .code pre").length+$(".article pre code").length==0)return;
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        
+        clipboard.off('success').on('success', function (e) {
+            $.message({
+            title: '复制成功',
+            message: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+            });
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    
+    $(function () {
+        pjax_initCopyCode()
+    });
+	volantis.pjax.push(pjax_initCopyCode)
+    
+</script>
+
+
+
+
+
+
+  <script>
+  let APlayerController = new Object();
+  APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+  APlayerController.volume = '0.7';
+  APlayerController.autoPlay = 'false';
+  loadCSS("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css", window.volantis.loadcss);
+  // APlayer 需要在  MetingJS 之前加载
+  loadScript("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js")
+  window.volantis.APlayerLoaded=0 // APlayer加载完成状态
+  var checkAPlayer = setInterval(function () {
+    if (!window.APlayer) return // APlayer加载完成？
+	  if ($("#safearea").css("display")!="block") return // 文章内容加载完成？ see: source/css/first.styl
+    clearInterval(checkAPlayer)
+	  if (!window.volantis.APlayerLoaded&&!window.MetingJSElement){ // APlayer只能加载一次
+      window.volantis.APlayerLoaded=1 // APlayer加载完成
+      loadScript("https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js") // 加载 MetingJS
+	  }
+  }, 2500) // 按照网速调节差分2.5s
+  // rightmenu see: layout/_partial/rightmenu.ejs
+
+  
+    loadScript("/js/aplayer.js")
+  
+
+</script>
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+    let pagePlaceholder = pdata.commentPlaceholder || "还得是你！";
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    var valine = new Valine();
+    valine.init(Object.assign({"path":null,"placeholder":"还得是你！","appId":"5EUu9nRz6er0p1Oz6Dcm4dAH-gzGzoHsz","appKey":"PYM2rss6BsLeP23KiqYz1k4P","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"enableQQ":true,"recordIP":false,"avatar":"robohash","pageSize":10,"lang":"zh-cn","highlight":true,"mathJax":false}, {
+      el: '#valine_container',
+      path: path,
+      placeholder: pagePlaceholder,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps,
+    }))
+  }
+  $(function () {
+    pjax_valine();
+  });
+  volantis.pjax.push(pjax_valine);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://tutouwang.vercel.app' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://tutouwang.vercel.app' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://tutouwang.vercel.app' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+
+	  
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+	<script>
+		volantis.pjax.push(window.HideLoading,'HideLoading');
+		volantis.pjax.send(window.ShowLoading,'ShowLoading');
+		volantis.pjax.error(window.HideLoading,'HideLoading');
+	</script>
+</div>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+	  
+    </div>
+    <!--单击显示文字-->
+    <script type="text/javascript" src="/js/click_show_text.js"></script>
+
+    <!--动态线条背景-->
+    <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
+    opacity：表示线条透明度（0~1），默认：0.5
+    count：表示线条的总数量，默认：150
+    zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+    <script type="text/javascript"
+    color="128,128,128" opacity='0.7' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+
+  </body>
+</html>
