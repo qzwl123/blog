@@ -135,7 +135,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/imgQQ%E5%9B%BE%E7%89%8720210307112526.png'/>
+            <img no-lazy class='logo' src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/imgQQ.png'/>
           
           
           
@@ -558,14 +558,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
               
               id="v4getting-started">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f5c3.svg'><p>文档</p>
             </a>
           
             <a href="/faqs/"
               
               
               id="faqs">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f516.svg'><p>帮助</p>
             </a>
           
             <a href="/examples/"
@@ -579,14 +579,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
               
               id="contributors">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f389.svg'><p>社区</p>
             </a>
           
             <a href="/archives/"
               
               
               id="archives">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f4f0.svg'><p>博客</p>
             </a>
           
         
@@ -839,7 +839,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>TCP 提供了一种可靠、面向连接、字节流、传输层的服务，采用三次握手建立一个连接。采用 四次挥手 来关闭一个连接。</p>
 <p>三次握手的目的是保证双方互相之间建立了连接</p>
 <p>三次握手发生在客户端连接的时候，当调用connect(),底层会通过TCP协议进行三次握手。</p>
-<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="TCP三次握手四次挥手.pdf_页面_1"></p>
+<h3 id="TCP三次握手四次挥手-图解"><a href="#TCP三次握手四次挥手-图解" class="headerlink" title="TCP三次握手四次挥手 - 图解"></a>TCP三次握手四次挥手 - 图解</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="TCP三次握手四次挥手.pdf_页面_1"></p>
+<h4 id="为社么不能2次握手"><a href="#为社么不能2次握手" class="headerlink" title="为社么不能2次握手"></a>为社么不能2次握手</h4><blockquote>
+<p>直接说你做我女朋友行吗？</p>
+<p>回复 好的</p>
+<p>答:客户端要知道自己能发数据也能收数据 服务端也是一样的</p>
+<p><strong>客户端</strong>给服务器发能确保的是客户端可以发送数据，但是不能确定<strong>服务端</strong>的收和发是否是好使的</p>
+<p><strong>服务端</strong>收到信息了服务端可以确定自己收是好的还能确定<strong>客户端</strong>的发是好的</p>
+<p>(客) C -&gt; S(服)</p>
+<p><strong>服务端</strong>回一个数据就能确定自己发也是没有问题的</p>
+<p><strong>客户端</strong>收到信息能确定自己的收是没有问题也能确定<strong>服务端</strong>的收发是没有问题的</p>
+<p>(客) C &lt;- S(服)</p>
+<p><strong>服务端</strong>收到客户发来的数据就知道客户端的收是好的</p>
+<p>(客) C -&gt; S(服)</p>
+</blockquote>
 <p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111003498.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111003498.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220624111003498"></p>
 <blockquote>
 <p>ACK: 用来做确认的</p>
@@ -864,7 +877,37 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 </li>
 </ul>
-<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220624111928654"></p>
+<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220624111928654.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220624111928654"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">第一次握手:</span><br><span class="line">	<span class="number">1.</span>客户端将SYN标志为<span class="number">1</span></span><br><span class="line">	<span class="number">2.</span>生成一个随机的<span class="number">32</span>位的序号seq = J，这序号后边是可以携带数据 (数据的大小)</span><br><span class="line">第二个次握手:</span><br><span class="line">	<span class="number">1.</span>服务器端接收客户端的连接: ACK = <span class="number">1</span></span><br><span class="line">	<span class="number">2.</span>服务器会回发一个确认序号: ack = 客户的序号 + 数据的长度 + SYN/FIN(按一个字节来算)</span><br><span class="line">	<span class="number">3.</span>服务器端会向客户端发起连接请求: SYN = <span class="number">1</span></span><br><span class="line">	<span class="number">4.</span>服务器也会生成一个随机序号: seq = K</span><br><span class="line">第三次握手:</span><br><span class="line">	<span class="number">1.</span>客户端应答服务器的连接请求: ACK = <span class="number">1</span></span><br><span class="line">	<span class="number">2.</span>客户端回复收到了服务端的数据: ack = 服务端的序号 + 数据长度 + SYN/FIN(按一个字节算)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="序号-和-确认序号-通信的过程"><a href="#序号-和-确认序号-通信的过程" class="headerlink" title="序号 和 确认序号 通信的过程"></a>序号 和 确认序号 通信的过程</h3><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_2.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="TCP三次握手四次挥手.pdf_页面_2"></p>
+<h2 id="8-TCP-滑动窗口"><a href="#8-TCP-滑动窗口" class="headerlink" title="8. TCP 滑动窗口"></a>8. TCP 滑动窗口</h2><blockquote>
+<p>滑动窗口（Sliding window）是一种流量控制技术。早期的网络通信中，通信双方不会考虑网络的 拥挤情况直接发送数据。由于大家不知道网络拥塞状况，同时发送数据，导致中间节点阻塞掉包， 谁也发不了数据，所以就有了滑动窗口机制来解决此问题。滑动窗口协议是用来改善吞吐量的一种 技术，即容许发送方在接收任何应答之前传送附加的包。接收方告诉发送方在某一时刻能送多少包 （称窗口尺寸）。 TCP 中采用滑动窗口来进行传输控制，滑动窗口的大小意味着接收方还有多大的缓冲区可以用于 接收数据。发送方可以通过滑动窗口的大小来确定应该发送多少字节的数据。当滑动窗口为 0 时，发送方一般不能再发送数据报。 </p>
+<p>滑动窗口是 TCP 中实现诸如 ACK 确认、流量控制、拥塞控制的承载结构。</p>
+</blockquote>
+<p>窗口理为缓冲区的大小</p>
+<p>滑动窗口的大小会随着发送数据和接受数据而变化</p>
+<p>通信的双方都有发送的缓冲区和接收数据的缓冲区</p>
+<p>​	服务器:</p>
+<p>​		发送缓冲区 (发送缓冲区的窗口)</p>
+<p>​		接受缓冲区 (接收缓冲区的窗口)</p>
+<p>​	客户端</p>
+<p>​		发送缓冲区 (发送缓冲区的窗口)</p>
+<p>​		接受缓冲区 </p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220625160402642.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220625160402642.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220625160402642"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">发送方的缓冲区:</span><br><span class="line">	白色格子: 空闲的空间</span><br><span class="line">	灰色格子: 数据已经被发送出去，但是还没有被接收,服务-回复ack确认收到那了</span><br><span class="line">	紫色格子: 还没有发送出去的数据</span><br><span class="line">        </span><br><span class="line">接受收方的缓冲区:</span><br><span class="line">	白色格子: 空闲空间</span><br><span class="line">	紫色格子: 已经接收到的数据</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220625160441838.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220625160441838.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220625160441838"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># mss: Maximum Segment Size(一条数据的最大的数据量)</span></span><br><span class="line"><span class="meta"># win: 滑动窗口 </span></span><br><span class="line"><span class="number">1.</span> 客户端向服务器发起连接，客户端的滑动窗口是<span class="number">4096</span>,一次发送的最大的数据是<span class="number">1460</span></span><br><span class="line"><span class="number">2.</span> 服务器接收连接情况,告诉客户端服务的窗口大小是<span class="number">6144</span>，一次发送的最大的数据是<span class="number">1024</span></span><br><span class="line"><span class="number">3.</span> 第三次握手</span><br><span class="line"><span class="number">4.</span> 第<span class="number">4</span> - <span class="number">9</span>客户端连续给服务器发送了<span class="number">6</span>k的数据, 每次发送<span class="number">1</span>k</span><br><span class="line"><span class="number">5.</span> 第<span class="number">10</span>次, 服务器告诉客户端: 发送的<span class="number">6</span>k数据以及接收到, 存储在缓冲区中, 缓冲区数据已经处理了<span class="number">2</span>k, 窗口大小是<span class="number">2</span>k</span><br><span class="line"><span class="number">6.</span> 第<span class="number">11</span>次, 服务器告诉客户端: 发送的<span class="number">6</span>k数据以及接收到, 存储在缓冲区中, 缓冲区数据已经处理了<span class="number">4</span>k, 窗口大小是<span class="number">4</span>k</span><br><span class="line"><span class="number">7.</span> 第<span class="number">12</span>次给服务器发送了<span class="number">1</span>k数据</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-TCP-四次挥手"><a href="#9-TCP-四次挥手" class="headerlink" title="9. TCP 四次挥手"></a>9. TCP 四次挥手</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">四次挥手发生在断开连接的时候，在程序中调用了close()会使用TCP协议进行四次挥手。</span><br><span class="line">客户端和服务器都可以主动发起断开连接,谁先调用close()谁就是发起。</span><br><span class="line">因为在TCP连接的时候, 采用三次握手建立的连接是双向的, 在断开的时候也需要双向断开。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_3.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pdf_%E9%A1%B5%E9%9D%A2_3.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="TCP三次握手四次挥手.pdf_页面_3"></p>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220626124846475.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220626124846475.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220626124846475"></p>
 
   
   
@@ -899,10 +942,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-06-24T14:45:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-06-26T16:00:20+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年6月24日</p>
+    <p>更新于：2022年6月26日</p>
   </a>
 </div>
 
@@ -1185,7 +1228,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-socket%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1.socket介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">2. 字节序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E4%B8%BE%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">字节序举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E6%98%AF-%E5%A4%A7%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F-or-%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">查看本机是 大端字节序 or 小端字节序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">字节序转换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-%E7%BD%91%E7%BB%9C%E5%AD%97%E8%8A%82%E5%BA%8F-%E4%B8%8E-%E4%B8%BB%E6%9C%BA%E5%AD%97%E8%8A%82%E5%BA%8F-%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.5.</span> <span class="toc-text">代码实现 网络字节序 与 主机字节序 转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">3. socket 地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.1.</span> <span class="toc-text">通用 socket 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.2.</span> <span class="toc-text">专用 socket 地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2ip-%E6%95%B4%E6%95%B0-%EF%BC%8C%E4%B8%BB%E6%9C%BA%E3%80%81%E7%BD%91%E7%BB%9C-%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. IP地址转换（字符串ip-整数 ，主机、网络 字节序的转换）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E4%BB%A3%E7%A0%81-%E5%AE%9E%E7%8E%B0-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">C代码-实现 IP地址转换函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">5. TCP通信流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-UDP-%E7%89%B9%E7%82%B9%E5%8C%BA%E5%88%AB"><span class="toc-number">5.1.</span> <span class="toc-text">TCP - UDP 特点区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">6. 套接字函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5%E6%B6%88%E6%81%AF-%E5%9B%9E%E5%B0%84"><span class="toc-number">7.</span> <span class="toc-text">TCP - 手动输入消息 - 回射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-TCP-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">8.</span> <span class="toc-text">7. TCP 三次握手</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-socket%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">1.socket介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">2. 字节序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E4%B8%BE%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">字节序举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E6%9C%BA%E6%98%AF-%E5%A4%A7%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F-or-%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">查看本机是 大端字节序 or 小端字节序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">字节序转换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-%E7%BD%91%E7%BB%9C%E5%AD%97%E8%8A%82%E5%BA%8F-%E4%B8%8E-%E4%B8%BB%E6%9C%BA%E5%AD%97%E8%8A%82%E5%BA%8F-%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.5.</span> <span class="toc-text">代码实现 网络字节序 与 主机字节序 转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">3. socket 地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.1.</span> <span class="toc-text">通用 socket 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="toc-number">3.2.</span> <span class="toc-text">专用 socket 地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%AD%97%E7%AC%A6%E4%B8%B2ip-%E6%95%B4%E6%95%B0-%EF%BC%8C%E4%B8%BB%E6%9C%BA%E3%80%81%E7%BD%91%E7%BB%9C-%E5%AD%97%E8%8A%82%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4. IP地址转换（字符串ip-整数 ，主机、网络 字节序的转换）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E4%BB%A3%E7%A0%81-%E5%AE%9E%E7%8E%B0-IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">C代码-实现 IP地址转换函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">5. TCP通信流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-UDP-%E7%89%B9%E7%82%B9%E5%8C%BA%E5%88%AB"><span class="toc-number">5.1.</span> <span class="toc-text">TCP - UDP 特点区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A5%97%E6%8E%A5%E5%AD%97%E5%87%BD%E6%95%B0"><span class="toc-number">6.</span> <span class="toc-text">6. 套接字函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E6%89%8B%E5%8A%A8%E8%BE%93%E5%85%A5%E6%B6%88%E6%81%AF-%E5%9B%9E%E5%B0%84"><span class="toc-number">7.</span> <span class="toc-text">TCP - 手动输入消息 - 回射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.1.</span> <span class="toc-text">服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-TCP-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">8.</span> <span class="toc-text">7. TCP 三次握手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B-%E5%9B%BE%E8%A7%A3"><span class="toc-number">8.1.</span> <span class="toc-text">TCP三次握手四次挥手 - 图解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E7%A4%BE%E4%B9%88%E4%B8%8D%E8%83%BD2%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">8.1.1.</span> <span class="toc-text">为社么不能2次握手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="toc-number">8.2.</span> <span class="toc-text">时序图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%8F%B7-%E5%92%8C-%E7%A1%AE%E8%AE%A4%E5%BA%8F%E5%8F%B7-%E9%80%9A%E4%BF%A1%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">8.3.</span> <span class="toc-text">序号 和 确认序号 通信的过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-TCP-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="toc-number">9.</span> <span class="toc-text">8. TCP 滑动窗口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-TCP-%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">10.</span> <span class="toc-text">9. TCP 四次挥手</span></a></li></ol>
     </div>
   </section>
 
@@ -1232,7 +1275,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>96k 字</div>
+          <div>97.3k 字</div>
         </div>
       
 
@@ -1258,8 +1301,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Jun 24 2022 15:28:48 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-06-24 日</div>
+            <div id="last-update" style="display: none;">Sun Jun 26 2022 16:13:13 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-06-26 日</div>
           
         </div>
         
@@ -1309,7 +1352,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-06-24 日';
+            document.getElementById('last-update-show').innerHTML = '2022-06-26 日';
           }
         </script>
         
@@ -1621,7 +1664,7 @@ var loadCSS = function( href, before, media, attributes ){
 <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
 
     <script type="text/javascript">
-        var imgs=["https://cdn.jsdelivr.net/gh/qzwl123/Drawing_bed@main/img%E5%A5%BD%E7%9C%8B%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%85%83%20%E5%8A%A8%E6%BC%AB%E5%A5%B3%E5%AD%A9%20%E8%88%B9%20%E7%81%AF%20%CB%AE%203440x1440%E5%B8%A6%E9%B1%BC%E5%B1%8F%E5%A3%81%E7%BA%B8_%E5%BD%BC%E5%B2%B8%E5%9B%BE%E7%BD%91.jpg"];
+        var imgs=["https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/beijing.jpg"];
         if ('false' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/
