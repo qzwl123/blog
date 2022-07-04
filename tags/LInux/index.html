@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：Linux - 秃头王</title>
+  <title>标签：LInux - 秃头王</title>
   
 
   
@@ -622,6 +622,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
+          
+        
       
     
     
@@ -635,18 +639,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/04/10/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/">
-        进程控制
+      <a href="/2022/03/10/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E6%A0%87%E5%87%86c%E5%BA%93IO%E5%87%BD%E6%95%B0%E5%92%8CLinux%E7%B3%BB%E7%BB%9FIO%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94/">
+        标准c库IO函数和Linux系统IO函数对比
       </a>
     </h2>
   
   <div class='md'>
     
       
-        进程退出12345#include &lt;stdlib.h&gt;void exit(int status);#include &lt;unistd.h&gt;void _exit(int status);
+        标准C库IO函数
+自带帮助文档 第三章 
 
 
-12345678910111213141516171819202122232425262728293031323334/******************************...
+虚拟地址空间
+Linux系统IO函数帮助文档 ~Linux : man 2 open停留在函数上Shif + k可进行快速跳转
+123456789101112131415161718192021// 为社么定义三个头文件：不同的宏定义在两个文件里#include &lt;sys/types.h&gt;#include &lt;sys/stat.h...
       
     
   </div>
@@ -654,15 +661,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-04-10</time>
+        <time>2022-03-10</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/04/10/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/'>
+          <a class='readmore' href='/2022/03/10/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E6%A0%87%E5%87%86c%E5%BA%93IO%E5%87%BD%E6%95%B0%E5%92%8CLinux%E7%B3%BB%E7%BB%9FIO%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94/'>
             阅读全文
           </a>
         </div>
@@ -684,18 +691,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/04/06/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/GDB%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%B0%83%E8%AF%95/">
-        GDB多线程调试
+      <a href="/2022/03/08/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/GDB%E8%B0%83%E8%AF%95/">
+        GDB调试
       </a>
     </h2>
   
   <div class='md'>
     
       
-        GDB多进程调试使用GDB调试的时候，GDB默认只能跟踪一个进程，可以在fork函数调用之前,通过指令设置GDB调试工具跟踪父进程或者跟踪跟踪子进程，默认跟踪父进程。
-设置调试父进程或者子进程： set follow-fork-mode [paren(默认) | child]
-设置调试模式：set detach-on-fork [on | off]
-默认 on,表示调试当前进程的时候,其他的...
+        什么是 GDB
+GDB是由 GNU软件系统社区提供的调试工具，同GCC 配套组成了一套完整的开发环境，GDB是 Linux和许多类Unix系统中的标准开发环境。
+一般来说，GDB主要帮助你完成下面四个方向的功能：
+启动程序，可以按照自定义的要求随心所欲的运行程序
+可让被调试的程序在指定的调置的断点处停住(断点可以是条件表达式)
+当程序被停住时,可以检查此时程序中发生的事
+可以改变程序，将一个...
       
     
   </div>
@@ -703,15 +713,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-04-06</time>
+        <time>2022-03-08</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/04/06/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/GDB%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%B0%83%E8%AF%95/'>
+          <a class='readmore' href='/2022/03/08/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/GDB%E8%B0%83%E8%AF%95/'>
             阅读全文
           </a>
         </div>
@@ -733,25 +743,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/04/01/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%A6%82%E8%BF%B0/">
-        进程概述
+      <a href="/2022/03/04/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/Makefile/">
+        Makefile
       </a>
     </h2>
   
   <div class='md'>
     
       
-        程序和进程程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：
-
-二进制格式标识：每个程序文件都包含用于描述可执行文件格式的元信息。内核利用此信息来解释文件中的其他信息。（ELF可执行连接格式）
-
-机器语言指令：对程序算法进行编码。
-
-程序入口地址：标识程序开始执行时的起始指令位置。
-
-数据：程序文件包含的变量初始值和程序使用的字面量值（比如字符串）。
-
-符号表及重定位表：描...
+        什么是Makefile
+一个工程中的源文件不计其数．其按类型、功能、模块分别放在若干个目录中，Makefile文件定义了一系列的规则来指定哪些文件要生编扁i译.哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile文件就像一个Shell 脚本一样,也可以执行操作系统的命
+Makefile带来的好处就是“自动化编译”，一旦写好只需要一个make命令，整个工...
       
     
   </div>
@@ -759,15 +761,134 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-04-01</time>
+        <time>2022-03-04</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/04/01/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%A6%82%E8%BF%B0/'>
+          <a class='readmore' href='/2022/03/04/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/Makefile/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/02/20/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/gcc-g-%E5%8C%BA%E5%88%AB%E4%B8%8E%E6%B5%81%E7%A8%8B/">
+        gcc/g++区别与流程
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        gcc&#x2F;G++gcc工作流程源代码(.h, .c, .cpp) - &gt; 预处理器 - &gt; 预处理后源代码 (.i) - &gt; 编译器 - &gt; 汇编代码（.s) - &gt; 汇编器 - &gt; 目标代码（.o)
+
+处理指令
+gcc&#x2F;g++的区别
+-D 宏的名字
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-02-20</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/02/20/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/gcc-g-%E5%8C%BA%E5%88%AB%E4%B8%8E%E6%B5%81%E7%A8%8B/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/11/14/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+        静态链接库-静态链接库
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        命名规则Linux
+
+
+Linux :  libxxxx.so
+
+
+lib : 前缀（固定）
+
+xxxx : 库的名字，自己起
+
+.so ： 后缀（固定）
+
+在Linux下是一个可执行文件
+
+
+		
+
+Windwos
+
+Windows ： libxxxx.dll
+
+静态链接库把所有.c文件 进行编译、汇编 不进行链接
+1gcc -c  test1.c test1.c test2.c test...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-11-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/11/14/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/'>
             阅读全文
           </a>
         </div>
@@ -837,7 +958,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <a href="https://github.com/volantis-x/"
+            <a href="https://github.com/qzwl123"
               class="social fab fa-github flat-btn"
               target="_blank"
               rel="external nofollow noopener noreferrer">
@@ -929,7 +1050,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <li><a class="flat-box"
             title="/categories/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" href="/categories/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"
             id="categoriesLinuxE7BD91E7BB9CE7BC96E7A88B"
-            ><div class='name'>Linux网络编程</div><div class='badge'>(2)</div></a></li>
+            ><div class='name'>Linux网络编程</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/MySql/" href="/categories/MySql/"
+            id="categoriesMySql"
+            ><div class='name'>MySql</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/c-OOP/" href="/categories/c-OOP/"
@@ -1039,7 +1165,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>55 篇</div>
+          <div>56 篇</div>
         </div>
       
 
@@ -1061,7 +1187,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>100.2k 字</div>
+          <div>104.9k 字</div>
         </div>
       
 
@@ -1087,8 +1213,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Jul 01 2022 09:49:03 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-07-01 日</div>
+            <div id="last-update" style="display: none;">Mon Jul 04 2022 15:22:20 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-07-04 日</div>
           
         </div>
         
@@ -1138,7 +1264,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-07-01 日';
+            document.getElementById('last-update-show').innerHTML = '2022-07-04 日';
           }
         </script>
         
@@ -2398,84 +2524,6 @@ document.addEventListener("pjax:success", listennSidebarTOC);
           
           "#pjax-container",
           "#pjax-header-nav-list"
-        ],
-        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
-      });
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-      //window.stop(); // 相当于点击了浏览器的停止按钮
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      window.subData = null; // 移除标题（用于一二级导航栏切换处）
-
-      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
-      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
-      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
-
-      // 解绑事件 避免重复监听
-      volantis.$topBtn.unbind('click');
-      $('.menu a').unbind('click');
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
-	  volantis.pjax.method.send.start();
-    });
-
-    document.addEventListener('pjax:complete', function () {
-      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
-      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-      try{
-		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
-		volantis.pjax.method.complete.start();
-      } catch (e) {
-        console.log(e);
-      }
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
-	  volantis.pjax.method.error.start();
-      window.location.href = e.triggerElement.href;
-    });
-</script>
-
-	  
-    </div>
-    <!--单击显示文字-->
-    <script type="text/javascript" src="/js/click_show_text.js"></script>
-
-    <!--动态线条背景-->
-    <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
-    opacity：表示线条透明度（0~1），默认：0.5
-    count：表示线条的总数量，默认：150
-    zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
-    <script type="text/javascript"
-    color="128,128,128" opacity='0.7' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-    </script>
-
-  </body>
-</html>
-    "#pjax-header-nav-list"
         ],
         cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
         timeout: 5000
