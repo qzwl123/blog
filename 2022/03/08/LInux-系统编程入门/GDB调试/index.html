@@ -745,7 +745,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309145453276.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220309145453276.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20220309145453276"></p>
 <h3 id="调试多个文件"><a href="#调试多个文件" class="headerlink" title="调试多个文件"></a>调试多个文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c a.c b.c -o main -g</span><br><span class="line">gdb main</span><br><span class="line">&#x2F;&#x2F; 查看其中一个文件</span><br><span class="line">&#x2F;&#x2F; 注意不能是一个文件例如 list mian.c</span><br><span class="line">l  a.c:1 &#x2F;&#x2F; 就会进入 a.c 的第一行 以行号为中心显示</span><br><span class="line">or</span><br><span class="line">l  a.c:函数名 &#x2F;&#x2F; 就会进入 a.c 的第函数为中心显示</span><br></pre></td></tr></table></figure>
 
-<h2 id="GDB命令-断电操作"><a href="#GDB命令-断电操作" class="headerlink" title="GDB命令-断电操作"></a>GDB命令-断电操作</h2><ul>
+<h2 id="GDB命令-断点操作"><a href="#GDB命令-断点操作" class="headerlink" title="GDB命令-断点操作"></a>GDB命令-断点操作</h2><ul>
 <li><p>设置断点</p>
 <p>b&#x2F;break 行号</p>
 <p>b&#x2F;break 函数名</p>
@@ -836,10 +836,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-05-27T09:27:02+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-09-24T15:59:13+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年5月27日</p>
+    <p>更新于：2022年9月24日</p>
   </a>
 </div>
 
@@ -1131,7 +1131,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-GDB"><span class="toc-number">1.</span> <span class="toc-text">什么是 GDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E5%90%AF%E5%8A%A8%E3%80%81%E9%80%80%E5%87%BA%E3%80%81%E6%9F%A5%E7%9C%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">GDB命令-启动、退出、查看代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb-%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">gdb 调试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">调试多个文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E6%96%AD%E7%94%B5%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">GDB命令-断电操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">断点设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">GDB命令-调试命令</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-GDB"><span class="toc-number">1.</span> <span class="toc-text">什么是 GDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E5%90%AF%E5%8A%A8%E3%80%81%E9%80%80%E5%87%BA%E3%80%81%E6%9F%A5%E7%9C%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">GDB命令-启动、退出、查看代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb-%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">gdb 调试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">调试多个文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E6%96%AD%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">GDB命令-断点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">断点设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB%E5%91%BD%E4%BB%A4-%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">GDB命令-调试命令</span></a></li></ol>
     </div>
   </section>
 
@@ -1156,7 +1156,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>67 篇</div>
+          <div>75 篇</div>
         </div>
       
 
@@ -1178,7 +1178,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>151.6k 字</div>
+          <div>159.6k 字</div>
         </div>
       
 
@@ -1204,8 +1204,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Aug 03 2022 10:41:23 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-08-03 日</div>
+            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:30:00 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-10-06 日</div>
           
         </div>
         
@@ -1255,7 +1255,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-08-03 日';
+            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
           }
         </script>
         

@@ -680,6 +680,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>临界资源：大家都能访问到的资源</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量 int ans = 0; 、std::mutex m_mutex;</span></span><br><span class="line"><span class="comment">// 加锁的地方就是临界区</span></span><br><span class="line"><span class="comment">// 抢占胡互斥锁, 如果抢占上了的话才对ans + 1, 出了作用域就会呗释放</span></span><br><span class="line"><span class="function">unique_lock&lt;mutex&gt; <span class="title">lock</span><span class="params">(m_mutex)</span></span>;</span><br><span class="line">ans += is_prime(i);</span><br><span class="line">lock.unlock();</span><br><span class="line"><span class="comment">// 对这种加操作的时候,有可能会发生多线程抢占资源的时候的时候导致数据不正确</span></span><br><span class="line"><span class="comment">// 临界资源</span></span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ **.cpp -pthread</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="500W个数查看素数个数"><a href="#500W个数查看素数个数" class="headerlink" title="500W个数查看素数个数"></a>500W个数查看素数个数</h3><ul>
 <li>prime_count_test_15s::main();</li>
 <li>prime_count_test1_2m10s::main();</li>
@@ -744,10 +748,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-28T10:02:31+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-09-22T16:19:59+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年7月28日</p>
+    <p>更新于：2022年9月22日</p>
   </a>
 </div>
 
@@ -838,7 +842,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2022/08/02/SmartPointer%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/'>
+        <a class='prev' href='/2022/08/02/OOP/SmartPointer%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>SmartPointer智能指针</p>
           <p class='content'>关于智能指针
 在C++11中通过引入智能指针的概念，使得C++程序员不需要手动释放内存
@@ -1075,7 +1079,7 @@ std::shared_ptr (计数指针)...</p>
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>67 篇</div>
+          <div>75 篇</div>
         </div>
       
 
@@ -1097,7 +1101,7 @@ std::shared_ptr (计数指针)...</p>
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>151.6k 字</div>
+          <div>159.6k 字</div>
         </div>
       
 
@@ -1123,8 +1127,8 @@ std::shared_ptr (计数指针)...</p>
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Aug 03 2022 10:41:19 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-08-03 日</div>
+            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:29:55 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-10-06 日</div>
           
         </div>
         
@@ -1174,7 +1178,7 @@ std::shared_ptr (计数指针)...</p>
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-08-03 日';
+            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
           }
         </script>
         

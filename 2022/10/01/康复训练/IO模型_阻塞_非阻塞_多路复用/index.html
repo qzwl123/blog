@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,zh-HK,zh-TW,default">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>IO模型（阻塞，非阻塞，多路复用） - 秃头王</title>
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+    
+      <meta name="msapplication-TileColor" content="#ffffff">
+    
+      <meta name="msapplication-config" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/browserconfig.xml">
+    
+      <meta name="theme-color" content="#ffffff">
+    
+  
+
+  <!-- link -->
+  
+
+  <!-- import link -->
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/site.webmanifest">
+  <link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/imgQQ.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                  
+                  
+                  >
+                  <i class='fas fa-link fa-fw'></i>OJ
+                </a>
+                
+                  <ul class="list-v">
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.acwing.com/problem/
+                  
+                  
+                  
+                    id="https:wwwacwingcomproblem"
+                  >
+                  Acwin
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=http://oj.haizeix.com/
+                  
+                  
+                  
+                    id="http:ojhaizeixcom"
+                  >
+                  海贼
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.luogu.com.cn/
+                  
+                  
+                  
+                    id="https:wwwluogucomcn"
+                  >
+                  洛谷
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.lanqiao.cn/contests/?category_id=3/
+                  
+                  
+                  
+                    id="https:wwwlanqiaocncontests?category_id=3"
+                  >
+                  蓝桥杯
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" 
+                  
+                  
+                  >
+                  <i class='fas fa-link fa-fw'></i>OJ
+                </a>
+                
+                  <ul class="list-v">
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.acwing.com/problem/
+                  
+                  
+                  
+                    id="https:wwwacwingcomproblem"
+                  >
+                  Acwin
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=http://oj.haizeix.com/
+                  
+                  
+                  
+                    id="http:ojhaizeixcom"
+                  >
+                  海贼
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.luogu.com.cn/
+                  
+                  
+                  
+                    id="https:wwwluogucomcn"
+                  >
+                  洛谷
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <hr>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=https://www.lanqiao.cn/contests/?category_id=3/
+                  
+                  
+                  
+                    id="https:wwwlanqiaocncontests?category_id=3"
+                  >
+                  蓝桥杯
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div id='cover-backstretch'></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">秃头王</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/v4/getting-started/"
+              
+              
+              id="v4getting-started">
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f5c3.svg'><p>文档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f389.svg'><p>社区</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/1f4f0.svg'><p>博客</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        IO模型（阻塞，非阻塞，多路复用）
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>秃头王</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/">康复训练</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年10月1日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="IO模型（阻塞，非阻塞，多路复用）" data-path="/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <h2 id="在了解IO模型前，先了解什么叫IO，IO得操作是怎么样的？"><a href="#在了解IO模型前，先了解什么叫IO，IO得操作是怎么样的？" class="headerlink" title="在了解IO模型前，先了解什么叫IO，IO得操作是怎么样的？"></a>在了解IO模型前，先了解什么叫IO，IO得操作是怎么样的？</h2><p>IO既输入输出，指的是一切操作程序或设备与计算机之间发生的数据传输的过程。它分为IO设备和IO接口两个部分。</p>
+<ul>
+<li><strong>IO设备</strong>：就是指可以与计算机进行数据传输的硬件。最常见的I&#x2F;O设备有打印机、硬盘、键盘和鼠标。从严格意义上来讲，它们中有一些只能算是输入设备（比如说键盘和鼠标）；有一些只是输出设备（如打印机）。</li>
+<li><strong>IO接口</strong>：就是是主机和外设之间的交接界面，通过接口可以实现主机和外设之间的信息交换。</li>
+</ul>
+<h2 id="IO的五种模型"><a href="#IO的五种模型" class="headerlink" title="IO的五种模型"></a>IO的五种模型</h2><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="五种IO模型"></p>
+<h2 id="阻塞与非阻塞IO"><a href="#阻塞与非阻塞IO" class="headerlink" title="阻塞与非阻塞IO"></a>阻塞与非阻塞IO</h2><p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9EIO.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9EIO.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="阻塞与非阻塞IO"></p>
+<blockquote>
+<p>你打电话问书店老板有没有《分布式系统》这本书，你如果是<strong>阻塞式调用</strong>，你会一直把自己“挂起”，直到得到这本书有没有的结果，如果是<strong>非阻塞式调用</strong>，你不管老板有没有告诉你，你自己先一边去玩了， 当然你也要偶尔过几分钟check一下老板有没有返回结果。<br>在这里阻塞与非阻塞与是否同步异步无关。跟老板通过什么方式回答你结果无关。</p>
+</blockquote>
+<p>往一个文件中写数据需要几个步骤：</p>
+<p>1.opne()、2.write(){系统调用，要想写磁盘，把数据给write让write帮自己写(把数据给内核，这个过程叫<strong>用户态</strong>下沉到<strong>内核态</strong>)，内核(内核里面还有缓冲IO,快缓冲(攒了一会再写)、直接IO)拿到数据(BUff)在写道磁盘当中，当写的过程中内核需要调度底层IO}、3.close()</p>
+<ul>
+<li><p>fcntl(int fd, int cmd, …&#x2F;* arg *&#x2F;);</p>
+<ol>
+<li><p>复制一个现有的描述符(cmd&#x3D;F_DUPFD). </p>
+</li>
+<li><p>获得／设置文件描述符标记(cmd&#x3D;F_GETFD或F_SETFD). </p>
+</li>
+<li><p>获得／设置文件状态标记(cmd&#x3D;F_GETFL或F_SETFL). </p>
+</li>
+<li><p>获得／设置异步I&#x2F;O所有权(cmd&#x3D;F_GETOWN或F_SETOWN). </p>
+</li>
+<li><p>获得／设置记录锁(cmd&#x3D;F_GETLK , F_SETLK或F_SETLKW).</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="阻塞-Block-x2F-非阻塞-NonBlock-场景描述"><a href="#阻塞-Block-x2F-非阻塞-NonBlock-场景描述" class="headerlink" title="阻塞(Block)&#x2F;非阻塞(NonBlock) 场景描述"></a>阻塞(Block)&#x2F;非阻塞(NonBlock) 场景描述</h3><p>阻塞:你和你的女朋约好再外面电话亭(文件)见面，你们就是数据,你就去了电话亭就再哪一直等等等！！！，你怕你走了她就来了，你就再那干等了10分钟。</p>
+<p>非阻塞：你和你的女朋约好再外面电话亭(文件)见面，你们就是数据,你就去了电话亭没看到你的女朋友(拿到一个-1)，(假如你们要恰饭)你就直接走了去恰饭。为了我们的关系我过一会我就看一下比如10分钟或者1秒(这叫轮询)</p>
+<h5 id="common-c"><a href="#common-c" class="headerlink" title="common.c"></a>common.c</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 非阻塞</span><br><span class="line">int make_nonblock(int fd) &#123;</span><br><span class="line">    int flag;</span><br><span class="line">    flag &#x3D; fcntl(fd, F_GETFL);</span><br><span class="line">    if(flag &lt; 0) &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; O_NONBLOCK 位掩码</span><br><span class="line">    flag |&#x3D; O_NONBLOCK;</span><br><span class="line">    return fcntl(fd, F_SETFL, flag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 解除非阻塞</span><br><span class="line">int make_block(int fd) &#123;</span><br><span class="line">    int flag;</span><br><span class="line">    flag &#x3D; fcntl(fd, F_GETFL);</span><br><span class="line">    if(flag &lt; 0) &#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    flag &amp;&#x3D; ~ O_NONBLOCK;</span><br><span class="line">    return fcntl(fd, F_SETFL, flag);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="阻塞IO-Block"><a href="#阻塞IO-Block" class="headerlink" title="阻塞IO(Block)"></a>阻塞IO(Block)</h3><p>阻塞：往往需要等待缓冲区中的数据准备好过后才处理其他的事情，否则一直等待在那里。（浪费时间）</p>
+<p>正常写的程序基本都是阻塞</p>
+<h3 id="非阻塞IO-NonBlock"><a href="#非阻塞IO-NonBlock" class="headerlink" title="非阻塞IO(NonBlock)"></a>非阻塞IO(NonBlock)</h3><h4 id="设置标准输入为非阻塞"><a href="#设置标准输入为非阻塞" class="headerlink" title="设置标准输入为非阻塞"></a>设置标准输入为非阻塞</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;5.common.c&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 默认 0、1、2 三个文件描述符是从父亲哪继承过来的</span></span><br><span class="line"><span class="comment">     * 我们称他们为：标准输入、标准输出、标准错误</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    make_nonblock(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;age);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ttw is %d years old! &lt;%d&gt;\n&quot;</span>, age, ret);</span><br><span class="line"></span><br><span class="line">    perror(<span class="string">&quot;scanf&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p>scanf retValue是-1 那么 -1 是什么意思用perror打印查看什错误</p>
+<ul>
+<li>scanf：是成功读入的个数，返回 -1 出错</li>
+<li>perror(“scanf”): 资源的临时是不可访问的(想要从一个空的输入流中捞出一个数据，显然是没有的，但是又是<strong>非阻塞</strong>的也不能等所以返回 -1)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ttw is -99424160 years old! &lt;-1&gt; </span><br><span class="line">scanf: Resource temporarily unavailable</span><br></pre></td></tr></table></figure>
+
+<h5 id="想办法怎么让程序读到数据？-标准输入-O-NONBLOCK"><a href="#想办法怎么让程序读到数据？-标准输入-O-NONBLOCK" class="headerlink" title="想办法怎么让程序读到数据？(标准输入-O_NONBLOCK)"></a>想办法怎么让程序读到数据？(标准输入-O_NONBLOCK)</h5><p><strong>简答猜想？</strong></p>
+<p>加上sleep(5)这前5秒标准输入流打开了么？</p>
+<p>再等待的5秒中之前输入123，scanf()读到了，意味着什么标准输入流打不打开有没有数据过去跟scanf没有关系，没有scanf标准输入流中的数据该去还是得去，只是这个数据有没有被收走，只要是非阻塞IO只要有数据我就可以直接把他拿走。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: 6.test_nonblock.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年10月01日 星期六 19时50分04秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;5.common.c&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    make_nonblock(<span class="number">0</span>);</span><br><span class="line">    sleep(<span class="number">5</span>); <span class="comment">// 让程序睡觉了 — 数据已经冲到家门口了 — 不占用CPU</span></span><br><span class="line">    <span class="keyword">int</span> ret = <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;age);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ttw is %d years old! &lt;%d&gt;\n&quot;</span>, age, ret);</span><br><span class="line">    perror(<span class="string">&quot;scanf&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">123</span> <span class="comment">// 等待5秒前输入</span></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">ttw is <span class="number">123</span> years old! &lt;<span class="number">1</span>&gt;</span><br><span class="line"><span class="built_in">scanf</span>: Success</span><br></pre></td></tr></table></figure>
+
+<h2 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT()"></a>SELECT()</h2><h4 id="select的函数格式："><a href="#select的函数格式：" class="headerlink" title="select的函数格式："></a>select的函数格式：</h4><p>&#x2F;&#x2F; 最大文件描述符 + 1, 读、写、异常、阻塞（睡觉啥也不干）</p>
+<p><code>int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);</code></p>
+<h5 id="解释一下各个参数的意思"><a href="#解释一下各个参数的意思" class="headerlink" title="解释一下各个参数的意思:"></a>解释一下各个参数的意思:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- 参数:</span><br><span class="line">    - nfds: 委托内核的检测最大文件描述符的值 + 1</span><br><span class="line">    - readfds: 要检测的文件描述符的读的集合,委托内核检测哪些文件描述符的读的属性</span><br><span class="line">        - 一般检测读操作</span><br><span class="line">            - 对应的是对方发送来的数据, 因为读被的接收数据, 检测的就是读缓冲区</span><br><span class="line">            - 是一个传入传出参数 </span><br><span class="line">        - fd_set集合可以通过一些宏由人为来操作:</span><br><span class="line">        	 - FD_ZERO(fd_set *fdset)：清空fdset与所有文件句柄的联系。 </span><br><span class="line">			- FD_SET(int fd, fd_set *fdset)：建立文件句柄fd与fdset的联系。 </span><br><span class="line">			- FD_CLR(int fd, fd_set *fdset)：清除文件句柄fd与fdset的联系。 </span><br><span class="line">			- FD_ISSET(int fd, fdset *fdset)：检查fdset联系的文件句柄fd是否可读写，&gt;0表示可读写。 </span><br><span class="line">    - writefds: 要检测的文件描述符的写的集合, 委托内核检测哪些文件描述符的写的属性</span><br><span class="line">        - 委托内核检测写缓存区是不是还可以写数据 (不满就可以写)</span><br><span class="line">    - exceptfds: 检测发生异常的文件描述符的集合</span><br><span class="line">    - timeout:  要设置的超时时间</span><br><span class="line">        struct timeout &#123;</span><br><span class="line">            long tv_sec; &#x2F;* seconds 秒 *&#x2F;</span><br><span class="line">            long tv_usec; &#x2F;* microseconds 微秒 *&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line">        - 值为 NULL: 永久阻塞, 直到检测到了文件描述符的变化</span><br><span class="line">        - tv_sec &#x3D; 0, tv_usec: &#x3D; 0 : 表示不阻塞</span><br><span class="line">        - tv_sec &gt; 0, tv_usec: &gt; 0 : 阻塞对应的时间</span><br><span class="line">    - 返回值:</span><br><span class="line">        -1: 失败</span><br><span class="line">        &gt; 0 (n): 检测的集合中n个文件描述符发生了变化</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>主旨思想:</p>
+<p>1 .首先要构造一个关于文件描述符的列表，将要监听的文件描述符添加到该列表中。</p>
+<ol start="2">
+<li>调用系统函数(select), 监听该列表中的文件描述符,直到这些描述符中的一个或者多个进行I\O操作时, 该函数才会返回</li>
+</ol>
+<p>a. 这个函数是阻塞的</p>
+<p>b. 函数对文件描述符的检测的操作是由内核完成</p>
+<ol start="3">
+<li>在返回时, 它会告诉进程有多少(哪些)描述符要进行I&#x2F;O操作</li>
+</ol>
+<p>FD_SETSIZE 它指定最大描述符数（通常是1024），一个整数占4个字节，既32位，那么就是用包含32个元素的整数数组来表示文件描述符集。我们可以在头文件中修改这个值来改变select使用的文件描述符集的大小，但是必须重新编译内核才能使修改后的值有效。当前版本的unix操作系统没有限制FD_SETSIZE的最大值，通常只受内存以及系统管理上的限制。</p>
+</blockquote>
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20221002150934847.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20221002150934847.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20221002150934847"></p>
+<p>select 缺点：</p>
+<ol>
+<li>每次调用select，都需要把fd集合从用户态拷贝到内核态，这个开销在fd很多时会很大。</li>
+<li>同时每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大。</li>
+<li>select支持的文件描述符数量太小了,默认是1024。</li>
+<li><strong>fds集合不能重用，每次都需要重置。</strong></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">        &gt; File Name: 7.select.c</span></span><br><span class="line"><span class="comment">        &gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">        &gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">        &gt; Created Time: 2022年10月02日 星期日 14时12分04秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    fd_set rfds;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">    <span class="keyword">int</span> retval;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Watch stdin (fd 0) to see when it has input. */</span></span><br><span class="line"></span><br><span class="line">    FD_ZERO(&amp;rfds);</span><br><span class="line">    FD_SET(<span class="number">0</span>, &amp;rfds);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait up to five seconds. */</span></span><br><span class="line"></span><br><span class="line">    tv.tv_sec = <span class="number">5</span>;</span><br><span class="line">    tv.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    retval = select(<span class="number">1</span>, &amp;rfds, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;tv);</span><br><span class="line">    <span class="comment">/* Don&#x27;t rely on the value of tv now! */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (retval == <span class="number">-1</span>)</span><br><span class="line">        perror(<span class="string">&quot;select()&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (retval)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Data is available now.\n&quot;</span>);</span><br><span class="line">        <span class="comment">/* FD_ISSET(0, &amp;rfds) will be true. */</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No data within five seconds.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="真的理解了么？小问题"><a href="#真的理解了么？小问题" class="headerlink" title="真的理解了么？小问题"></a>真的理解了么？小问题</h4><p>上述代码运行，输入ls或者任意(123)，为什么会出现一下现象？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qz@DESKTOP-FH4203J IO % .&#x2F;a.out                   </span><br><span class="line">123</span><br><span class="line">Data is available now.</span><br><span class="line">qz@DESKTOP-FH4203J IO % 123                       </span><br><span class="line">zsh: command not found: 123</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>.&#x2F;a.out 感知到了数据到来 IO感知 select没收</p>
+<p>就好比说你雇了一个人，看着电话亭你女朋友是否来了来就打电话告诉你，但是你女朋友来了看着的人给你打电话了，但是你女朋友还再电话亭里面等着，这时候就你能不能到就看你自己了，所以说如果你没有接走被别人接走了（程序死了，被zsh接走了），</p>
+</blockquote>
+<h5 id="修改程序，刚才那种显示结果就不会出现了"><a href="#修改程序，刚才那种显示结果就不会出现了" class="headerlink" title="修改程序，刚才那种显示结果就不会出现了"></a>修改程序，刚才那种显示结果就不会出现了</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    fd_set rfds;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">    <span class="keyword">int</span> retval;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Watch stdin (fd 0) to see when it has input. */</span></span><br><span class="line"></span><br><span class="line">    FD_ZERO(&amp;rfds);</span><br><span class="line">    FD_SET(<span class="number">0</span>, &amp;rfds);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait up to five seconds. */</span></span><br><span class="line"></span><br><span class="line">    tv.tv_sec = <span class="number">5</span>;</span><br><span class="line">    tv.tv_usec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    retval = select(<span class="number">1</span>, &amp;rfds, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;tv);</span><br><span class="line">    <span class="comment">/* Don&#x27;t rely on the value of tv now! */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (retval == <span class="number">-1</span>)</span><br><span class="line">        perror(<span class="string">&quot;select()&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (retval) &#123;</span><br><span class="line">        <span class="keyword">char</span> buff[<span class="number">512</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Data is available now.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, buff);</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">/* FD_ISSET(0, &amp;rfds) will be true. */</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No data within five seconds.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;poll.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> fd; <span class="comment">/* 委托内核检测的文件描述符 */</span></span><br><span class="line">	<span class="keyword">short</span> events; <span class="comment">/* 委托内核检测文件描述符的什么事件 */</span></span><br><span class="line">	<span class="keyword">short</span> revents; <span class="comment">/* 文件描述符实际发生的事件 */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> <span class="title">myfd</span>;</span></span><br><span class="line">myfd.fd = <span class="number">5</span>;</span><br><span class="line">myfd.events = POLLIN | POLLOUT;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd *fds, <span class="keyword">nfds_t</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line">	- 参数：</span><br><span class="line">		- fds : 是一个<span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> 结构体数组，这是一个需要检测的文件描述符的集合</span></span><br><span class="line"><span class="class">		- <span class="title">nfds</span> :</span> 这个是第一个参数数组中最后一个有效元素的下标 + <span class="number">1</span></span><br><span class="line">		- timeout : 阻塞时长(毫秒)</span><br><span class="line">			<span class="number">0</span> : 不阻塞</span><br><span class="line">			<span class="number">-1</span> : 阻塞，当检测到需要检测的文件描述符有变化，解除阻塞</span><br><span class="line">			&gt;<span class="number">0</span> : 阻塞的时长</span><br><span class="line">	- 返回值：</span><br><span class="line">		<span class="number">-1</span> : 失败</span><br><span class="line">		&gt;<span class="number">0</span>（n） : 成功,n表示检测到集合中有n个文件描述符发生变化</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220702180026781.png" class="lazyload" data-srcset="https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/image-20220702180026781.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20221002150934847"></p>
+<p>poll 缺点：</p>
+<ol>
+<li>每次调用select，都需要把fd集合从用户态拷贝到内核态，这个开销在fd很多时会很大。</li>
+<li>同时每次调用select都需要在内核遍历传递进来的所有fd，这个开销在fd很多时也很大。</li>
+<li><del>select支持的文件描述符数量太小了,默认是1024.</del></li>
+<li><del>fds集合不能重用，每次都需要重置。</del></li>
+</ol>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys&#x2F;epoll.h&gt;</span><br><span class="line">&#x2F;&#x2F; 创建一个新的epoll实例。在内核中创建了一个数据，这个数据中有两个比较重要的数据，一个是需要检测的文件描述符的信息（红黑树），还有一个是就绪列表，存放检测到数据发送改变的文件描述符信息（双向链表）。</span><br><span class="line">int epoll_create(int size);</span><br><span class="line">	- 参数：</span><br><span class="line">		size : (以前是使用哈希实现的需要用到size)目前没有意义了。随便写一个数，必须大于0</span><br><span class="line">	- 返回值：</span><br><span class="line">		-1 : 失败</span><br><span class="line">		&gt; 0 : 文件描述符，操作epoll实例的</span><br><span class="line">            </span><br><span class="line">typedef union epoll_data &#123;</span><br><span class="line">    void *ptr;</span><br><span class="line">    int fd;</span><br><span class="line">    uint32_t u32;</span><br><span class="line">    uint64_t u64;</span><br><span class="line">&#125; epoll_data_t;</span><br><span class="line"></span><br><span class="line">struct epoll_event &#123;</span><br><span class="line">    uint32_t events; &#x2F;* Epoll events *&#x2F;</span><br><span class="line">    epoll_data_t data; &#x2F;* User data variable *&#x2F;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">常见的Epoll检测事件：</span><br><span class="line">    - EPOLLIN</span><br><span class="line">    - EPOLLOUT</span><br><span class="line">    - EPOLLERR</span><br><span class="line">    ... ... </span><br><span class="line">    </span><br><span class="line">&#x2F;&#x2F; 对epoll实例进行管理：添加文件描述符信息，删除信息，修改信息</span><br><span class="line">int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);</span><br><span class="line">	- 参数：</span><br><span class="line">		- epfd : epoll实例对应的文件描述符</span><br><span class="line">		- op : 要进行什么操作</span><br><span class="line">            EPOLL_CTL_ADD: 添加</span><br><span class="line">            EPOLL_CTL_MOD: 修改</span><br><span class="line">            EPOLL_CTL_DEL: 删除</span><br><span class="line">        - fd : 要检测的文件描述符</span><br><span class="line">        - event : 检测文件描述符什么事情</span><br><span class="line">&#x2F;&#x2F; 检测函数</span><br><span class="line">int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int</span><br><span class="line">timeout);</span><br><span class="line">	- 参数:</span><br><span class="line">    - epfd : epoll实例对应的文件描述符</span><br><span class="line">    - events : 传出参数，保存了发送 了变化的文件描述符的信息</span><br><span class="line">    - maxevents : 第二个参数结构体数组的大小</span><br><span class="line">    - timeout : 阻塞时间</span><br><span class="line">        -  0  : 不阻塞</span><br><span class="line">        - -1  : 阻塞，直到检测到fd数据发生变化，解除阻塞</span><br><span class="line">        - &gt; 0 : 阻塞的时长（毫秒）</span><br><span class="line">    - 返回值:</span><br><span class="line">        - 成功，返回发送变化的文件描述符的个数 &gt; 0</span><br><span class="line">        - 失败 -1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Epoll-的工作模式："><a href="#Epoll-的工作模式：" class="headerlink" title="Epoll 的工作模式："></a>Epoll 的工作模式：</h3><ul>
+<li>LT 模式 （水平触发）</li>
+</ul>
+<p> 假设委托内核检测读事件 -&gt; 检测fd的读缓冲区</p>
+<p> 读缓冲区有数据 - &gt; epoll检测到了会给用户通知</p>
+<p> a.用户不读数据，数据一直在缓冲区，epoll 会一直通知</p>
+<p> b.用户只读了一部分数据，epoll会通知</p>
+<p> c.缓冲区的数据读完了，不通知</p>
+<blockquote>
+<p>LT（level - triggered）是缺省的工作方式，并且同时支持 block 和 nonblock, socket。在这 种做法中，内核告诉你一个文件描述符是否就绪了，然后你可以对这个就绪的 fd 进行 IO 操 作。如果你不作任何操作，内核还是会继续通知你的。</p>
+</blockquote>
+<ul>
+<li>ET 模式（边沿触发）</li>
+</ul>
+<p> 假设委托内核检测读事件 -&gt; 检测fd的读缓冲区</p>
+<p> 读缓冲区有数据 - &gt; epoll检测到了会给用户通知</p>
+<p> a.用户不读数据，数据一致在缓冲区中，epoll下次检测的时候就不通知了</p>
+<p> b.用户只读了一部分数据，epoll不通知</p>
+<p> c.缓冲区的数据读完了，不通知</p>
+<blockquote>
+<p>ET（edge - triggered）是高速工作方式，只支持 nonblock, socket。在这种模式下，当描述 符从未就绪变为就绪时，内核通过epoll告诉你。然后它会假设你知道文件描述符已经就绪， 并且不会再为那个文件描述符发送更多的就绪通知，直到你做了某些操作导致那个文件描述 符不再为就绪状态了。但是请注意，如果一直不对这个 fd 作 IO 操作（从而导致它再次变成 未就绪），内核不会发送更多的通知（only once）。 ET 模式在很大程度上减少了 epoll 事件被重复触发的次数，因此效率要比 LT 模式高。epoll 工作在 ET 模式的时候，必须使用非阻塞套接口，以避免由于一个文件句柄的阻塞读&#x2F;阻塞写 操作把处理多个文件描述符的任务饿死。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> events; <span class="comment">/* Epoll events */</span></span><br><span class="line">    <span class="keyword">epoll_data_t</span> data; <span class="comment">/* User data variable */</span></span><br><span class="line">&#125;;</span><br><span class="line">常见的Epoll检测事件：</span><br><span class="line">    - EPOLLIN</span><br><span class="line">    - EPOLLOUT</span><br><span class="line">    - EPOLLERR</span><br><span class="line">    - EPOLLET <span class="comment">// 边沿触发</span></span><br></pre></td></tr></table></figure>
+
+<p>丢个博客：</p>
+<p><a href="https://tutouwang.vercel.app/2022/07/01/Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">点我咱就走！</a></p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/>https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-10-02T19:58:12+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年10月2日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/&title=IO模型（阻塞，非阻塞，多路复用） - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/&title=IO模型（阻塞，非阻塞，多路复用） - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/&title=IO模型（阻塞，非阻塞，多路复用） - 秃头王&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        
+        <div class='hoverbox'>
+          <a class='share'><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></a>
+          <div class='target'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHYCAAAAADLsqZFAAAH30lEQVR42u3aQXbdNhAEQN3/0s4+jt/H9DR/EqKwk00B4BS0wDR/fhmvHD9KANYAa4A1wBpgwSrBy2F/wvH33/9tgeVz0/X/NP+n9T49dzr/p+dO51t7gAULFixYsGDBggULFuwlsMcX4EOw8cX68EW3+2vtP4WfHvTx+4IFCxYsWLBgwYIFCxbsZbDthsR0nhZ0CriF/rTP0wZFWkewYMGCBQsWLFiwYMGCBXt2wd8+P533tIDbRsfTdQALFixYsGDBggULFixYsP+tBsX2ubSxMR1PQYMFCxYsWLBgwYIFCxYs2Gdh0yB6+u/toHoawLeC/m0jZRv0gwULFixYsGDBggULFuytsOmF3s/P/Bx7gAULFqyfwfoZLFiwYMG+HHY70sZA+kLtfZyun34YMA3a1x5gwYIFCxYsWLBgwYIF+3LYNMieXrTbQXfrgp8G3tP50jqO6wsWLFiwYMGCBQsWLFiwL4edTphezKcNgLRQp89PGwetBslTjRWwYMGCBQsWLFiwYMGCvQV2GzxPL9BpAJ02TraB97TxktavdlDBggULFixYsGDBggUL9hLY1oW7FbRv99cu7L+1j9MDCBYsWLBgwYIFCxYsWLC3wW6D7Z/liIPlYcNkXKgS8LfWAQsWLFiwYMGCBQsWLNjbYNsbTAvZbii0AvpWYL79oGDcoAALFixYsGDBggULFizYl8JuA+fTQm7nOy14ut7pftI/iHYwDxYsWLBgwYIFCxYsWLC3wk4LtG1sbIP7NOifgm4ParuBARYsWLBgwYIFCxYsWLC3wm4LvQ2y0/mmDYjpvO2g/WvvDxYsWLBgwYIFCxYsWLAvh90W8OkD0ArKt42HNDhPGw9pYwUsWLBgwYIFCxYsWLBgwZ5toBXIt4LqdLTmO21IbBsfYMGCBQsWLFiwYMGCBXsb7FMbXF+0wwZC2ljZBuXTfUzXPV4HLFiwYMGCBQsWLFiwYC+BbS28faG0UdD+QGAahKfBeVrPP/4/WLBgwYIFCxYsWLBgwV4KmzYSWsF7qxDfaoS0DtjpwQYLFixYsGDBggULFizYW2HbwXcazE8D8G2hp/tP69AO/o+DdrBgwYIFCxYsWLBgwYK9DHZ78Z8G5NNgv9VISBsV03mnBy7+EAIsWLBgwYIFCxYsWLBgL4FNGxDphXu84eVFvjVfq05pMP9xPrBgwYIFCxYsWLBgwYK9BDYNlrfBdasR0ArQp42b1gHf1g8sWLBgwYIFCxYsWLBgb4X9CccWvF2IdL/TBsTp+z+9b7BgwYIFCxYsWLBgwYK9BbZ1sZ+CnjYetoU+bWxsA/cUut5oAQsWLFiwYMGCBQsWLNhLYNsX+nTepwLvp98zBamvCxYsWLBgwYIFCxYsWLCXwU4n3EJPA+rTgrb/P32fbzUwwIIFCxYsWLBgwYIFC/ZW2OkGt42G7YU93e8WOF1nu9910A4WLFiwYMGCBQsWLFiwL4NtX9inQXNrvvYBSw/atpEz/X2wYMGCBQsWLFiwYMGCvQX2aej0gt5qXLQO0rbRMgUePwcWLFiwYMGCBQsWLFiwL4dNC9SGPS186+I/XSdt0KTzxgcALFiwYMGCBQsWLFiwYC+BnV68pwdge2FvNxamBZ2u22pgjA8WWLBgwYIFCxYsWLBgwV4Om75weiHfBujb99kG/60DBRYsWLBgwYIFCxYsWLBg/xl2Gni3g+1pwbYBf7qfp4L5VqMELFiwYMGCBQsWLFiwYG+Fbb9I2ghoBdGtRkrrD2B78OIGBViwYMGCBQsWLFiwYMG+BHZ7wX8qGJ9e2KeFiAv3UMOl9aEDWLBgwYIFCxYsWLBgwd4Kuw26W42L1kFr/94WIK3zx+fAggULFixYsGDBggUL9uWwU6jxhTn89+n8aaCegmzBpoH68UEDCxYsWLBgwYIFCxYs2Etgvw3TaiScPp9+UJA+325wjIN2sGDBggULFixYsGDBgn0pbBo4n/48DorLz03h0/XbDZw4kAcLFixYsGDBggULFizYl8NugdsNg3Yhpg2Q1vppsL7+QAAsWLBgwYIFCxYsWLBgXw7bDn5bDYW04ZEenFag3zqo6cEACxYsWLBgwYIFCxYs2LfDTmHS56frtQuwbcBM99mu5/F7gAULFixYsGDBggULFuzLYacBcyuQbzcATgv3rYbD9sAfB+tgwYIFCxYsWLBgwYIFeyns9AXTRkCrIbJtMKSNhOl60z+I7cEGCxYsWLBgwYIFCxYs2LfDTsdpQbcX8/T51kFND1K7QTKuC1iwYMGCBQsWLFiwYMGCPYI+DdjT4H7bUEgbGd9qkEzr+zFoBwsWLFiwYMGCBQsWLNiXwrYC4rTRcPpC2+B/W/DjoHsYkE/3W/+CAixYsGDBggULFixYsGD/p7DtoH27wdZ+2o2RtEGzbVAcNyzAggULFixYsGDBggUL9jLYaUMihf9WodP32X44kMKvG0ZgwYIFCxYsWLBgwYIFC3YVBI+D4mHhp8H2NChvBerp+033BxYsWLBgwYIFCxYsWLBgs4bDdKPfKlj6gcDTHwZs/4DAggULFixYsGDBggUL9lbY6cZaF/BtID4NpLdB+LqREAbzH+sIFixYsGDBggULFixYsJfApgXaNizaAK3gPg2+20H/dH6wYMGCBQsWLFiwYMGCfTus8a4BFqwB1gBrgDXAGmBfOv4CTJ+K0+LCYcUAAAAASUVORK5CYII=">
+          </div>
+        </div>
+      
+    
+      
+        <a class="-mob-share-telegram" title="" rel="external nofollow noopener noreferrer noopener"
+          
+            target="_blank" href="https://t.me/share/url?url=https://tutouwang.vercel.app/2022/10/01/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/IO%E6%A8%A1%E5%9E%8B_%E9%98%BB%E5%A1%9E_%E9%9D%9E%E9%98%BB%E5%A1%9E_%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/&text=IO模型（阻塞，非阻塞，多路复用） - 秃头王"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2022/10/02/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/%E5%A4%9A%E8%BF%9B%E7%A8%8B/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>多进程</p>
+          <p class='content'>什么是进程进程是程序在进程中的镜像
+程序放到进程中他就变成了进程
+进程是程序正在运行中的程序
+</p>
+        </a>
+      
+      
+        <a class='next' href='/2022/09/28/%E5%87%BD%E6%95%B0API/'>
+          <p class='title'>函数API<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>函数API
+getopt()123456789101112131415161718192021222324252627282930313233343536373839/*************...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/imgQQ.png'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">秃头王</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:1658339000@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/qzwl123"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget text shadow desktop mobile">
+  
+  <header>
+    
+      <i class="iconfont icon-gonggao fa-fw" aria-hidden="true"></i><span class='name'>公告</span>
+    
+  </header>
+
+
+  <div class='content'>
+    
+      <p>本站默认替换了右键菜单，恢复原始右键菜单请按住Ctrl再点击鼠标右键。</p>
+
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E4%BA%86%E8%A7%A3IO%E6%A8%A1%E5%9E%8B%E5%89%8D%EF%BC%8C%E5%85%88%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%E5%8F%ABIO%EF%BC%8CIO%E5%BE%97%E6%93%8D%E4%BD%9C%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">在了解IO模型前，先了解什么叫IO，IO得操作是怎么样的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E7%9A%84%E4%BA%94%E7%A7%8D%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">IO的五种模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9EIO"><span class="toc-number">3.</span> <span class="toc-text">阻塞与非阻塞IO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E-Block-x2F-%E9%9D%9E%E9%98%BB%E5%A1%9E-NonBlock-%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">阻塞(Block)&#x2F;非阻塞(NonBlock) 场景描述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#common-c"><span class="toc-number">3.1.0.1.</span> <span class="toc-text">common.c</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9EIO-Block"><span class="toc-number">3.2.</span> <span class="toc-text">阻塞IO(Block)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9EIO-NonBlock"><span class="toc-number">3.3.</span> <span class="toc-text">非阻塞IO(NonBlock)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E4%B8%BA%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="toc-number">3.3.1.</span> <span class="toc-text">设置标准输入为非阻塞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">3.3.2.</span> <span class="toc-text">运行结果</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%83%B3%E5%8A%9E%E6%B3%95%E6%80%8E%E4%B9%88%E8%AE%A9%E7%A8%8B%E5%BA%8F%E8%AF%BB%E5%88%B0%E6%95%B0%E6%8D%AE%EF%BC%9F-%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5-O-NONBLOCK"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">想办法怎么让程序读到数据？(标准输入-O_NONBLOCK)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C-1"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">运行结果</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELECT"><span class="toc-number">4.</span> <span class="toc-text">SELECT()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#select%E7%9A%84%E5%87%BD%E6%95%B0%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">4.0.1.</span> <span class="toc-text">select的函数格式：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B%E5%90%84%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E6%84%8F%E6%80%9D"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">解释一下各个参数的意思:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%9F%E7%9A%84%E7%90%86%E8%A7%A3%E4%BA%86%E4%B9%88%EF%BC%9F%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="toc-number">4.0.2.</span> <span class="toc-text">真的理解了么？小问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%88%9A%E6%89%8D%E9%82%A3%E7%A7%8D%E6%98%BE%E7%A4%BA%E7%BB%93%E6%9E%9C%E5%B0%B1%E4%B8%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BA%86"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">修改程序，刚才那种显示结果就不会出现了</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#poll"><span class="toc-number">5.</span> <span class="toc-text">poll()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#epoll"><span class="toc-number">6.</span> <span class="toc-text">epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Epoll-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%EF%BC%9A"><span class="toc-number">6.1.</span> <span class="toc-text">Epoll 的工作模式：</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+<section class="widget shadow desktop mobile">
+  
+  <header>
+    
+      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>文章数目：</div>
+          <div>75 篇</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>已运行时间：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2021/03/06'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+        </script>
+      
+
+
+      
+        <div class="webinfo-item">
+          <div>本站总字数：</div>
+          <div>159.6k 字</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站访客数：</div>
+          
+          <div><span id="lc-uv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站总访问量：</div>
+          
+          <div><span id="lc-sv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:29:54 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-10-06 日</div>
+          
+        </div>
+        
+        <script>
+          function timeago(dateTimeStamp) {
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+              var hour = minute * 60;
+              var day = hour * 24;
+              var week = day * 7;
+              var month = day * 30;
+              var now = new Date().getTime(); //获取当前时间毫秒
+              var diffValue = now - dateTimeStamp; //时间差
+              if (diffValue < 0) {
+                  return;
+              }
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+              var hourC = diffValue / hour;
+              var dayC = diffValue / day;
+              var weekC = diffValue / week;
+              var monthC = diffValue / month;
+              if (monthC >= 1 && monthC <= 3) {
+                  result = " " + parseInt(monthC) + " 月前"
+              } else if (weekC >= 1 && weekC <= 3) {
+                  result = " " + parseInt(weekC) + " 周前"
+              } else if (dayC >= 1 && dayC <= 6) {
+                  result = " " + parseInt(dayC) + " 天前"
+              } else if (hourC >= 1 && hourC <= 23) {
+                  result = " " + parseInt(hourC) + " 小时前"
+              } else if (minC >= 1 && minC <= 59) {
+                  result = " " + parseInt(minC) + " 分钟前"
+              } else if (diffValue >= 0 && diffValue <= minute) {
+                  result = "刚刚"
+              } else {
+                  var datetime = new Date();
+                  datetime.setTime(dateTimeStamp);
+                  var Nyear = datetime.getFullYear();
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+                  result = Nyear + "-" + Nmonth + "-" + Ndate
+              }
+              return result;
+          }
+          var lastUpDate = document.getElementById('last-update').innerHTML;
+          try {
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
+          } catch (error) {
+            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
+          }
+        </script>
+        
+      
+    </div>
+  </div>
+</section>
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="IO模型（阻塞，非阻塞，多路复用）";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2020-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  loadCSS("https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css", window.volantis.loadcss);
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+        var imgs=["https://typora-images-qz.oss-cn-beijing.aliyuncs.com/img/beijing.jpg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+	  function Pjax_backstretch(){
+        
+          $('#cover-backstretch').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        
+	  }
+	  loadScript("https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js",Pjax_backstretch)
+    </script>
+  
+
+
+
+  
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick="document.execCommand('copy')"><i class='fa fa-copy fa-fw'></i>复制文本</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>复制链接</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>在新标签页打开</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>复制图片地址</a>
+        <hr id='hr-src'>
+      </li>
+      
+        <li class='navigation'>
+          <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+          <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+        </li>
+      
+      <hr>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <hr>
+        
+      
+        
+      
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default ' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default toggle-mode-btn' 
+        
+        
+        
+        >
+        <i class='fas fa-moon fa-fw'></i> Dark mode
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          if ('true' == 'true') {
+            copyText.style.display = 'block';
+            hrText.style.display = 'block';
+          }
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+      // 有音乐播放器 see: layout/_third-party/aplayer/script.ejs
+      
+      if(volantis.APlayerLoaded){ // APlayer加载完成？
+        // 如果有aplayer，初始化一下
+        checkAPlayer();
+      }
+      
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+		if($(".highlight .code pre").length+$(".article pre code").length==0)return;
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        
+        clipboard.off('success').on('success', function (e) {
+            $.message({
+            title: '复制成功',
+            message: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+            });
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    
+    $(function () {
+        pjax_initCopyCode()
+    });
+	volantis.pjax.push(pjax_initCopyCode)
+    
+</script>
+
+
+
+
+
+
+  <script>
+  let APlayerController = new Object();
+  APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+  APlayerController.volume = '0.7';
+  APlayerController.autoPlay = 'false';
+  loadCSS("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css", window.volantis.loadcss);
+  // APlayer 需要在  MetingJS 之前加载
+  loadScript("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js")
+  window.volantis.APlayerLoaded=0 // APlayer加载完成状态
+  var checkAPlayer = setInterval(function () {
+    if (!window.APlayer) return // APlayer加载完成？
+	  if ($("#safearea").css("display")!="block") return // 文章内容加载完成？ see: source/css/first.styl
+    clearInterval(checkAPlayer)
+	  if (!window.volantis.APlayerLoaded&&!window.MetingJSElement){ // APlayer只能加载一次
+      window.volantis.APlayerLoaded=1 // APlayer加载完成
+      loadScript("https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js") // 加载 MetingJS
+	  }
+  }, 2500) // 按照网速调节差分2.5s
+  // rightmenu see: layout/_partial/rightmenu.ejs
+
+  
+    loadScript("/js/aplayer.js")
+  
+
+</script>
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+    let pagePlaceholder = pdata.commentPlaceholder || "还得是你！";
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    var valine = new Valine();
+    valine.init(Object.assign({"path":null,"placeholder":"还得是你！","appId":"5EUu9nRz6er0p1Oz6Dcm4dAH-gzGzoHsz","appKey":"PYM2rss6BsLeP23KiqYz1k4P","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"enableQQ":true,"recordIP":false,"avatar":"robohash","pageSize":10,"lang":"zh-cn","highlight":true,"mathJax":false}, {
+      el: '#valine_container',
+      path: path,
+      placeholder: pagePlaceholder,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps,
+    }))
+  }
+  $(function () {
+    pjax_valine();
+  });
+  volantis.pjax.push(pjax_valine);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://tutouwang.vercel.app' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://tutouwang.vercel.app' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://tutouwang.vercel.app' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+
+	  
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+	<script>
+		volantis.pjax.push(window.HideLoading,'HideLoading');
+		volantis.pjax.send(window.ShowLoading,'ShowLoading');
+		volantis.pjax.error(window.HideLoading,'HideLoading');
+	</script>
+</div>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+	  
+    </div>
+    <!--单击显示文字-->
+    <script type="text/javascript" src="/js/click_show_text.js"></script>
+
+    <!--动态线条背景-->
+    <!-- color：表示线条颜色，三个数字分别为(R,G,B)，默认：（0,0,0）
+    opacity：表示线条透明度（0~1），默认：0.5
+    count：表示线条的总数量，默认：150
+    zIndex：表示背景的z-index属性，css属性用于控制所在层的位置，默认：-1 -->
+    <script type="text/javascript"
+    color="128,128,128" opacity='0.7' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+
+  </body>
+</html>

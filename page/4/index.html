@@ -624,6 +624,390 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2022/05/26/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/">
+        共享内存
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        共享内存共享内存允许两个或者多个进程共享物理内存的同一块区域（通常被称为段）。由于 一个共享内存段会成为一个进程用户空间的一部分，因此这种 IPC 机制无需内核介 入。所有需要做的就是让一个进程将数据复制进共享内存中，并且这部分数据会对其 他所有共享同一个段的进程可用。
+与管道等要求发送进程将数据从用户空间的缓冲区复制进内核内存和接收进程将数据 从内核内存复制进用户空间的缓冲区的做法相比，这...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-26</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/26/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/05/18/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E4%BF%A1%E5%8F%B7/">
+        信号
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        信号概述信号是 Linux进程间通信的最古老的方式之一，是事件发生时对进程的通知机制，有时也称之为软件中断，它是在软件层次上对中断机制的一种模拟，是一种异步通信的方式。信号可以导致一个丘在运行的进程被另一个正在运行的异步进程中断，转而处理某一个突发事件。
+
+发往进程的诸多信号，通常都是源于内核。引发内核为进程产生信号的各类事件如下:
+
+对于前台进程，用户可以通过输入特殊的终端字符来给它发送信...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-18</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/18/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E4%BF%A1%E5%8F%B7/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/05/17/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84/">
+        内存映射
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        内存映射内存映射(Memory-mapped I&#x2F;O)是将磁盘文件的数据映射到内存,用户通过修改内存就能修改磁盘文件
+
+父子进程间通信12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-17</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/17/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/05/15/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/%E4%B8%89%E8%A7%92%E5%BD%A2%E6%B1%82%E9%9D%A2%E7%A7%AF/">
+        三角形求面积
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        行列式 - 直角坐标器给定 A(x1, y1) B(x2, y2) C(x3, y3)
+
+以知三角行 底(a) - 高(h)$S &#x3D; (a * h ) &#x2F; 2$
+海伦公式$p  &#x3D; (a + b + c) &#x2F; 2$
+$S&#x3D;sqrt[p(p-a)(p-b)(p-c)]$
+$&#x3D;sqrt[(1&#x2F;16)(a+b+c)(a+b-c)...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-15</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/15/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/%E4%B8%89%E8%A7%92%E5%BD%A2%E6%B1%82%E9%9D%A2%E7%A7%AF/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/05/06/STL%E5%89%96%E6%9E%90/STL-%E4%BA%8C%E5%88%86/">
+        STL_二分
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        数组是升序的情况例：1 3 5 7 7 10 11
+lower_bound(begin, ned, key) — 得到第一个 &gt;&#x3D; key 的下标
+upper_bound(begin, ned, key) — 得到第一个 &gt;  key 的下标
+1234567891011121314151617181920212223242526272829303132333435363...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-06</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/06/STL%E5%89%96%E6%9E%90/STL-%E4%BA%8C%E5%88%86/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/05/04/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E5%9F%BA%E7%A1%80%E5%8D%9A%E5%BC%88/">
+        基础博弈
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        博弈论1.简介 博弈博弈&#x2F;博弈论，又称为对策论（Game Theory）、赛局理论等，既是现代数学的一个新分支，也是运筹学的一个重要学科。博弈论主要研究公式化了的激励结构间的相互作用，是研究具有斗争或竞争性质现象的数学理论和方法，博弈论考虑游戏中的个体的预测行为和实际行为，并研究它们的优化策略。
+总而言之，博弈，就是两方（或者多方）在为了某一种目标进行的竞争。
+在生活中，博弈无处不...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-05-04</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">基础算法</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/05/04/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E5%9F%BA%E7%A1%80%E5%8D%9A%E5%BC%88/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/04/17/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">
+        进程间通信-IPC
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        进程间通讯的概念进程是一个独立的资源分配单元，不同进程（这里所说的进程通常指的是用户进程)之间的资源是独立的，没有关联，不能在一个进程中直接访问另一个进程的资源。
+但是，进程不是孤立的，不同的进程需要进行信息的交互和状态的传递等，因此需要进程间通信(IPC: Inter Processes Communication )。
+GUI：用户图像接口
+IDE：集成开发环境
+API：应用程序接口
+进...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-04-17</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/04/17/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/04/11/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/wait%E5%87%BD%E6%95%B0/">
+        wait-waitpid 函数
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        wait - 回收子进程资源123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354/*************************************************************************        &g...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-04-11</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/04/11/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/wait%E5%87%BD%E6%95%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2022/04/10/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/">
         进程控制
       </a>
@@ -713,424 +1097,6 @@ exec函数族的函数执行成功后不会返回，因为调用进程的实体�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/04/08/OOP/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0Sort/">
-        STL-Sort解析
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        STL-源码文件百度网盘链接：https://pan.baidu.com/s/1eNo5hZkBndvO3-eZTCG6VA提取码：m207
-
-cd SGI-STL-master&#x2F;
-cd SGI-STL\ V3.3&#x2F;
-vim algorithm
-EXC tag sort&#x2F;&#x2F; 自己想要查找的
-
-cppreference
-https://en.cppref...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-04-08</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/OOP/">OOP</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/04/08/OOP/%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0Sort/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/04/06/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/GDB%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%B0%83%E8%AF%95/">
-        GDB多线程调试
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        GDB多进程调试使用GDB调试的时候，GDB默认只能跟踪一个进程，可以在fork函数调用之前,通过指令设置GDB调试工具跟踪父进程或者跟踪跟踪子进程，默认跟踪父进程。
-设置调试父进程或者子进程： set follow-fork-mode [paren(默认) | child]
-设置调试模式：set detach-on-fork [on | off]
-默认 on,表示调试当前进程的时候,其他的...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-04-06</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/04/06/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/GDB%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%B0%83%E8%AF%95/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/04/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2/">
-        进程状态转换
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        进程状态转换三态模型：就绪态、运行态、阻塞态
-五态模型：新建态、就绪态、运行态、阻塞态、终止态
-
-进程的状态
-查看进程 man ps
-
-ps aux &#x2F; ajx (PPID 父进程的IP、 PID 进程的ID、PGID 进程组的ID、SID 绘话)
-a：显示终端上的所有进程, 包括其他用户的进程
-u: 显示进程的详细信息
-x: 显示没有控制终端的进程
-j: 列出与作业控制相关的信息...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-04-02</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/04/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/04/01/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%A6%82%E8%BF%B0/">
-        进程概述
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        程序和进程程序是包含一系列信息的文件，这些信息描述了如何在运行时创建一个进程：
-
-二进制格式标识：每个程序文件都包含用于描述可执行文件格式的元信息。内核利用此信息来解释文件中的其他信息。（ELF可执行连接格式）
-
-机器语言指令：对程序算法进行编码。
-
-程序入口地址：标识程序开始执行时的起始指令位置。
-
-数据：程序文件包含的变量初始值和程序使用的字面量值（比如字符串）。
-
-符号表及重定位表：描...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-04-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">Linux多进程开发</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/04/01/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/%E8%BF%9B%E7%A8%8B%E6%A6%82%E8%BF%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/03/10/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E6%A0%87%E5%87%86c%E5%BA%93IO%E5%87%BD%E6%95%B0%E5%92%8CLinux%E7%B3%BB%E7%BB%9FIO%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94/">
-        标准c库IO函数和Linux系统IO函数对比
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        标准C库IO函数
-自带帮助文档 第三章 
-
-
-虚拟地址空间
-Linux系统IO函数帮助文档 ~Linux : man 2 open停留在函数上Shif + k可进行快速跳转
-123456789101112131415161718192021// 为社么定义三个头文件：不同的宏定义在两个文件里#include &lt;sys/types.h&gt;#include &lt;sys/stat.h...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-03-10</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/03/10/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/%E6%A0%87%E5%87%86c%E5%BA%93IO%E5%87%BD%E6%95%B0%E5%92%8CLinux%E7%B3%BB%E7%BB%9FIO%E5%87%BD%E6%95%B0%E5%AF%B9%E6%AF%94/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/03/09/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/%E5%A4%8D%E5%88%B6%E4%BB%A3%E7%A0%81%E9%94%99%E4%BD%8D%E9%97%AE%E9%A2%98/">
-        Vim复制代码错位问题
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Vim中复制粘贴缩进错乱问题的解决方Vim中复制粘贴缩进错乱问题的解决方案
-当你把这段缩进优美的代码直接ctrl+c(ctrl+shift + c)，ctrl+v到Vim的时候，就会出现如下恶心的情况
-可以看到，这种直接粘贴的方式会导致代码丢失和缩进错乱等情况。
-解决方案vim进入paste模式，命令如下：
-:set paste
-进入paste模式之后，再按i进入插入模式，进行复制、粘贴就很...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-03-09</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/">有趣的知识</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/03/09/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/%E5%A4%8D%E5%88%B6%E4%BB%A3%E7%A0%81%E9%94%99%E4%BD%8D%E9%97%AE%E9%A2%98/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/03/08/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/GDB%E8%B0%83%E8%AF%95/">
-        GDB调试
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        什么是 GDB
-GDB是由 GNU软件系统社区提供的调试工具，同GCC 配套组成了一套完整的开发环境，GDB是 Linux和许多类Unix系统中的标准开发环境。
-一般来说，GDB主要帮助你完成下面四个方向的功能：
-启动程序，可以按照自定义的要求随心所欲的运行程序
-可让被调试的程序在指定的调置的断点处停住(断点可以是条件表达式)
-当程序被停住时,可以检查此时程序中发生的事
-可以改变程序，将一个...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-03-08</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/03/08/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/GDB%E8%B0%83%E8%AF%95/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/03/04/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/Makefile/">
-        Makefile
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        什么是Makefile
-一个工程中的源文件不计其数．其按类型、功能、模块分别放在若干个目录中，Makefile文件定义了一系列的规则来指定哪些文件要生编扁i译.哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile文件就像一个Shell 脚本一样,也可以执行操作系统的命
-Makefile带来的好处就是“自动化编译”，一旦写好只需要一个make命令，整个工...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-03-04</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/">LInux-系统编程入门</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/03/04/LInux-%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/Makefile/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1145,7 +1111,7 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
           </a>
         
         <p class="current">
-          4 / 7
+          4 / 8
         </p>
         
           <a class="next" rel="next" href="/page/5/">
@@ -1317,6 +1283,11 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
             ><div class='name'>基础算法</div><div class='badge'>(3)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/" href="/categories/%E5%BA%B7%E5%A4%8D%E8%AE%AD%E7%BB%83/"
+            id="categoriesE5BAB7E5A48DE8AEADE7BB83"
+            ><div class='name'>康复训练</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/%E6%95%99%E7%A8%8B/" href="/categories/%E6%95%99%E7%A8%8B/"
             id="categoriesE69599E7A88B"
             ><div class='name'>教程</div><div class='badge'>(1)</div></a></li>
@@ -1324,7 +1295,7 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
           <li><a class="flat-box"
             title="/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/" href="/categories/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%9F%A5%E8%AF%86/"
             id="categoriesE69C89E8B6A3E79A84E79FA5E8AF86"
-            ><div class='name'>有趣的知识</div><div class='badge'>(8)</div></a></li>
+            ><div class='name'>有趣的知识</div><div class='badge'>(10)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/"
@@ -1409,7 +1380,7 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>67 篇</div>
+          <div>75 篇</div>
         </div>
       
 
@@ -1431,7 +1402,7 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>151.6k 字</div>
+          <div>159.6k 字</div>
         </div>
       
 
@@ -1457,8 +1428,8 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Aug 03 2022 10:41:31 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-08-03 日</div>
+            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:30:06 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-10-06 日</div>
           
         </div>
         
@@ -1508,7 +1479,7 @@ Makefile带来的好处就是“自动化编译”，一旦写好只需要一个
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-08-03 日';
+            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
           }
         </script>
         

@@ -676,8 +676,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <h3 id="UDP-client-c"><a href="#UDP-client-c" class="headerlink" title="UDP_client.c"></a>UDP_client.c</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*************************************************************************</span></span><br><span class="line"><span class="comment">	&gt; File Name: udp_client.c</span></span><br><span class="line"><span class="comment">	&gt; Author: 秃头王</span></span><br><span class="line"><span class="comment">	&gt; Mail: 1658339000@qq.com</span></span><br><span class="line"><span class="comment">	&gt; Created Time: 2022年07月04日 星期一 16时02分50秒</span></span><br><span class="line"><span class="comment"> ************************************************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1.创建一个通信的socket</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> fd = socket(PF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">if</span>(fd == <span class="number">-1</span>) &#123;</span><br><span class="line">		perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 服务器端的地址信息</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">saddr</span>;</span></span><br><span class="line">	saddr.sin_family = AF_INET;</span><br><span class="line">	saddr.sin_port = htons(<span class="number">5200</span>);</span><br><span class="line">	inet_pton(AF_INET, <span class="string">&quot;127.0.0.1&quot;</span>, &amp;saddr.sin_addr.s_addr);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3.通信</span></span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">char</span> sendBuf[<span class="number">123</span>];</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">cliaddr</span>;</span></span><br><span class="line">		<span class="keyword">socklen_t</span> len = <span class="keyword">sizeof</span>(cliaddr);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发送数据</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">sprintf</span>(sendBuf, <span class="string">&quot;hello , i am client %d \n&quot;</span>, num++);</span><br><span class="line">        sendto(fd, sendBuf, <span class="built_in">strlen</span>(sendBuf) + <span class="number">1</span>, <span class="number">0</span>, (struct sockaddr *)&amp;saddr, <span class="keyword">sizeof</span>(saddr));</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 接收数据</span></span><br><span class="line">		<span class="keyword">int</span> num = recvfrom(fd, sendBuf, <span class="keyword">sizeof</span>(sendBuf), <span class="number">0</span>, (struct sockaddr *)&amp;cliaddr, &amp;len);</span><br><span class="line">		<span class="keyword">if</span>(num == <span class="number">-1</span>) &#123;</span><br><span class="line">			perror(<span class="string">&quot;recvfrom&quot;</span>);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;server say : %s\n&quot;</span>, sendBuf);</span><br><span class="line"></span><br><span class="line">		sleep(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	close(fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-
 <h2 id="1-2广播"><a href="#1-2广播" class="headerlink" title="1.2广播"></a>1.2广播</h2><blockquote>
 <p>向子网中多台计算机发送消息，并且子网中所有的计算机都可以接收到发送方发送的消息，每个广 播消息都包含一个特殊的IP地址，这个IP中子网内主机标志部分的二进制全部为1。 </p>
 <p>​	a. 只能在局域网中使用。 </p>
@@ -795,10 +793,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-05T16:48:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-08-05T20:22:29+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年7月5日</p>
+    <p>更新于：2022年8月5日</p>
   </a>
 </div>
 
@@ -1116,7 +1114,7 @@ sudo dhclient 重新获取IP
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>67 篇</div>
+          <div>75 篇</div>
         </div>
       
 
@@ -1138,7 +1136,7 @@ sudo dhclient 重新获取IP
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>151.6k 字</div>
+          <div>159.6k 字</div>
         </div>
       
 
@@ -1164,8 +1162,8 @@ sudo dhclient 重新获取IP
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Aug 03 2022 10:41:20 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-08-03 日</div>
+            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:29:56 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-10-06 日</div>
           
         </div>
         
@@ -1215,7 +1213,7 @@ sudo dhclient 重新获取IP
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-08-03 日';
+            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
           }
         </script>
         
