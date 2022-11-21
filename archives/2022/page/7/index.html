@@ -623,6 +623,248 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2022/01/20/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%93%88%E5%B8%8C%E8%A1%A8/">
+        哈希表
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        哈希表
+通过数组下标索引到值
+任意类型映射成一个整型 (下标)
+
+简单举例
+val % size
+假如 val  &#x3D; 16、size &#x3D; 9
+
+16 % 9 &#x3D; 7 (下标)
+
+假如 val &#x3D; 7、size &#x3D; 9
+
+7 % 9 &#x3D; 7 (下标) 产生冲突了 - 优秀的哈希都会冲突
+
+
+
+
+
+下标
+0
+1
+2
+3
+4
+5
+6
+7
+...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-01-20</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">基础数据结构</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/01/20/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%93%88%E5%B8%8C%E8%A1%A8/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/01/20/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E4%B8%89%E5%88%86%E6%9F%A5%E6%89%BE/">
+        二分查找与三分查找
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        二分查找 (折半查找)条件
+
+单调性 - (一般单调递减)
+
+特殊情况 - 1
+
+查找第最后出现的 1
+如果待查值不存在的情况可以设置一个虚拟头 
+
+
+特殊情况 - 2
+查找第一个 1
+如果待查值不存在的情况可以设置一个虚拟尾
+
+
+时间复杂度
+平均复杂度 ：  $O(log^N)$
+
+三分查找
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-01-20</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">基础数据结构</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/01/20/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E4%B8%89%E5%88%86%E6%9F%A5%E6%89%BE/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/01/19/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/">
+        排序合集 5 种 - 插入、冒泡、归并、选择、快排
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        排序算法分类
+稳定 ：( 插入、冒泡、归并)
+非稳定 (不稳定) ：(选择、快排)
+内部 ：(整体一次性的加入到内存当中,整体的去排序)
+外部 ： (对一个数据文件排序的话可以不将整个文件都加载到内存里面进行排序 - 归并！  )
+
+
+插入排序 (insert_Sort)口诀 :
+
+
+将数组分成【已排序区】 和 【待排序区】
+将【待排序区】第一个元素，向前插入到【已排序区】
+直到【待排序区】...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-01-19</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">基础数据结构</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/01/19/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F%E5%90%88%E9%9B%86/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/01/18/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%BF%E4%B9%89%E8%A1%A8%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/">
+        广义表转二叉树
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        代码实现广义表还原二叉树 (栈原理)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-01-18</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">基础数据结构</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/01/18/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%BF%E4%B9%89%E8%A1%A8%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2022/01/17/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/">
         树与二叉树
       </a>
@@ -1114,7 +1356,7 @@ $$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$...
           <li><a class="flat-box"
             title="/categories/MySql/" href="/categories/MySql/"
             id="categoriesMySql"
-            ><div class='name'>MySql</div><div class='badge'>(4)</div></a></li>
+            ><div class='name'>MySql</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/OOP/" href="/categories/OOP/"
@@ -1229,7 +1471,7 @@ $$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$...
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>75 篇</div>
+          <div>79 篇</div>
         </div>
       
 
@@ -1251,7 +1493,7 @@ $$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$...
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>159.6k 字</div>
+          <div>169.6k 字</div>
         </div>
       
 
@@ -1277,8 +1519,8 @@ $$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$...
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Thu Oct 06 2022 09:30:08 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2022-10-06 日</div>
+            <div id="last-update" style="display: none;">Mon Nov 21 2022 20:58:40 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2022-11-21 日</div>
           
         </div>
         
@@ -1328,7 +1570,7 @@ $$ 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0$...
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2022-10-06 日';
+            document.getElementById('last-update-show').innerHTML = '2022-11-21 日';
           }
         </script>
         
